@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import ConditionalNavbar from "./components/ConditionalNavbar";
-import { ThemeProvider } from "./lib/theme-provider";
+import "../globals.css";
+import { ThemeProvider } from "../lib/theme-provider";
 import {
   inter,
   poppins,
@@ -11,7 +10,8 @@ import {
   firaCode,
   spaceGrotesk,
   sourceCodePro,
-} from "./lib/fonts";
+} from "../lib/fonts";
+import { SidebarProvider } from "../context/SidebarContext";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -58,8 +58,7 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${sourceCodePro.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${firaCode.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
-          <ConditionalNavbar />
-          <main>{children}</main>
+          <SidebarProvider>{children}</SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
