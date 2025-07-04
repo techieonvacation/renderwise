@@ -83,11 +83,11 @@
   --font-inter: Inter, sans-serif;
   --font-poppins: Poppins, sans-serif;
   --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: 'Source Code Pro', monospace;
+  --font-source-code-pro: "Source Code Pro", monospace;
   --font-space-grotesk: Space Grotesk, sans-serif;
   --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: 'JetBrains Mono', monospace;
-  --font-fira-code: 'Fira Code', monospace;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-fira-code: "Fira Code", monospace;
 }
 
 @theme inline {
@@ -220,11 +220,11 @@
   --font-inter: Inter, sans-serif;
   --font-poppins: Poppins, sans-serif;
   --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: 'Source Code Pro', monospace;
+  --font-source-code-pro: "Source Code Pro", monospace;
   --font-space-grotesk: Space Grotesk, sans-serif;
   --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: 'JetBrains Mono', monospace;
-  --font-fira-code: 'Fira Code', monospace;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-fira-code: "Fira Code", monospace;
 }
 
 /* Dark theme - Professional IT Company Dark Mode */
@@ -318,11 +318,11 @@
   --font-inter: Inter, sans-serif;
   --font-poppins: Poppins, sans-serif;
   --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: 'Source Code Pro', monospace;
+  --font-source-code-pro: "Source Code Pro", monospace;
   --font-space-grotesk: Space Grotesk, sans-serif;
   --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: 'JetBrains Mono', monospace;
-  --font-fira-code: 'Fira Code', monospace;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-fira-code: "Fira Code", monospace;
 }
 
 body {
@@ -334,23 +334,6 @@ body {
 }
 .container {
   @apply max-w-7xl mx-auto px-4;
-}
-
-/* Links - Professional IT Style */
-a {
-  color: rgb(var(--primary));
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-a:hover {
-  color: rgb(var(--primary-hover));
-}
-
-a:focus-visible {
-  outline: 2px solid rgb(var(--ring));
-  outline-offset: 2px;
-  border-radius: 2px;
 }
 
 /* Code elements - IT Company specific */

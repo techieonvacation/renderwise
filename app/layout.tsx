@@ -12,6 +12,7 @@ import {
   spaceGrotesk,
   sourceCodePro,
 } from "./lib/fonts";
+import Footer from "./components/ui/Footer";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -60,6 +61,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
           <ConditionalNavbar />
           <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
