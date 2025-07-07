@@ -1,72 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  /* Base Colors - IT Company Theme */
-  --background: 255 255 255;
-  --foreground: 30 30 30;
+  /* Base Colors */
+  --background: 255 255 255; /* White */
+  --foreground: 34 34 34; /* Dark charcoal (improved readability) */
 
-  /* Brand Colors - Professional IT Theme with #b22e2e */
-  --primary: 178 46 46; /* Brand red #b22e2e */
-  --primary-foreground: 255 255 255;
-  --primary-hover: 150 38 38;
-  --secondary: 51 65 85; /* Professional dark blue-gray */
-  --secondary-foreground: 255 255 255;
-  --secondary-hover: 30 41 59;
-  --accent: 14 165 233; /* Tech blue for CTAs and highlights */
-  --accent-foreground: 255 255 255;
-  --accent-hover: 2 132 199;
-  --muted: 248 250 252;
-  --muted-foreground: 100 116 139;
+  /* Brand Colors */
+  --primary: 178 46 46; /* #b22e2e */
+  --primary-foreground: 255 255 255; /* White text on red */
+  --primary-hover: 150 38 38; /* Slightly darker red */
 
-  /* Status Colors - IT/Tech Optimized */
-  --destructive: 239 68 68; /* Error red */
+  /* Secondary Palette (neutral grays) */
+  --secondary: 51 51 51; /* Almost black for strong contrast */
+  --secondary-foreground: 255 255 255; /* White text */
+  --secondary-hover: 34 34 34; /* Dark charcoal hover */
+
+  /* Accent (softened red for highlights) */
+  --accent: 220 76 76; /* Lighter tint of brand red */
+  --accent-foreground: 255 255 255; /* White text */
+  --accent-hover: 198 66 66; /* Hover state */
+
+  /* Muted (subtle light gray) */
+  --muted: 245 245 245; /* Light smoke */
+  --muted-foreground: 117 117 117; /* Mid-gray */
+
+  /* Status Colors */
+  --destructive: 178 46 46; /* Reuse brand red for errors */
   --destructive-foreground: 255 255 255;
-  --destructive-hover: 220 38 38;
-  --success: 34 197 94; /* Success green */
+  --destructive-hover: 150 38 38;
+
+  --success: 34 197 94; /* Standard green */
   --success-foreground: 255 255 255;
   --success-hover: 22 163 74;
-  --warning: 245 158 11; /* Warning amber */
-  --warning-foreground: 30 30 30;
+
+  --warning: 245 158 11; /* Amber for warnings */
+  --warning-foreground: 34 34 34;
   --warning-hover: 217 119 6;
-  --info: 59 130 246; /* Info blue */
+
+  --info: 59 130 246; /* Blue for info */
   --info-foreground: 255 255 255;
   --info-hover: 37 99 235;
 
-  /* UI Elements - High Contrast for Professional Look */
+  /* UI Elements */
   --card: 255 255 255;
-  --card-foreground: 30 30 30;
-  --card-border: 226 232 240;
+  --card-foreground: 34 34 34;
+  --card-border: 224 224 224;
+
   --popover: 255 255 255;
-  --popover-foreground: 30 30 30;
-  --popover-border: 203 213 225;
-  --border: 203 213 225;
-  --input: 203 213 225;
+  --popover-foreground: 34 34 34;
+  --popover-border: 200 200 200;
+
+  --border: 200 200 200;
+  --input: 200 200 200;
   --input-background: 255 255 255;
-  --input-foreground: 30 30 30;
+  --input-foreground: 34 34 34;
+
   --ring: 178 46 46;
   --ring-offset: 255 255 255;
 
   /* Interactive States */
-  --disabled: 148 163 184;
-  --disabled-foreground: 100 116 139;
+  --disabled: 189 189 189;
+  --disabled-foreground: 117 117 117;
   --focus: 178 46 46;
   --focus-visible: 178 46 46;
-  --hover: 248 250 252;
+  --hover: 245 245 245;
 
-  /* Typography - Professional IT */
-  --text-primary: 30 30 30;
-  --text-secondary: 71 85 105;
-  --text-muted: 100 116 139;
-  --text-disabled: 148 163 184;
+  /* Typography */
+  --text-primary: 34 34 34;
+  --text-secondary: 85 85 85;
+  --text-muted: 117 117 117;
+  --text-disabled: 189 189 189;
 
-  /* Shadows - Modern Professional */
-  --shadow: 0 1px 3px 0 rgba(30, 30, 30, 0.1),
-    0 1px 2px 0 rgba(30, 30, 30, 0.06);
-  --shadow-sm: 0 1px 2px 0 rgba(30, 30, 30, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(30, 30, 30, 0.1),
-    0 2px 4px -1px rgba(30, 30, 30, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(30, 30, 30, 0.1),
-    0 4px 6px -2px rgba(30, 30, 30, 0.05);
+  /* Shadows */
+  --shadow: 0 1px 3px 0 rgba(34, 34, 34, 0.1),
+    0 1px 2px 0 rgba(34, 34, 34, 0.06);
+  --shadow-sm: 0 1px 2px 0 rgba(34, 34, 34, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(34, 34, 34, 0.1),
+    0 2px 4px -1px rgba(34, 34, 34, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(34, 34, 34, 0.1),
+    0 4px 6px -2px rgba(34, 34, 34, 0.05);
 
   /* Opacity */
   --opacity-disabled: 0.5;
@@ -79,7 +91,7 @@
   --z-index-modal: 30;
   --z-index-toast: 40;
 
-  /* Fonts - Modern IT/Tech Stack */
+  /* Fonts */
   --font-inter: Inter, sans-serif;
   --font-poppins: Poppins, sans-serif;
   --font-roboto: Roboto, sans-serif;
@@ -128,253 +140,163 @@
   --font-fira-code: var(--font-fira-code);
 }
 
-/* Light theme (default) - Professional IT Company */
+/* Light theme */
 .light {
-  /* Base Colors - Clean and Professional */
-  --background: 255 255 255;
-  --foreground: 30 30 30;
-
-  /* Brand Colors - IT Company with #b22e2e */
-  --primary: 178 46 46; /* Your brand red */
-  --primary-foreground: 255 255 255;
-  --primary-hover: 150 38 38;
-
-  --secondary: 51 65 85; /* Professional dark blue-gray */
-  --secondary-foreground: 255 255 255;
-  --secondary-hover: 30 41 59;
-
-  --accent: 14 165 233; /* Tech blue for modern feel */
-  --accent-foreground: 255 255 255;
-  --accent-hover: 2 132 199;
-
-  --muted: 248 250 252;
-  --muted-foreground: 100 116 139;
-
-  /* Status Colors - IT Optimized */
-  --destructive: 239 68 68;
-  --destructive-foreground: 255 255 255;
-  --destructive-hover: 220 38 38;
-
-  --success: 34 197 94;
-  --success-foreground: 255 255 255;
-  --success-hover: 22 163 74;
-
-  --warning: 245 158 11;
-  --warning-foreground: 30 30 30;
-  --warning-hover: 217 119 6;
-
-  --info: 59 130 246;
-  --info-foreground: 255 255 255;
-  --info-hover: 37 99 235;
-
-  /* UI Elements - High Contrast */
-  --card: 255 255 255;
-  --card-foreground: 30 30 30;
-  --card-border: 226 232 240;
-
-  --popover: 255 255 255;
-  --popover-foreground: 30 30 30;
-  --popover-border: 203 213 225;
-
-  --border: 203 213 225;
-  --input: 203 213 225;
-  --input-background: 255 255 255;
-  --input-foreground: 30 30 30;
-  --ring: 178 46 46;
-  --ring-offset: 255 255 255;
-
-  /* Interactive States */
-  --disabled: 148 163 184;
-  --disabled-foreground: 100 116 139;
-  --focus: 178 46 46;
-  --focus-visible: 178 46 46;
-  --hover: 248 250 252;
-
-  /* Typography - Professional */
-  --text-primary: 30 30 30;
-  --text-secondary: 71 85 105;
-  --text-muted: 100 116 139;
-  --text-disabled: 148 163 184;
-
-  /* Shadows - Modern Professional */
-  --shadow: 0 1px 3px 0 rgba(30, 30, 30, 0.1),
-    0 1px 2px 0 rgba(30, 30, 30, 0.06);
-  --shadow-sm: 0 1px 2px 0 rgba(30, 30, 30, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(30, 30, 30, 0.1),
-    0 2px 4px -1px rgba(30, 30, 30, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(30, 30, 30, 0.1),
-    0 4px 6px -2px rgba(30, 30, 30, 0.05);
-
-  /* Opacity */
-  --opacity-disabled: 0.5;
-  --opacity-hover: 0.9;
-
-  /* Z-Index */
-  --z-index-base: 0;
-  --z-index-card: 10;
-  --z-index-popover: 20;
-  --z-index-modal: 30;
-  --z-index-toast: 40;
-
-  /* Fonts - Modern IT/Tech */
-  --font-inter: Inter, sans-serif;
-  --font-poppins: Poppins, sans-serif;
-  --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: "Source Code Pro", monospace;
-  --font-space-grotesk: Space Grotesk, sans-serif;
-  --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
-  --font-fira-code: "Fira Code", monospace;
+  /* Inherits all root settings—no changes needed for light */
 }
 
-/* Dark theme - Professional IT Company Dark Mode */
+/* Dark theme */
 .dark {
-  /* Base Colors - Dark Professional Theme */
-  --background: 15 23 42;
-  --foreground: 248 250 252;
+  --background: 17 17 17; /* Deep off-black */
+  --foreground: 235 235 235; /* Light gray text */
 
-  /* Brand Colors - Dark Mode Variants */
-  --primary: 220 76 76; /* Lighter version of brand red for dark mode */
-  --primary-foreground: 15 23 42;
-  --primary-hover: 248 113 113;
+  --primary: 220 76 76; /* Slightly brighter for dark */
+  --primary-foreground: 255 255 255; /* White text on red */
+  --primary-hover: 255 85 85;
 
-  --secondary: 71 85 105; /* Professional blue-gray */
-  --secondary-foreground: 248 250 252;
-  --secondary-hover: 100 116 139;
+  --secondary: 51 51 51;
+  --secondary-foreground: 235 235 235;
+  --secondary-hover: 85 85 85;
 
-  --accent: 56 189 248; /* Brighter tech blue for dark mode */
-  --accent-foreground: 15 23 42;
-  --accent-hover: 14 165 233;
+  --accent: 235 64 64;
+  --accent-foreground: 17 17 17;
+  --accent-hover: 198 66 66;
 
-  --muted: 30 41 59;
-  --muted-foreground: 148 163 184;
+  --muted: 34 34 34;
+  --muted-foreground: 140 140 140;
 
-  /* Status Colors - Dark Mode */
-  --destructive: 248 113 113;
-  --destructive-foreground: 15 23 42;
-  --destructive-hover: 239 68 68;
+  --card: 34 34 34;
+  --card-foreground: 235 235 235;
+  --card-border: 68 68 68;
 
-  --success: 74 222 128;
-  --success-foreground: 15 23 42;
-  --success-hover: 34 197 94;
+  --popover: 34 34 34;
+  --popover-foreground: 235 235 235;
+  --popover-border: 68 68 68;
 
-  --warning: 251 191 36;
-  --warning-foreground: 15 23 42;
-  --warning-hover: 245 158 11;
+  --border: 68 68 68;
+  --input: 68 68 68;
+  --input-background: 51 51 51;
+  --input-foreground: 235 235 235;
 
-  --info: 147 197 253;
-  --info-foreground: 15 23 42;
-  --info-hover: 59 130 246;
-
-  /* UI Elements - Dark Mode */
-  --card: 30 41 59;
-  --card-foreground: 248 250 252;
-  --card-border: 71 85 105;
-
-  --popover: 30 41 59;
-  --popover-foreground: 248 250 252;
-  --popover-border: 71 85 105;
-
-  --border: 71 85 105;
-  --input: 71 85 105;
-  --input-background: 51 65 85;
-  --input-foreground: 248 250 252;
   --ring: 220 76 76;
-  --ring-offset: 15 23 42;
+  --ring-offset: 17 17 17;
 
-  /* Interactive States - Dark Mode */
-  --disabled: 71 85 105;
-  --disabled-foreground: 100 116 139;
-  --focus: 220 76 76;
-  --focus-visible: 220 76 76;
-  --hover: 51 65 85;
-
-  /* Typography - Dark Mode */
-  --text-primary: 248 250 252;
-  --text-secondary: 148 163 184;
-  --text-muted: 100 116 139;
-  --text-disabled: 71 85 105;
-
-  /* Shadows - Dark Mode */
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
-    0 2px 4px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4),
-    0 4px 6px -4px rgba(0, 0, 0, 0.4);
-
-  /* Opacity */
-  --opacity-disabled: 0.5;
-  --opacity-hover: 0.9;
-
-  /* Z-Index */
-  --z-index-base: 0;
-  --z-index-card: 10;
-  --z-index-popover: 20;
-  --z-index-modal: 30;
-  --z-index-toast: 40;
-
-  /* Fonts - Modern IT/Tech */
-  --font-inter: Inter, sans-serif;
-  --font-poppins: Poppins, sans-serif;
-  --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: "Source Code Pro", monospace;
-  --font-space-grotesk: Space Grotesk, sans-serif;
-  --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
-  --font-fira-code: "Fira Code", monospace;
+  --hover: 51 51 51;
 }
 
+/* Base element styles */
 body {
   background: rgb(var(--background));
   color: rgb(var(--foreground));
   font-family: var(--font-inter);
   line-height: 1.6;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
+
 .container {
   @apply max-w-7xl mx-auto px-4;
 }
 
-/* Code elements - IT Company specific */
-code {
-  font-family: var(--font-source-code-pro);
-  background: rgb(var(--muted));
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
+/* Custom animations */
+@keyframes rotateme {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-pre {
-  font-family: var(--font-source-code-pro);
-  background: rgb(var(--card));
-  border: 1px solid rgb(var(--border));
-  border-radius: 0.5rem;
-  padding: 1rem;
-  overflow-x: auto;
+@keyframes float-bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-/* Selection colors */
-::selection {
-  background: rgb(var(--primary) / 0.2);
-  color: rgb(var(--foreground));
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Scrollbar styling for modern look */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@layer utilities {
+  .animate-spin-slow {
+    animation: rotateme 15s linear infinite;
+  }
+  .animate-float {
+    animation: float-bob 3s ease-in-out infinite;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgb(var(--background));
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(var(--primary));
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--primary-hover));
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: rgb(var(--muted));
+/* Slick slider dots */
+.slick-dots {
+  bottom: 30px !important;
+}
+.slick-dots li button:before {
+  color: rgb(var(--primary)) !important;
+  font-size: 12px !important;
+}
+.slick-dots li.slick-active button:before {
+  color: rgb(var(--primary-foreground)) !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgb(var(--border));
-  border-radius: 4px;
+/* Hero shapes */
+.hero-left-shape {
+  position: absolute;
+  top: 25px;
+  left: -154px;
+  animation: rotateme 20s linear infinite;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--primary) / 0.7);
-}
+/* ---------------------------------------
+   HERO SECTION SHINE ANIMATION
+   --------------------------------------- */
+   @layer components {
+    @keyframes shine {
+      from {
+        -webkit-mask-position: 150%;
+      }
+  
+      to {
+        -webkit-mask-position: -50%;
+      }
+    }
+  
+    .animate-shine {
+      -webkit-mask-image: linear-gradient(
+        -75deg,
+        rgba(56, 75, 255, 0.15) 50%,
+        #384bff 50%,
+        rgba(56, 75, 255, 0.15) 100%
+      );
+      -webkit-mask-size: 200%;
+      animation: shine 3s infinite;
+    }
+  }

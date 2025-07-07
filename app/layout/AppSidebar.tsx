@@ -24,7 +24,12 @@ const navItems: NavItem[] = [
   {
     name: "Home",
     icon: <LucideIcons.Home />,
-    subItems: [{ name: "Home", path: "/admin/home", pro: false }],
+    subItems: [
+      { name: "Primary Hero", path: "/admin/primary-hero" },
+      { name: "Secondary Hero", path: "/admin/secondary-hero" },
+      { name: "Hero Control", path: "/admin/hero-control" },
+      { name: "Team Members", path: "/admin/team-members" },
+    ],
   },
   {
     name: "Blog",

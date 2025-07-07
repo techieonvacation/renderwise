@@ -12,6 +12,8 @@ import {
   sourceCodePro,
 } from "../lib/fonts";
 import { SidebarProvider } from "../context/SidebarContext";
+import AdminDashboardLayout from "./AdminDashboardLayout";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -58,8 +60,11 @@ export default function AdminLayout({
         className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${sourceCodePro.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${firaCode.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
-          <SidebarProvider>{children}</SidebarProvider>
+          <SidebarProvider>
+            <AdminDashboardLayout>{children}</AdminDashboardLayout>
+          </SidebarProvider>
         </ThemeProvider>
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );
