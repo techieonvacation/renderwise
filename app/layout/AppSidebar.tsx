@@ -32,6 +32,11 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    name: "Careers",
+    icon: <LucideIcons.Briefcase />,
+    path: "/admin/careers",
+  },
+  {
     name: "Blog",
     icon: <LucideIcons.File />,
     subItems: [{ name: "Blog", path: "/admin/blog", pro: false }],

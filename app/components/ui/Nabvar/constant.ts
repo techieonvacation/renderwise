@@ -1,6 +1,6 @@
 /**
  * Enhanced Navbar Configuration
- * 
+ *
  * Comprehensive configuration for the Renderwise navbar including:
  * - Advanced sub-menu layouts with grouping
  * - Detailed service descriptions
@@ -14,10 +14,10 @@ import { NavItem, SocialIcon } from "./Navbar.types";
 
 export const NAVBAR_CONFIG = {
   mainNavItems: [
-    { 
-      name: "Home", 
-      href: "/", 
-      icon: LucideIcons.Home 
+    {
+      name: "Home",
+      href: "/",
+      icon: LucideIcons.Home,
     },
     {
       name: "Services",
@@ -201,9 +201,9 @@ export const NAVBAR_CONFIG = {
       footerText: "View All Solutions",
       footerLink: "/solutions",
     },
-    { 
-      name: "About", 
-      href: "/about", 
+    {
+      name: "About",
+      href: "/about",
       icon: LucideIcons.Users,
       hasDropdown: true,
       gridCols: 2,
@@ -222,7 +222,7 @@ export const NAVBAR_CONFIG = {
         },
         {
           name: "Careers",
-          href: "/about/careers",
+          href: "/careers",
           desc: "Join our team and build the future of technology together",
           iconName: "Briefcase" as const,
         },
@@ -234,9 +234,9 @@ export const NAVBAR_CONFIG = {
         },
       ],
     },
-    { 
-      name: "Portfolio", 
-      href: "/portfolio", 
+    {
+      name: "Portfolio",
+      href: "/portfolio",
       icon: LucideIcons.Award,
       hasDropdown: true,
       gridCols: 1,
@@ -267,9 +267,9 @@ export const NAVBAR_CONFIG = {
         },
       ],
     },
-    { 
-      name: "Blog", 
-      href: "/blog", 
+    {
+      name: "Blog",
+      href: "/blog",
       icon: LucideIcons.MessageCircle,
       hasDropdown: true,
       gridCols: 2,
@@ -300,22 +300,22 @@ export const NAVBAR_CONFIG = {
         },
       ],
     },
-    { 
-      name: "Contact", 
-      href: "/contact", 
-      icon: LucideIcons.Mail 
+    {
+      name: "Contact",
+      href: "/contact-us",
+      icon: LucideIcons.Mail,
     },
   ] as NavItem[],
-  
+
   secondaryNavItems: [
-    { 
-      name: "Career", 
-      href: "/careers", 
-      icon: LucideIcons.Briefcase 
+    {
+      name: "Career",
+      href: "/careers",
+      icon: LucideIcons.Briefcase,
     },
-    { 
-      name: "Support", 
-      href: "/support", 
+    {
+      name: "Support",
+      href: "/support",
       icon: LucideIcons.MessageCircle,
       hasDropdown: true,
       gridCols: 1,
@@ -340,16 +340,16 @@ export const NAVBAR_CONFIG = {
         },
       ],
     },
-    { 
-      name: "Privacy Policy", 
-      href: "/privacy" 
+    {
+      name: "Privacy Policy",
+      href: "/privacy",
     },
-    { 
-      name: "Terms of Service", 
-      href: "/terms" 
+    {
+      name: "Terms of Service",
+      href: "/terms",
     },
   ] as NavItem[],
-  
+
   socialIcons: [
     {
       icon: LucideIcons.Github,
@@ -376,7 +376,7 @@ export const NAVBAR_CONFIG = {
       external: true,
     },
   ] as SocialIcon[],
-  
+
   showSearch: true,
   showThemeToggle: true,
   showConsultation: true,
