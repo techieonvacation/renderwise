@@ -38,7 +38,7 @@ export async function GET(
     }
     
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
     
     const teamMember = await db
       .collection("dedicated-team")
@@ -97,7 +97,7 @@ export async function PUT(
     };
     
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
     
     const result = await db
       .collection("dedicated-team")
@@ -142,7 +142,7 @@ export async function DELETE(
     }
     
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
     
     const result = await db
       .collection("dedicated-team")

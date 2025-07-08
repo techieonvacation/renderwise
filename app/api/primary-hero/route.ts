@@ -36,7 +36,7 @@ const DEFAULT_PRIMARY_HERO = [
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     // Get all primary hero slides, sorted by order
     const heroData = await db
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
     const data = await request.json();
 
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     // Handle default IDs
     if (data._id?.startsWith("default_")) {
@@ -233,7 +233,7 @@ export async function DELETE(request: Request) {
     }
 
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     const objectId = new ObjectId(id);
     const result = await db

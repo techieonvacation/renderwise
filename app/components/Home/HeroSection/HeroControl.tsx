@@ -10,66 +10,60 @@ interface HeroControlSettings {
   secondaryHeroOrder: number;
 }
 
+// Default settings
+const DEFAULT_SETTINGS: HeroControlSettings = {
+  primaryHeroVisible: true,
+  secondaryHeroVisible: true,
+  primaryHeroOrder: 1,
+  secondaryHeroOrder: 2,
+};
+
+// Cache MongoDB connection and collection reference
+let cachedDb: any = null;
+let cachedCollection: any = null;
+
+async function getCollection() {
+  if (cachedDb && cachedCollection) {
+    return { db: cachedDb, collection: cachedCollection };
+  }
+  
+  const client = await clientPromise;
+  cachedDb = client.db("eleservsoftech");
+  cachedCollection = cachedDb.collection("heroControl");
+  
+  return { db: cachedDb, collection: cachedCollection };
+}
+
+// Simple cached getter without streaming
 export const getHeroControlSettings = cache(
   async (): Promise<HeroControlSettings> => {
     try {
-      const client = await clientPromise;
-      const db = client.db("hackintowndb");
-      const heroControl = await db
-        .collection("heroControl")
-        .findOne({ id: "main" });
-
-      return (
-        (heroControl as unknown as HeroControlSettings) || {
-          primaryHeroVisible: true,
-          secondaryHeroVisible: true,
-          primaryHeroOrder: 1,
-          secondaryHeroOrder: 2,
-        }
+      const { collection } = await getCollection();
+      const heroControl = await collection.findOne(
+        { id: "main" },
+        { projection: { _id: 0 } }
       );
+      return heroControl || DEFAULT_SETTINGS;
     } catch (error) {
       console.error("Error fetching hero control settings:", error);
-      return {
-        primaryHeroVisible: true,
-        secondaryHeroVisible: true,
-        primaryHeroOrder: 1,
-        secondaryHeroOrder: 2,
-      };
+      return DEFAULT_SETTINGS;
     }
   }
 );
 
-// Add cache tag for on-demand revalidation
+// Simple getter with no streaming for admin panel
 export const getHeroControlSettingsWithTag = cache(
   async (): Promise<HeroControlSettings> => {
     try {
-      const client = await clientPromise;
-      const db = client.db("hackintowndb");
-      const heroControl = await db
-        .collection("heroControl")
-        .findOne({ id: "main" });
-
-      const result = (heroControl as unknown as HeroControlSettings) || {
-        primaryHeroVisible: true,
-        secondaryHeroVisible: true,
-        primaryHeroOrder: 1,
-        secondaryHeroOrder: 2,
-      };
-
-      // Add cache tag for on-demand revalidation
-      const response = new Response(JSON.stringify(result));
-      response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");
-      response.headers.set("Next-Cache-Tags", "hero-control");
-
-      return result;
+      const { collection } = await getCollection();
+      const heroControl = await collection.findOne(
+        { id: "main" },
+        { projection: { _id: 0 } }
+      );
+      return heroControl || DEFAULT_SETTINGS;
     } catch (error) {
       console.error("Error fetching hero control settings:", error);
-      return {
-        primaryHeroVisible: true,
-        secondaryHeroVisible: true,
-        primaryHeroOrder: 1,
-        secondaryHeroOrder: 2,
-      };
+      return DEFAULT_SETTINGS;
     }
   }
 );

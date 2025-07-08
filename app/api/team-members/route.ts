@@ -11,7 +11,7 @@ const teamMemberSchema = z.object({
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
     
     const teamMembers = await db
       .collection("team-members")
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     const validatedData = teamMemberSchema.parse(data);
     
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
     
     const now = new Date();
     

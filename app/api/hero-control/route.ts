@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import clientPromise from "@/app/lib/mongodb";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 // Define schema for validation
 const heroControlSchema = z.object({
@@ -11,8 +11,7 @@ const heroControlSchema = z.object({
 });
 
 /**
- * Default hero control values - used as fallback when no database content exists
- * This ensures the site always has control settings even if database is unavailable
+ * Default hero control values
  */
 const DEFAULT_HERO_CONTROL = {
   id: "main",
@@ -22,38 +21,55 @@ const DEFAULT_HERO_CONTROL = {
   secondaryHeroOrder: 2,
 };
 
+// Cache MongoDB connection and collection reference
+let cachedDb: any = null;
+let cachedCollection: any = null;
+
+async function getCollection() {
+  if (cachedDb && cachedCollection) {
+    return { db: cachedDb, collection: cachedCollection };
+  }
+  
+  const client = await clientPromise;
+  cachedDb = client.db("eleservsoftech");
+  cachedCollection = cachedDb.collection("heroControl");
+  
+  return { db: cachedDb, collection: cachedCollection };
+}
+
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const { collection } = await getCollection();
 
-    const heroControl = await db
-      .collection("heroControl")
-      .findOne({ id: "main" });
-
-    const responseData = heroControl || DEFAULT_HERO_CONTROL;
-
-    // Create response with proper caching headers
-    const response = NextResponse.json(responseData);
-
-    // Cache for 1 minute in production, 30 seconds in development
-    // Shorter cache time for faster CMS updates
-    const cacheTime = process.env.NODE_ENV === "production" ? 60 : 30;
-    response.headers.set(
-      "Cache-Control",
-      `public, max-age=${cacheTime}, s-maxage=${cacheTime}`
+    const heroControl = await collection.findOne(
+      { id: "main" },
+      { projection: { _id: 0 } }
     );
-    response.headers.set("Content-Type", "application/json");
 
-    return response;
+    const data = heroControl || DEFAULT_HERO_CONTROL;
+
+    // Return JSON response without streaming
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+      }
+    });
   } catch (error) {
     console.error("Error fetching hero control settings:", error);
-
-    // Return default settings with shorter cache time on error
-    const response = NextResponse.json(DEFAULT_HERO_CONTROL);
-    response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");
-
-    return response;
+    
+    return new Response(JSON.stringify(DEFAULT_HERO_CONTROL), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "private, no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+      }
+    });
   }
 }
 
@@ -70,12 +86,18 @@ export async function PUT(request: Request) {
     });
 
     if (!validationResult.success) {
-      return NextResponse.json(
-        {
+      return new Response(
+        JSON.stringify({
           error: "Invalid input data",
           details: validationResult.error.format(),
-        },
-        { status: 400 }
+        }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "private, no-cache, no-store, must-revalidate",
+          }
+        }
       );
     }
 
@@ -84,10 +106,9 @@ export async function PUT(request: Request) {
       updatedAt: new Date().toISOString(),
     };
 
-    const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const { collection } = await getCollection();
 
-    const result = await db.collection("heroControl").updateOne(
+    const result = await collection.updateOne(
       { id: "main" },
       {
         $set: updateData,
@@ -96,36 +117,56 @@ export async function PUT(request: Request) {
       { upsert: true }
     );
 
-    // Create response with no-cache headers for mutations
-    const response = NextResponse.json({
-      success: true,
-      message: "Hero control settings updated successfully",
-      data: { id: "main", ...updateData },
-      matched: result.matchedCount,
-      modified: result.modifiedCount,
-      upserted: result.upsertedCount,
-    });
+    // Revalidate paths
+    revalidatePath("/api/hero-control");
+    revalidatePath("/");
+    revalidatePath("/admin/hero-control");
 
-    response.headers.set(
-      "Cache-Control",
-      "no-cache, no-store, must-revalidate"
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: "Hero control settings updated successfully",
+        data: { id: "main", ...updateData },
+        matched: result.matchedCount,
+        modified: result.modifiedCount,
+        upserted: result.upsertedCount,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "private, no-cache, no-store, must-revalidate",
+          "Pragma": "no-cache",
+          "Expires": "0"
+        }
+      }
     );
-
-    return response;
   } catch (error) {
     console.error("Error updating hero control settings:", error);
 
     // Check if it's a JSON parsing error
     if (error instanceof SyntaxError && error.message.includes("JSON")) {
-      return NextResponse.json(
-        { error: "Invalid JSON in request body" },
-        { status: 400 }
+      return new Response(
+        JSON.stringify({ error: "Invalid JSON in request body" }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "private, no-cache, no-store, must-revalidate"
+          }
+        }
       );
     }
 
-    return NextResponse.json(
-      { error: "Failed to update hero control settings" },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ error: "Failed to update hero control settings" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "private, no-cache, no-store, must-revalidate"
+        }
+      }
     );
   }
 }

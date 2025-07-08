@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useTransition, useRef } from "react";
 import { Button } from "@/app/components/ui/Button";
 import { toast } from "react-hot-toast";
 import { ArrowUpDown, Eye, EyeOff, SaveIcon } from "lucide-react";
@@ -15,26 +15,39 @@ interface HeroControlSettings {
   secondaryHeroOrder: number;
 }
 
+const DEFAULT_SETTINGS: HeroControlSettings = {
+  id: "main",
+  primaryHeroVisible: true,
+  secondaryHeroVisible: true,
+  primaryHeroOrder: 1,
+  secondaryHeroOrder: 2,
+};
+
 export default function HeroControlPage() {
-  const [settings, setSettings] = useState<HeroControlSettings>({
-    id: "main",
-    primaryHeroVisible: true,
-    secondaryHeroVisible: true,
-    primaryHeroOrder: 1,
-    secondaryHeroOrder: 2,
-  });
-
+  const [settings, setSettings] = useState<HeroControlSettings>(DEFAULT_SETTINGS);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+  // Memoized fetch function with abort controller
+  const fetchSettings = useCallback(async () => {
     try {
+      // Cancel any ongoing request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+
+      // Create new abort controller
+      abortControllerRef.current = new AbortController();
+
       setIsLoading(true);
-      const response = await fetch("/api/hero-control");
+      const response = await fetch("/api/hero-control", {
+        signal: abortControllerRef.current.signal,
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch hero control settings");
@@ -43,58 +56,75 @@ export default function HeroControlPage() {
       const data = await response.json();
       setSettings(data);
     } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        // Ignore abort errors
+        return;
+      }
       console.error("Error fetching hero control settings:", error);
       toast.error("Failed to load hero settings");
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const handleSave = async () => {
-    try {
-      setIsSaving(true);
-      const response = await fetch("/api/hero-control", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(settings),
-      });
+  useEffect(() => {
+    fetchSettings();
 
-      if (!response.ok) {
-        throw new Error("Failed to update hero control settings");
+    // Cleanup function to abort any pending requests
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
+    };
+  }, [fetchSettings]);
 
-      toast.success("Hero settings saved successfully");
+  const handleSave = useCallback(async () => {
+    const previousSettings = { ...settings };
+
+    try {
+      // Optimistic update
+      startTransition(async () => {
+        const response = await fetch("/api/hero-control", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          },
+          body: JSON.stringify(settings),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update hero control settings");
+        }
+
+        // Refetch settings to ensure sync
+        await fetchSettings();
+        toast.success("Hero settings saved successfully");
+      });
     } catch (error) {
+      // Revert on error
+      setSettings(previousSettings);
       console.error("Error saving hero control settings:", error);
       toast.error("Failed to save hero settings");
-    } finally {
-      setIsSaving(false);
     }
-  };
+  }, [settings, fetchSettings]);
 
-  const toggleVisibility = (hero: "primary" | "secondary") => {
-    if (hero === "primary") {
-      setSettings({
-        ...settings,
-        primaryHeroVisible: !settings.primaryHeroVisible,
-      });
-    } else {
-      setSettings({
-        ...settings,
-        secondaryHeroVisible: !settings.secondaryHeroVisible,
-      });
-    }
-  };
+  const toggleVisibility = useCallback((hero: "primary" | "secondary") => {
+    setSettings((prev) => ({
+      ...prev,
+      ...(hero === "primary"
+        ? { primaryHeroVisible: !prev.primaryHeroVisible }
+        : { secondaryHeroVisible: !prev.secondaryHeroVisible }),
+    }));
+  }, []);
 
-  const swapOrder = () => {
-    setSettings({
-      ...settings,
-      primaryHeroOrder: settings.secondaryHeroOrder,
-      secondaryHeroOrder: settings.primaryHeroOrder,
-    });
-  };
+  const swapOrder = useCallback(() => {
+    setSettings((prev) => ({
+      ...prev,
+      primaryHeroOrder: prev.secondaryHeroOrder,
+      secondaryHeroOrder: prev.primaryHeroOrder,
+    }));
+  }, []);
 
   if (isLoading) {
     return <Loader />;
@@ -106,12 +136,12 @@ export default function HeroControlPage() {
         <h1 className="text-2xl font-bold">Hero Sections Control</h1>
         <Button
           onClick={handleSave}
-          disabled={isSaving}
+          disabled={isPending}
           variant="primary"
           size="md"
           leftIcon={<SaveIcon />}
         >
-          {isSaving ? "Saving..." : "Save Changes"}
+          {isPending ? "Saving..." : "Save Changes"}
         </Button>
       </div>
 
@@ -221,6 +251,7 @@ export default function HeroControlPage() {
           onClick={swapOrder}
           variant="outline"
           className="flex items-center gap-2"
+          disabled={isPending}
         >
           <ArrowUpDown className="h-4 w-4" />
           Swap Display Order

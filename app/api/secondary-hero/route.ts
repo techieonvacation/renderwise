@@ -30,7 +30,7 @@ const DEFAULT_SECONDARY_HERO = {
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     // Get the most recent secondary hero data
     const heroData = await db
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     const data = await request.json();
 
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     // Check if _id is "default" and handle it specially
     if (data._id === "default") {

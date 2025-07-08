@@ -28,7 +28,7 @@ const teamMemberSchema = z.object({
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     const teamMembers = await db
       .collection("dedicated-team")
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     };
 
     const client = await clientPromise;
-    const db = client.db("hackintowndb");
+    const db = client.db("eleservsoftech");
 
     const result = await db
       .collection("dedicated-team")
