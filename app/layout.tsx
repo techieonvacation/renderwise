@@ -12,7 +12,7 @@ import {
   spaceGrotesk,
   sourceCodePro,
 } from "./lib/fonts";
-import Footer from "./components/ui/Footer";
+import ConditionalFooter from "./components/ConditionalFooter";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     description: "Global leading IT Company for all your needs",
     type: "website",
     locale: "en_US",
-  },
-  twitter: {
+    },
+    twitter: {
     card: "summary_large_image",
     title: "Renderwise",
     description: "Global leading IT Company for all your needs",
@@ -61,7 +61,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
           <ConditionalNavbar />
           <main>{children}</main>
-          <Footer />
+          <ConditionalFooter />
         </ThemeProvider>
       </body>
     </html>
