@@ -278,25 +278,51 @@ body {
 /* ---------------------------------------
    HERO SECTION SHINE ANIMATION
    --------------------------------------- */
-   @layer components {
-    @keyframes shine {
-      from {
-        -webkit-mask-position: 150%;
-      }
-  
-      to {
-        -webkit-mask-position: -50%;
-      }
+@layer components {
+  @keyframes shine {
+    from {
+      -webkit-mask-position: 150%;
     }
-  
-    .animate-shine {
-      -webkit-mask-image: linear-gradient(
-        -75deg,
-        rgba(56, 75, 255, 0.15) 50%,
-        #384bff 50%,
-        rgba(56, 75, 255, 0.15) 100%
-      );
-      -webkit-mask-size: 200%;
-      animation: shine 3s infinite;
+
+    to {
+      -webkit-mask-position: -50%;
     }
   }
+
+  .animate-shine {
+    -webkit-mask-image: linear-gradient(
+      -75deg,
+      rgba(56, 75, 255, 0.15) 50%,
+      #384bff 50%,
+      rgba(56, 75, 255, 0.15) 100%
+    );
+    -webkit-mask-size: 200%;
+    animation: shine 3s infinite;
+  }
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-bold lg:text-5xl font-poppins leading-tight;
+}
+
+/* Tagline Variants */
+.tagline-left::before {
+  position: absolute;
+  content: "";
+  width: 70px;
+  height: 2px;
+  background-image: linear-gradient(270deg, #ffffff 0%, #ff3b00 100%);
+  left: -76px;
+  top: 12px;
+}
+
+.tagline-right::after {
+  position: absolute;
+  content: "";
+  width: 70px;
+  height: 2px;
+  background-image: linear-gradient(270deg, #ff3b00 0%, #ffffff 100%);
+  right: -74px;
+  top: 12px;
+}
+
