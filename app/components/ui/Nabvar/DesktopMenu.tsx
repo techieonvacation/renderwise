@@ -28,44 +28,6 @@ import SubMenuFooter from "./SubMenuFooter";
 import Image from "next/image";
 import { DesktopMenuProps, SubMenuItem, SliderData } from "./Navbar.types";
 
-/**
- * Auto-slider data for enhanced visual appeal in advanced sub-menus
- * Showcases key services with beautiful imagery and descriptions
- */
-const sliderData: SliderData[] = [
-  {
-    title: "Web Development",
-    description:
-      "Modern, responsive websites built with cutting-edge technologies",
-    image: "/images/services/web-development.jpg",
-    gradient: "from-blue-500 to-purple-600",
-  },
-  {
-    title: "Cloud Solutions",
-    description: "Scalable cloud infrastructure for modern businesses",
-    image: "/images/services/cloud-solutions.jpg",
-    gradient: "from-purple-500 to-pink-600",
-  },
-  {
-    title: "AI & Machine Learning",
-    description: "Intelligent automation and data-driven insights",
-    image: "/images/services/ai-ml.jpg",
-    gradient: "from-pink-500 to-red-600",
-  },
-  {
-    title: "Mobile Development",
-    description: "Native and cross-platform mobile applications",
-    image: "/images/services/mobile-dev.jpg",
-    gradient: "from-green-500 to-teal-600",
-  },
-  {
-    title: "DevOps & Security",
-    description: "Secure deployment pipelines and infrastructure",
-    image: "/images/services/devops.jpg",
-    gradient: "from-teal-500 to-cyan-600",
-  },
-];
-
 export default function DesktopMenu({ menu }: DesktopMenuProps) {
   // State management for menu interactions and animations
   const [isHover, setIsHover] = useState(false);
@@ -73,10 +35,36 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
   const [menuPosition, setMenuPosition] = useState<"left" | "center" | "right">(
     "center"
   );
+  const [sliderData, setSliderData] = useState<SliderData[]>([]);
 
   // Refs for DOM manipulation and positioning calculations
   const menuRef = useRef<HTMLLIElement>(null);
   const subMenuRef = useRef<HTMLDivElement>(null);
+
+  // Fetch slider data from API
+  useEffect(() => {
+    const fetchSliderData = async () => {
+      try {
+        const response = await fetch("/api/navbar", {
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.sliderData && Array.isArray(data.sliderData)) {
+            setSliderData(data.sliderData.sort((a: SliderData, b: SliderData) => (a.order || 0) - (b.order || 0)));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching slider data:", error);
+      }
+    };
+
+    fetchSliderData();
+  }, []);
 
   /**
    * Handles menu item clicks and closes sub-menus
@@ -109,9 +97,9 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
    * Safely retrieves icons by name with fallback
    */
   const getIcon = React.useCallback(
-    (iconName: keyof typeof LucideIcons | undefined) => {
+    (iconName: string | undefined) => {
       if (!iconName) return null;
-      const Icon = LucideIcons[iconName] as LucideIcons.LucideIcon;
+      const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as LucideIcons.LucideIcon;
       return Icon ? <Icon className="h-5 w-5 text-primary" /> : null;
     },
     []
@@ -161,14 +149,14 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
    * Automatically cycles through slides when sub-menu is open
    */
   useEffect(() => {
-    if (!isHover || !useAdvancedSubMenu) return;
+    if (!isHover || !useAdvancedSubMenu || sliderData.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderData.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHover, useAdvancedSubMenu]);
+  }, [isHover, useAdvancedSubMenu, sliderData.length]);
 
   return (
     <li
@@ -325,20 +313,22 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
               </div>
 
               {/* Slide indicators */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {sliderData.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={cn(
-                      "w-2 h-2 rounded-full transition-all duration-300",
-                      currentSlide === index
-                        ? "bg-primary scale-125"
-                        : "bg-foreground/30 hover:bg-foreground/50"
-                    )}
-                  />
-                ))}
-              </div>
+              {sliderData.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {sliderData.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={cn(
+                        "w-2 h-2 rounded-full transition-all duration-300",
+                        currentSlide === index
+                          ? "bg-primary scale-125"
+                          : "bg-foreground/30 hover:bg-foreground/50"
+                      )}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

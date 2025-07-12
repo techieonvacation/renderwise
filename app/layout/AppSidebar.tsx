@@ -20,7 +20,11 @@ const navItems: NavItem[] = [
     name: "Dashboard",
     path: "/",
   },
-
+  {
+    icon: <LucideIcons.LayoutDashboard />,
+    name: "Navbar",
+    path: "/admin/navbar",
+  },
   {
     name: "Home",
     icon: <LucideIcons.Home />,

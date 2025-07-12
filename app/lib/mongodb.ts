@@ -7,7 +7,7 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI;
-const dbName = process.env.MONGODB_DB_NAME || "renderwise";
+const dbName = process.env.MONGODB_DB_NAME || "eleservsoftech";
 
 // Enhanced options for better performance
 const options: MongoClientOptions = {

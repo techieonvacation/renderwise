@@ -9,7 +9,6 @@
  * - Backward compatibility with existing structure
  */
 
-import { LucideIcons } from "../Icon";
 import { NavItem, SocialIcon } from "./Navbar.types";
 
 export const NAVBAR_CONFIG = {
@@ -17,7 +16,7 @@ export const NAVBAR_CONFIG = {
     {
       name: "Home",
       href: "/",
-      icon: LucideIcons.Home,
+      icon: "Home",
     },
     {
       name: "Services",
@@ -204,7 +203,7 @@ export const NAVBAR_CONFIG = {
     {
       name: "About",
       href: "/about",
-      icon: LucideIcons.Users,
+      icon: "Users",
       hasDropdown: true,
       gridCols: 2,
       subMenu: [
@@ -237,7 +236,7 @@ export const NAVBAR_CONFIG = {
     {
       name: "Portfolio",
       href: "/portfolio",
-      icon: LucideIcons.Award,
+      icon: "Award",
       hasDropdown: true,
       gridCols: 1,
       subMenu: [
@@ -270,7 +269,7 @@ export const NAVBAR_CONFIG = {
     {
       name: "Blog",
       href: "/blog",
-      icon: LucideIcons.MessageCircle,
+      icon: "MessageCircle",
       hasDropdown: true,
       gridCols: 2,
       subMenu: [
@@ -303,7 +302,7 @@ export const NAVBAR_CONFIG = {
     {
       name: "Contact",
       href: "/contact-us",
-      icon: LucideIcons.Mail,
+      icon: "Mail",
     },
   ] as NavItem[],
 
@@ -311,12 +310,12 @@ export const NAVBAR_CONFIG = {
     {
       name: "Career",
       href: "/careers",
-      icon: LucideIcons.Briefcase,
+      icon: "Briefcase",
     },
     {
       name: "Support",
       href: "/support",
-      icon: LucideIcons.MessageCircle,
+      icon: "MessageCircle",
       hasDropdown: true,
       gridCols: 1,
       subMenu: [
@@ -352,25 +351,25 @@ export const NAVBAR_CONFIG = {
 
   socialIcons: [
     {
-      icon: LucideIcons.Github,
+      icon: "Github",
       href: "https://github.com/renderwise",
       label: "GitHub",
       external: true,
     },
     {
-      icon: LucideIcons.Linkedin,
+      icon: "Linkedin",
       href: "https://linkedin.com/company/renderwise",
       label: "LinkedIn",
       external: true,
     },
     {
-      icon: LucideIcons.Twitter,
+      icon: "Twitter",
       href: "https://twitter.com/renderwise",
       label: "Twitter",
       external: true,
     },
     {
-      icon: LucideIcons.Mail,
+      icon: "Mail",
       href: "mailto:hello@renderwise.com",
       label: "Email",
       external: true,

@@ -31,6 +31,7 @@ import { cn } from "@/app/lib/utils";
 import { Button } from "@/app/components/ui/Button";
 import MobileSubMenu from "./MobileSubMenu";
 import { NavbarConfig } from "./Navbar.types";
+import * as LucideIcons from "lucide-react";
 
 interface MobileMenuProps {
   config: NavbarConfig;
@@ -47,6 +48,19 @@ export default function MobileMenu({
 }: MobileMenuProps) {
   // State to track which sub-menus are expanded
   const [expandedMenus, setExpandedMenus] = useState<Set<string>>(new Set());
+
+  /**
+   * Dynamic icon loading from Lucide React
+   * Safely retrieves icons by name with fallback
+   */
+  const getIcon = React.useCallback(
+    (iconName: string | undefined) => {
+      if (!iconName) return null;
+      const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as LucideIcons.LucideIcon;
+      return Icon ? <Icon className="h-5 w-5" /> : null;
+    },
+    []
+  );
 
   /**
    * Toggle sub-menu expansion state
@@ -88,6 +102,19 @@ export default function MobileMenu({
       setExpandedMenus(new Set());
     }
   }, [isOpen]);
+
+  // Filter active items and sort by order
+  const activeMainItems = config.mainNavItems
+    .filter(item => item.isActive !== false)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  const activeSecondaryItems = config.secondaryNavItems
+    .filter(item => item.isActive !== false)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  const activeSocialIcons = config.socialIcons
+    .filter(social => social.isActive !== false)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
     <>
@@ -150,7 +177,7 @@ export default function MobileMenu({
                 </h3>
               </div>
               <div className="divide-y divide-border/10">
-                {config.mainNavItems.map((item, index) => (
+                {activeMainItems.map((item, index) => (
                   <MobileSubMenu
                     key={`main-${item.name}-${index}`}
                     menu={item}
@@ -163,7 +190,7 @@ export default function MobileMenu({
             </div>
 
             {/* Secondary Navigation Section */}
-            {config.secondaryNavItems.length > 0 && (
+            {activeSecondaryItems.length > 0 && (
               <div className="py-2 border-t border-border/20">
                 <div className="px-4 py-3 border-b border-border/10">
                   <h3 className="text-xs font-semibold text-foreground/60 uppercase tracking-wider">
@@ -171,7 +198,7 @@ export default function MobileMenu({
                   </h3>
                 </div>
                 <div className="divide-y divide-border/10">
-                  {config.secondaryNavItems.map((item, index) => (
+                  {activeSecondaryItems.map((item, index) => (
                     <MobileSubMenu
                       key={`secondary-${item.name}-${index}`}
                       menu={item}
@@ -226,22 +253,25 @@ export default function MobileMenu({
           {/* Mobile Menu Footer - Sticky */}
           <div className="p-4 border-t border-border bg-background/80 backdrop-blur-sm sticky bottom-0">
             {/* Social Icons */}
-            {config.socialIcons.length > 0 && (
+            {activeSocialIcons.length > 0 && (
               <div className="flex items-center justify-center space-x-6 mb-4">
-                {config.socialIcons.map((social, index) => (
-                  <Link
-                    key={index}
-                    href={social.href}
-                    className="text-foreground/60 hover:text-primary transition-all duration-200 hover:scale-110 active:scale-95 p-2"
-                    aria-label={social.label}
-                    onClick={handleMenuItemClick}
-                    {...(social.external
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </Link>
-                ))}
+                {activeSocialIcons.map((social, index) => {
+                  const IconComponent = getIcon(social.icon);
+                  return (
+                    <Link
+                      key={index}
+                      href={social.href}
+                      className="text-foreground/60 hover:text-primary transition-all duration-200 hover:scale-110 active:scale-95 p-2"
+                      aria-label={social.label}
+                      onClick={handleMenuItemClick}
+                      {...(social.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {IconComponent || <span className="h-5 w-5" />}
+                    </Link>
+                  );
+                })}
               </div>
             )}
 

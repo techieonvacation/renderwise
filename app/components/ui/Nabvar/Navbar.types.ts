@@ -8,11 +8,12 @@ export interface SubMenuItem {
   name: string;
   href: string;
   desc: string;
-  iconName?: keyof typeof import("lucide-react"); // Support for dynamic icon names
+  iconName?: string; // Changed from keyof typeof import("lucide-react") to string for dynamic icons
   group?: string; // For grouped menu layouts
   external?: boolean;
   isNew?: boolean;
   badge?: string;
+  order?: number;
 }
 
 /**
@@ -39,8 +40,10 @@ export interface NavItem {
 
   // Basic properties
   external?: boolean;
-  icon?: LucideIcon;
+  icon?: string; // Changed from LucideIcon to string for dynamic icons
   badge?: string;
+  order?: number;
+  isActive?: boolean;
 }
 
 /**
@@ -59,10 +62,12 @@ export interface DropdownItem {
  * Social media icon configuration
  */
 export interface SocialIcon {
-  icon: LucideIcon;
+  icon: string; // Changed from LucideIcon to string for dynamic icons
   href: string;
   label: string;
   external?: boolean;
+  order?: number;
+  isActive?: boolean;
 }
 
 /**
@@ -76,6 +81,7 @@ export interface NavbarConfig {
   showThemeToggle?: boolean;
   showConsultation?: boolean;
   companyName?: string;
+  sliderData?: SliderData[];
 }
 
 /**
@@ -117,4 +123,5 @@ export interface SliderData {
   description: string;
   image: string;
   gradient: string;
+  order?: number;
 }

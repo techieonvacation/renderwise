@@ -50,9 +50,9 @@ export default function MobileSubMenu({
    * Safely retrieves icons by name with fallback
    */
   const getIcon = React.useCallback(
-    (iconName: keyof typeof LucideIcons | undefined) => {
+    (iconName: string | undefined) => {
       if (!iconName) return null;
-      const Icon = LucideIcons[iconName] as LucideIcons.LucideIcon;
+      const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as LucideIcons.LucideIcon;
       return Icon ? <Icon className="h-4 w-4 text-primary" /> : null;
     },
     []
@@ -106,12 +106,7 @@ export default function MobileSubMenu({
         aria-controls={hasSubItems ? `submenu-${menu.name}` : undefined}
       >
         <div className="flex items-center space-x-3">
-          {menu.icon && (
-            <menu.icon className={cn(
-              "h-5 w-5 transition-colors duration-200",
-              isExpanded && hasSubItems ? "text-primary" : "text-foreground/70"
-            )} />
-          )}
+          {menu.icon && getIcon(menu.icon)}
           <span className={cn(
             "font-medium transition-colors duration-200",
             isExpanded && hasSubItems ? "text-primary" : "text-foreground"
