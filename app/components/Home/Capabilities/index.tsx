@@ -29,7 +29,7 @@ export default function TechShowcaseVariant1() {
 
   return (
     <section
-      className="min-h-screen bg-background py-8 md:py-16 xl:py-20"
+      className="min-h-screen bg-background py-10 md:py-16"
       style={{
         backgroundImage: `url("/images/white-bg.png")`,
         backgroundSize: "cover",
@@ -40,7 +40,7 @@ export default function TechShowcaseVariant1() {
       aria-label="Our Capabilities"
     >
       <div className="container">
-        <div className="flex flex-col justify-center items-center gap-2 mb-6 md:mb-10 lg:mb-16 xl:mb-20">
+        <div className="flex flex-col justify-center items-center mb-6 md:mb-10 lg:mb-16 xl:mb-20">
           <Tagline variant="center" className="mb-2">
             Capabilities
           </Tagline>

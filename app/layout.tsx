@@ -13,6 +13,7 @@ import {
   sourceCodePro,
 } from "./lib/fonts";
 import ConditionalFooter from "./components/ConditionalFooter";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -26,8 +27,8 @@ export const metadata: Metadata = {
     description: "Global leading IT Company for all your needs",
     type: "website",
     locale: "en_US",
-    },
-    twitter: {
+  },
+  twitter: {
     card: "summary_large_image",
     title: "Renderwise",
     description: "Global leading IT Company for all your needs",
@@ -63,6 +64,7 @@ export default function RootLayout({
           <main>{children}</main>
           <ConditionalFooter />
         </ThemeProvider>
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );

@@ -18,7 +18,6 @@ export const SliderDataSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
   image: z.string().min(1, "Image URL is required"),
-  gradient: z.string().min(1, "Gradient is required"),
   order: z.number().int().positive().optional(),
 });
 
@@ -85,7 +84,6 @@ export interface SliderData {
   title: string;
   description: string;
   image: string;
-  gradient: string;
   order?: number;
 }
 
@@ -353,35 +351,30 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       title: "Web Development",
       description: "Modern, responsive websites built with cutting-edge technologies",
       image: "/images/services/web-development.jpg",
-      gradient: "from-blue-500 to-purple-600",
       order: 1,
     },
     {
       title: "Cloud Solutions",
       description: "Scalable cloud infrastructure for modern businesses",
       image: "/images/services/cloud-solutions.jpg",
-      gradient: "from-purple-500 to-pink-600",
       order: 2,
     },
     {
       title: "AI & Machine Learning",
       description: "Intelligent automation and data-driven insights",
       image: "/images/services/ai-ml.jpg",
-      gradient: "from-pink-500 to-red-600",
       order: 3,
     },
     {
       title: "Mobile Development",
       description: "Native and cross-platform mobile applications",
       image: "/images/services/mobile-dev.jpg",
-      gradient: "from-green-500 to-teal-600",
       order: 4,
     },
     {
       title: "DevOps & Security",
       description: "Secure deployment pipelines and infrastructure",
       image: "/images/services/devops.jpg",
-      gradient: "from-teal-500 to-cyan-600",
       order: 5,
     },
   ],

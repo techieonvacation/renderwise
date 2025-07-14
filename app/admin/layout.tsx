@@ -13,7 +13,6 @@ import {
 } from "../lib/fonts";
 import { SidebarProvider } from "../context/SidebarContext";
 import AdminDashboardLayout from "./AdminDashboardLayout";
-import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Renderwise",
@@ -64,7 +63,6 @@ export default function AdminLayout({
             <AdminDashboardLayout>{children}</AdminDashboardLayout>
           </SidebarProvider>
         </ThemeProvider>
-        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );

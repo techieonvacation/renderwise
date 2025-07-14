@@ -70,7 +70,7 @@ const Services: React.FC = () => {
       <div className="container relative">
         {/* Header with Navigation Arrows */}
         <div className="flex justify-between items-center mb-10">
-          <div className="flex flex-col gap-2 max-w-xl">
+          <div className="flex flex-col max-w-xl">
             <Tagline variant="left">{homeServicesData.subtitle.toUpperCase()}</Tagline>
             <h2 className="section-title">
               {homeServicesData.title}{" "}

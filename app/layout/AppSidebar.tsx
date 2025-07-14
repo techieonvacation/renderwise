@@ -41,9 +41,14 @@ const navItems: NavItem[] = [
     path: "/admin/careers",
   },
   {
+    name: "Counter",
+    icon: <LucideIcons.BarChart3 />,
+    path: "/admin/counter",
+  },
+  {
     name: "Blog",
     icon: <LucideIcons.File />,
-    subItems: [{ name: "Blog", path: "/admin/blog", pro: false }],
+    path: "/admin/blog",
   },
 ];
 

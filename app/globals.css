@@ -302,7 +302,11 @@ body {
 }
 
 .section-title {
-  @apply text-3xl md:text-4xl font-bold lg:text-5xl font-poppins leading-tight;
+  @apply text-3xl md:text-4xl font-extrabold lg:text-5xl font-roboto leading-tight;
+}
+
+.section-subtitle {
+  @apply text-sm md:text-base text-foreground/70 font-inter leading-tight;
 }
 
 /* Tagline Variants */
@@ -325,4 +329,38 @@ body {
   right: -74px;
   top: 12px;
 }
+/* Tech Stack */
+/* Infinite Moving Cards */
+.animate-scroll-left {
+  animation: scroll-left 10s linear infinite;
+  will-change: transform;
+}
 
+.animate-scroll-right {
+  animation: scroll-right 10s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.pause-animation {
+  animation-play-state: paused;
+}

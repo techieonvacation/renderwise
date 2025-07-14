@@ -4,6 +4,8 @@ import GetInTouch from "./components/ui/GetInTouch";
 import Services from "./components/Home/Services";
 import MarqueeWrapper from "./components/ui/MarqueeWrapper";
 import Capabilities from "./components/Home/Capabilities";
+import TechStackTabs from "./components/ui/TechStacks";
+import Counter from "./components/Home/Counter";
 
 export default async function Home() {
   const heroSettings = await getHeroControlSettings();
@@ -25,6 +27,8 @@ export default async function Home() {
       </div>
       <Services />
       <Capabilities />
+      <Counter />
+      <TechStackTabs />
       <GetInTouch />
     </div>
   );

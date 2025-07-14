@@ -67,18 +67,6 @@ const LUCIDE_ICONS = [
   "Share2",
   "Image",
 ];
-
-const GRADIENT_OPTIONS = [
-  "from-blue-500 to-purple-600",
-  "from-purple-500 to-pink-600",
-  "from-pink-500 to-red-600",
-  "from-green-500 to-teal-600",
-  "from-teal-500 to-cyan-600",
-  "from-orange-500 to-red-600",
-  "from-indigo-500 to-purple-600",
-  "from-emerald-500 to-teal-600",
-];
-
 export default function NavbarAdminPage() {
   const [state, setState] = useState<NavbarAdminState>({
     config: DEFAULT_NAVBAR_CONFIG,
@@ -390,7 +378,6 @@ export default function NavbarAdminPage() {
           title: "New Slide",
           description: "Description for new slide",
           image: "/images/services/new-slide.jpg",
-          gradient: "from-blue-500 to-purple-600",
           order: (config.sliderData?.length || 0) + 1,
         },
       ],
@@ -1110,22 +1097,6 @@ export default function NavbarAdminPage() {
                     }
                     placeholder="Slide description"
                   />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Gradient</label>
-                  <select
-                    value={slide.gradient}
-                    onChange={(e) =>
-                      updateSliderData(index, { gradient: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-border rounded-md bg-background"
-                  >
-                    {GRADIENT_OPTIONS.map((gradient) => (
-                      <option key={gradient} value={gradient}>
-                        {gradient}
-                      </option>
-                    ))}
-                  </select>
                 </div>
               </div>
             </Card>

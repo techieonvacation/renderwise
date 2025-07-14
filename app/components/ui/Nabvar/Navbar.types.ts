@@ -122,6 +122,5 @@ export interface SliderData {
   title: string;
   description: string;
   image: string;
-  gradient: string;
   order?: number;
 }

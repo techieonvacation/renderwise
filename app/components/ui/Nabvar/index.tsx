@@ -369,7 +369,7 @@ export default function Navbar({
 
       {/* Advanced Mobile Menu */}
       <MobileMenu 
-        config={finalConfig}
+        config={finalConfig}    
         isOpen={isOpen}
         onClose={closeMobileMenu}
         onConsultationClick={handleConsultationClick}

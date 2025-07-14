@@ -12,9 +12,7 @@
  *
  * @component
  * @example
- * ```tsx
  * <DesktopMenu menu={menuItem} />
- * ```
  */
 
 "use client";
@@ -55,7 +53,12 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
         if (response.ok) {
           const data = await response.json();
           if (data.sliderData && Array.isArray(data.sliderData)) {
-            setSliderData(data.sliderData.sort((a: SliderData, b: SliderData) => (a.order || 0) - (b.order || 0)));
+            setSliderData(
+              data.sliderData.sort(
+                (a: SliderData, b: SliderData) =>
+                  (a.order || 0) - (b.order || 0)
+              )
+            );
           }
         }
       } catch (error) {
@@ -96,14 +99,13 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
    * Dynamic icon loading from Lucide React
    * Safely retrieves icons by name with fallback
    */
-  const getIcon = React.useCallback(
-    (iconName: string | undefined) => {
-      if (!iconName) return null;
-      const Icon = LucideIcons[iconName as keyof typeof LucideIcons] as LucideIcons.LucideIcon;
-      return Icon ? <Icon className="h-5 w-5 text-primary" /> : null;
-    },
-    []
-  );
+  const getIcon = React.useCallback((iconName: string | undefined) => {
+    if (!iconName) return null;
+    const Icon = LucideIcons[
+      iconName as keyof typeof LucideIcons
+    ] as LucideIcons.LucideIcon;
+    return Icon ? <Icon className="h-5 w-5 text-primary" /> : null;
+  }, []);
 
   /**
    * Groups sub-menu items by their group property for organized display
@@ -289,17 +291,15 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                         : "opacity-0 translate-y-4"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "absolute inset-0 bg-gradient-to-br opacity-10",
-                        slide.gradient
-                      )}
-                    />
                     <div className="relative z-10">
-                      <div className="w-28 h-28 lg:w-32 lg:h-32 mx-auto mb-4 lg:mb-6 rounded-2xl overflow-hidden shadow-xl bg-primary/10">
-                        <div className="w-full h-full flex items-center justify-center">
-                          <div className="text-4xl text-primary">🚀</div>
-                        </div>
+                      <div className="mb-4 lg:mb-6 rounded-2xl overflow-hidden max-w-[200px] mx-auto w-full">
+                        <Image
+                          src={slide.image}
+                          alt={slide.title}
+                          width={100}
+                          height={100}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <h4 className="text-lg lg:text-xl font-bold text-foreground mb-2 lg:mb-3">
                         {slide.title}
