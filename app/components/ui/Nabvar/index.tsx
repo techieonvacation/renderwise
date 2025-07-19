@@ -10,6 +10,7 @@ import { useTheme } from "@/app/lib/theme-provider";
 import { NavbarProps } from "./Navbar.types";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
+import { Hamburger } from "../Humberger";
 import Image from "next/image";
 import { NavbarConfig, DEFAULT_NAVBAR_CONFIG } from "@/app/lib/models/navbar";
 
@@ -25,7 +26,9 @@ export default function Navbar({
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [navbarConfig, setNavbarConfig] = useState<NavbarConfig>(DEFAULT_NAVBAR_CONFIG);
+  const [navbarConfig, setNavbarConfig] = useState<NavbarConfig>(
+    DEFAULT_NAVBAR_CONFIG
+  );
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
   const searchRef = useRef<HTMLInputElement>(null);
@@ -102,9 +105,7 @@ export default function Navbar({
   );
 
   // Mobile menu toggle
-  const toggleMobileMenu = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const toggleMobileMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
@@ -217,41 +218,25 @@ export default function Navbar({
         <div className="container">
           {/* Mobile Navigation Bar */}
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleMobileMenu}
-              className="lg:hidden relative h-10 w-10 rounded-xl transition-all duration-300 ease-out hover:bg-hover focus:bg-hover focus:ring-2 focus:ring-ring bg-transparent border-none cursor-pointer"
-              aria-label="Toggle navigation menu"
-              aria-expanded={isOpen}
-              type="button"
-            >
-              <div className="relative w-6 h-6 mx-auto">
-                <span
-                  className={`absolute block h-0.5 w-6 bg-foreground transition-all duration-300 ease-out ${
-                    isOpen ? "top-3 rotate-45" : "top-1"
-                  }`}
-                />
-                <span
-                  className={`absolute block h-0.5 w-6 bg-foreground transition-all duration-300 ease-out ${
-                    isOpen ? "opacity-0" : "top-2.5 opacity-100"
-                  }`}
-                />
-                <span
-                  className={`absolute block h-0.5 w-6 bg-foreground transition-all duration-300 ease-out ${
-                    isOpen ? "top-3 -rotate-45" : "top-4"
-                  }`}
-                />
-              </div>
-            </button>
-
             {/* Logo */}
             <Link href="/">
               <Image
-                src="/images/logo.png"
+                src="/images/light-logo.webp"
                 alt={finalConfig.companyName || "Renderwise"}
                 width={100}
                 height={100}
-                className="object-contain lg:w-30 h-auto"
+                className={`w-full h-full transition-all duration-300 ${
+                  theme === "dark" ? "hidden" : "block"
+                }`}
+              />
+              <Image
+                src="/images/dark-logo.webp"
+                alt={finalConfig.companyName || "Renderwise"}
+                width={100}
+                height={100}
+                className={`w-full h-full transition-all duration-300 ${
+                  theme === "dark" ? "block" : "hidden"
+                }`}
               />
             </Link>
 
@@ -259,7 +244,7 @@ export default function Navbar({
             <nav className="hidden lg:flex items-center space-x-2">
               <ul className="flex items-center space-x-1">
                 {finalConfig.mainNavItems
-                  .filter(item => item.isActive !== false)
+                  .filter((item) => item.isActive !== false)
                   .sort((a, b) => (a.order || 0) - (b.order || 0))
                   .map((item, index) => (
                     <DesktopMenu key={`${item.name}-${index}`} menu={item} />
@@ -269,19 +254,6 @@ export default function Navbar({
 
             {/* Right Actions */}
             <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3">
-              {/* Search Toggle - Mobile */}
-              {finalConfig.showSearch && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setSearchFocused(!searchFocused)}
-                  className="hidden lg:flex h-10 w-10 rounded-full border border-border hover:bg-hover transition-all duration-200"
-                  aria-label="Toggle search"
-                >
-                  <LucideIcons.Search className="h-5 w-5" />
-                </Button>
-              )}
-
               {/* Theme Toggle */}
               {finalConfig.showThemeToggle && (
                 <Button
@@ -329,6 +301,14 @@ export default function Navbar({
                   </Button>
                 </>
               )}
+              {/* Mobile Menu Button */}
+              <div className="lg:hidden">
+                <Hamburger
+                  isOpen={isOpen}
+                  onToggle={toggleMobileMenu}
+                  className="lg:hidden"
+                />
+              </div>
             </div>
           </div>
 
@@ -368,8 +348,8 @@ export default function Navbar({
       </header>
 
       {/* Advanced Mobile Menu */}
-      <MobileMenu 
-        config={finalConfig}    
+      <MobileMenu
+        config={finalConfig}
         isOpen={isOpen}
         onClose={closeMobileMenu}
         onConsultationClick={handleConsultationClick}

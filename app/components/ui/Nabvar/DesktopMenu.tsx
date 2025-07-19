@@ -170,12 +170,12 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
       {/* Main Menu Item - Link or Dropdown Trigger */}
       {!hasSubMenu && menu.href ? (
         <Link href={menu.href}>
-          <span className="flex items-center text-foreground font-medium text-xs lg:text-sm xl:text-lg whitespace-nowrap gap-1 hover:text-primary cursor-pointer px-3 py-1 rounded-xl transition-all duration-300">
+          <span className="flex items-center text-foreground font-medium font-urbanist text-xs lg:text-sm xl:text-lg whitespace-nowrap gap-1 hover:text-primary cursor-pointer px-3 py-1 rounded-xl transition-all duration-300">
             {menu.name}
           </span>
         </Link>
       ) : (
-        <span className="flex items-center font-medium text-xs lg:text-sm xl:text-lg text-foreground gap-1 hover:text-primary cursor-pointer px-3 py-1 rounded-xl transition-all duration-300">
+        <span className="flex items-center font-medium font-urbanist text-xs lg:text-sm xl:text-lg text-foreground gap-1 hover:text-primary cursor-pointer px-3 py-1 rounded-xl transition-all duration-300">
           {menu.name}
           {hasSubMenu && (
             <ChevronDown
@@ -219,7 +219,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                   <div className="space-y-6 lg:space-y-8">
                     {menu.subMenuHeading.map((heading, idx) => (
                       <div key={idx} className="space-y-3 lg:space-y-4">
-                        <h3 className="text-base lg:text-lg font-bold text-foreground mb-3 lg:mb-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-8 after:h-0.5 after:bg-primary">
+                        <h3 className="text-base lg:text-lg font-bold font-urbanist text-foreground mb-3 lg:mb-4 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-8 after:h-0.5 after:bg-primary">
                           {heading}
                         </h3>
                         <div className="space-y-2">
@@ -236,7 +236,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                                 </div>
                               )}
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm lg:text-base truncate">
+                                <h4 className="font-semibold font-urbanist text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm lg:text-base truncate">
                                   {submenu.name}
                                 </h4>
                                 <p className="text-xs lg:text-sm text-foreground/70 group-hover/item:text-foreground/90 transition-colors duration-200 line-clamp-2">
@@ -265,7 +265,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm lg:text-base truncate">
+                        <h4 className="font-semibold font-urbanist text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm lg:text-base truncate">
                           {submenu.name}
                         </h4>
                         <p className="text-xs lg:text-sm text-foreground/70 group-hover/item:text-foreground/90 transition-colors duration-200 line-clamp-2">
@@ -301,7 +301,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <h4 className="text-lg lg:text-xl font-bold text-foreground mb-2 lg:mb-3">
+                      <h4 className="text-lg lg:text-xl font-bold font-urbanist text-foreground mb-2 lg:mb-3">
                         {slide.title}
                       </h4>
                       <p className="text-foreground/80 text-sm leading-relaxed">
@@ -380,7 +380,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm truncate">
+                  <h4 className="font-semibold font-urbanist text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm truncate">
                     {submenu.name}
                   </h4>
                   <p className="text-xs text-foreground/70 group-hover/item:text-foreground/90 transition-colors duration-200 line-clamp-2">
@@ -404,7 +404,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm truncate">
+                  <h4 className="font-semibold font-urbanist text-foreground group-hover/item:text-primary transition-colors duration-200 text-sm truncate">
                     {dropdownItem.name}
                   </h4>
                   {dropdownItem.description && (

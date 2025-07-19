@@ -93,13 +93,9 @@
 
   /* Fonts */
   --font-inter: Inter, sans-serif;
-  --font-poppins: Poppins, sans-serif;
-  --font-roboto: Roboto, sans-serif;
-  --font-source-code-pro: "Source Code Pro", monospace;
   --font-space-grotesk: Space Grotesk, sans-serif;
   --font-dm-sans: DM Sans, sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
-  --font-fira-code: "Fira Code", monospace;
+  --font-urbanist: Urbanist, sans-serif;
 }
 
 @theme inline {
@@ -131,13 +127,9 @@
 
   /* Font Variables */
   --font-inter: var(--font-inter);
-  --font-poppins: var(--font-poppins);
-  --font-roboto: var(--font-roboto);
-  --font-source-code-pro: var(--font-source-code-pro);
+  --font-urbanist: var(--font-urbanist);
   --font-space-grotesk: var(--font-space-grotesk);
   --font-dm-sans: var(--font-dm-sans);
-  --font-jetbrains-mono: var(--font-jetbrains-mono);
-  --font-fira-code: var(--font-fira-code);
 }
 
 /* Light theme */
@@ -188,8 +180,9 @@
 body {
   background: rgb(var(--background));
   color: rgb(var(--foreground));
-  font-family: var(--font-inter);
+  font-family: var(--font-urbanist);
   line-height: 1.6;
+  font-weight: 400;
 }
 
 .container {
@@ -302,7 +295,7 @@ body {
 }
 
 .section-title {
-  @apply text-3xl md:text-4xl font-extrabold lg:text-5xl font-roboto leading-tight;
+  @apply text-3xl md:text-4xl font-extrabold lg:text-5xl font-urbanist leading-tight;
 }
 
 .section-subtitle {
@@ -363,4 +356,32 @@ body {
 
 .pause-animation {
   animation-play-state: paused;
+}
+
+/* Marquee */
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 30s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 25s linear infinite;
 }

@@ -11,7 +11,7 @@ import { cn } from "@/app/lib/utils"; // A utility for conditional classNames
  */
 const buttonVariants = cva(
   // Base styles for all buttons
-  "inline-flex items-center cursor-pointer justify-center font-inter relative font-medium rounded-full overflow-hidden transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none",
+  "inline-flex items-center cursor-pointer whitespace-nowrap justify-center font-urbanist relative font-semibold rounded-full overflow-hidden transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none",
   {
     variants: {
       /**

@@ -20,7 +20,7 @@ export default function SubMenuFooter({
         {text || "Ready to get started?"}
         <Link
           href={href || "/contact"}
-          className="font-semibold text-sm text-primary hover:text-primary/80 transition-colors px-2"
+          className="font-semibold text-sm text-primary hover:text-primary/80 transition-colors px-2 font-urbanist"
         >
           Let&apos;s talk
         </Link>
@@ -29,7 +29,7 @@ export default function SubMenuFooter({
       <div className="flex flex-col md:flex-row md:items-center gap-2 text-sm">
         <Link
           href="mailto:info@eleservsoftech.com"
-          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-urbanist"
         >
           <Mail className="h-4 w-4" />
           <span>info@eleservsoftech.com</span>
@@ -37,7 +37,7 @@ export default function SubMenuFooter({
 
         <Link
           href="tel:+919826000000"
-          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-urbanist"
         >
           <Phone className="h-4 w-4" />
           <span>+91 9826000000</span>

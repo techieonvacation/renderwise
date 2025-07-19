@@ -3,13 +3,9 @@ import "../globals.css";
 import { ThemeProvider } from "../lib/theme-provider";
 import {
   inter,
-  poppins,
-  roboto,
   dmSans,
-  jetbrainsMono,
-  firaCode,
+  urbanist,
   spaceGrotesk,
-  sourceCodePro,
 } from "../lib/fonts";
 import { SidebarProvider } from "../context/SidebarContext";
 import AdminDashboardLayout from "./AdminDashboardLayout";
@@ -56,7 +52,7 @@ export default function AdminLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${sourceCodePro.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${firaCode.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${inter.variable} ${urbanist.variable} ${dmSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
           <SidebarProvider>

@@ -26,6 +26,11 @@ const navItems: NavItem[] = [
     path: "/admin/navbar",
   },
   {
+    icon: <LucideIcons.Image />,
+    name: "Logo Marquee",
+    path: "/admin/logo-marquee",
+  },
+  {
     name: "Home",
     icon: <LucideIcons.Home />,
     subItems: [

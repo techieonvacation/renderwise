@@ -83,7 +83,7 @@ const PrimaryHero: React.FC = () => {
                       </h6>
 
                       {/* Main Title */}
-                      <h1 className="text-foreground font-bold font-sans my-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                      <h1 className="text-foreground font-extrabold font-urbanist my-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                         {slide.title}{" "}
                         <span className="text-primary inline-block">
                           {slide.highlightedWord}
@@ -96,12 +96,25 @@ const PrimaryHero: React.FC = () => {
                       </p>
 
                       {/* Buttons */}
-                      <div className="flex flex-wrap items-center gap-4 mt-10">
+                      <div className="flex items-center gap-2 mt-10">
                         {/* Get Started Button */}
                         <Button
                           variant={"primary"}
+                          size={"sm"}
+                          rightIcon={
+                            <ArrowRightIcon className="size-4 sm:size-5" />
+                          }
+                          className="lg:hidden"
+                        >
+                          Get Started
+                        </Button>
+                        <Button
+                          variant={"primary"}
                           size={"lg"}
-                          rightIcon={<ArrowRightIcon className="size-5" />}
+                          rightIcon={
+                            <ArrowRightIcon className="size-4 sm:size-5" />
+                          }
+                          className="hidden lg:flex"
                         >
                           Get Started
                         </Button>
@@ -112,15 +125,15 @@ const PrimaryHero: React.FC = () => {
                             <Image
                               src={slide.profileImage}
                               alt="Expert Profile"
-                              width={56}
-                              height={56}
-                              className="border-2 border-primary rounded-full mr-2 object-cover"
+                              width={40}
+                              height={40}
+                              className="border-2 border-primary rounded-full mr-2 object-cover sm:w-12 sm:h-12"
                             />
                             <Link
                               href="/about"
-                              className="text-foreground text-[15px] font-bold uppercase relative z-10 hover:text-primary transition-colors duration-300"
+                              className="text-foreground text-sm sm:text-base font-bold uppercase relative z-10 hover:text-primary transition-colors duration-300"
                             >
-                              <span className="text-primary underline mr-1">
+                              <span className="text-primary underline mr-1 text-sm sm:text-base">
                                 MEET
                               </span>
                               Our Experts
@@ -152,8 +165,8 @@ const PrimaryHero: React.FC = () => {
                         </div>
 
                         {/* Gradient Line */}
-                        <div className="w-[2px] h-[166px] bg-gradient-to-t from-primary to-foreground mb-2"></div>
-                        <div className="w-[2px] h-[166px] bg-gradient-to-t from-foreground to-primary mb-8"></div>
+                        <div className="w-[2px] h-[166px] bg-gradient-to-t from-primary to-foreground mt-6"></div>
+                        <div className="w-[2px] h-[166px] bg-gradient-to-t from-foreground to-primary mb-6"></div>
 
                         {/* Next Text */}
                         <div

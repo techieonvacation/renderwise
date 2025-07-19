@@ -2,16 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ConditionalNavbar from "./components/ConditionalNavbar";
 import { ThemeProvider } from "./lib/theme-provider";
-import {
-  inter,
-  poppins,
-  roboto,
-  dmSans,
-  jetbrainsMono,
-  firaCode,
-  spaceGrotesk,
-  sourceCodePro,
-} from "./lib/fonts";
+import { inter, dmSans, spaceGrotesk, urbanist } from "./lib/fonts";
 import ConditionalFooter from "./components/ConditionalFooter";
 import { Toaster } from "react-hot-toast";
 
@@ -57,7 +48,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${sourceCodePro.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${firaCode.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${inter.variable} ${urbanist.variable} ${dmSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider defaultTheme="light" storageKey="renderwise-theme">
           <ConditionalNavbar />
