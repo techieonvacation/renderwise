@@ -38,6 +38,7 @@ const navItems: NavItem[] = [
       { name: "Secondary Hero", path: "/admin/secondary-hero" },
       { name: "Hero Control", path: "/admin/hero-control" },
       { name: "Team Members", path: "/admin/team-members" },
+      { name: "Services", path: "/admin/services", new: true },
     ],
   },
   {
