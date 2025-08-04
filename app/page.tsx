@@ -7,6 +7,7 @@ import TechStackTabs from "./components/ui/TechStacks";
 import Counter from "./components/Home/Counter";
 import { LogoMarquee } from "./components/ui/MarqueeWrapper/logoMarquee";
 import { getLogoMarqueeConfig } from "./lib/services/logoMarqueeService";
+import Testimonials from "./components/ui/Testimonails";
 
 export default async function Home() {
   const heroSettings = await getHeroControlSettings();
@@ -19,6 +20,7 @@ export default async function Home() {
       <Capabilities />
       <Counter />
       <TechStackTabs />
+      <Testimonials />
       <GetInTouch />
     </div>
   );

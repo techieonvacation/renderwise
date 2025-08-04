@@ -17,11 +17,23 @@ import {
   AlertCircle,
   CheckCircle,
 } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/app/components/ui/Card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "@/app/components/ui/Card";
 import { Input } from "@/app/components/ui/Input";
 import { Checkbox } from "@/app/components/ui/Checkbox";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/components/ui/tabs";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/app/components/ui/tabs";
 import Loader from "@/app/components/ui/Loader";
+import { ImageUpload } from "@/app/components/ui/ImageUpload";
 import {
   LogoMarqueeConfig,
   Logo,
@@ -231,7 +243,9 @@ export default function LogoMarqueeAdminPage() {
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
         <div className="text-center">
           <Loader />
-          <p className="mt-4 text-muted-foreground font-medium">Loading logo marquee configuration...</p>
+          <p className="mt-4 text-muted-foreground font-medium">
+            Loading logo marquee configuration...
+          </p>
         </div>
       </div>
     );
@@ -279,7 +293,15 @@ export default function LogoMarqueeAdminPage() {
         )}
 
         {/* Main Content */}
-        <Tabs value={state.activeTab} onValueChange={(value) => setState((prev) => ({ ...prev, activeTab: value as "logos" | "settings" }))}>
+        <Tabs
+          value={state.activeTab}
+          onValueChange={(value) =>
+            setState((prev) => ({
+              ...prev,
+              activeTab: value as "logos" | "settings",
+            }))
+          }
+        >
           <TabsList className="grid w-full grid-cols-2 mb-8 bg-muted/50 border border-border/50">
             <TabsTrigger value="logos" className="flex items-center gap-2">
               <ImageIcon size={18} />
@@ -304,8 +326,8 @@ export default function LogoMarqueeAdminPage() {
                       Add, edit, and organize your marquee logos
                     </CardDescription>
                   </div>
-                  <Button 
-                    onClick={addLogo} 
+                  <Button
+                    onClick={addLogo}
                     variant="primary"
                     size="lg"
                     leftIcon={<Plus size={18} />}
@@ -319,7 +341,10 @@ export default function LogoMarqueeAdminPage() {
                 <div className="space-y-4">
                   {state.config.logos.length === 0 ? (
                     <div className="text-center py-12 text-muted-foreground">
-                      <ImageIcon size={48} className="mx-auto mb-4 opacity-50" />
+                      <ImageIcon
+                        size={48}
+                        className="mx-auto mb-4 opacity-50"
+                      />
                       <p className="text-lg font-medium">No logos added yet</p>
                       <p className="text-sm">Click "Add Logo" to get started</p>
                     </div>
@@ -329,23 +354,25 @@ export default function LogoMarqueeAdminPage() {
                         key={logo.id}
                         className="group relative border border-border/50 rounded-xl p-6 bg-gradient-to-r from-card to-card/80 hover:from-primary/5 hover:to-accent/5 transition-all duration-300 shadow-sm hover:shadow-md"
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4 flex-1 min-w-0">
-                            {/* Logo Preview */}
-                            <div className="flex-shrink-0 w-16 h-16 bg-muted rounded-lg flex items-center justify-center border border-border/50">
-                              <img
-                                src={logo.imageUrl}
-                                alt={logo.name}
-                                className="w-10 h-10 object-contain"
-                                onError={(e) => {
-                                  e.currentTarget.src = "/images/light-logo.webp";
-                                }}
-                              />
-                            </div>
-                            
-                            {/* Logo Details */}
-                            <div className="flex flex-col gap-3 flex-1 min-w-0">
-                              <div className="flex items-center gap-3">
+                        <div className="space-y-6">
+                          {/* Header with Logo Name and Controls */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4 flex-1 min-w-0">
+                              {/* Logo Preview */}
+                              <div className="flex-shrink-0 w-16 h-16 bg-muted rounded-lg flex items-center justify-center border border-border/50">
+                                <img
+                                  src={logo.imageUrl}
+                                  alt={logo.name}
+                                  className="w-10 h-10 object-contain"
+                                  onError={(e) => {
+                                    e.currentTarget.src =
+                                      "/images/light-logo.webp";
+                                  }}
+                                />
+                              </div>
+
+                              {/* Logo Name and Status */}
+                              <div className="flex items-center gap-3 flex-1 min-w-0">
                                 <Input
                                   value={logo.name}
                                   onChange={(e) =>
@@ -357,7 +384,9 @@ export default function LogoMarqueeAdminPage() {
                                 <div className="flex items-center gap-2">
                                   <Checkbox
                                     checked={logo.isActive !== false}
-                                    onCheckedChange={() => toggleLogoActive(index)}
+                                    onCheckedChange={() =>
+                                      toggleLogoActive(index)
+                                    }
                                   />
                                   <Button
                                     variant="ghost"
@@ -373,56 +402,77 @@ export default function LogoMarqueeAdminPage() {
                                   </Button>
                                 </div>
                               </div>
-                              <Input
-                                value={logo.imageUrl}
-                                onChange={(e) =>
-                                  updateLogo(index, { imageUrl: e.target.value })
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex items-center gap-2 ml-4">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => moveLogo(index, "up")}
+                                disabled={index === 0}
+                                className="text-muted-foreground hover:text-foreground hover:bg-primary/10"
+                              >
+                                <MoveUp size={16} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => moveLogo(index, "down")}
+                                disabled={
+                                  index === state.config.logos.length - 1
                                 }
-                                placeholder="Image URL"
-                                className="flex-1 text-sm"
-                              />
+                                className="text-muted-foreground hover:text-foreground hover:bg-primary/10"
+                              >
+                                <MoveDown size={16} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeLogo(index)}
+                                className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                              >
+                                <Trash2 size={16} />
+                              </Button>
                             </div>
                           </div>
 
-                          {/* Action Buttons */}
-                          <div className="flex items-center gap-2 ml-4">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => moveLogo(index, "up")}
-                              disabled={index === 0}
-                              className="text-muted-foreground hover:text-foreground hover:bg-primary/10"
-                            >
-                              <MoveUp size={16} />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => moveLogo(index, "down")}
-                              disabled={index === state.config.logos.length - 1}
-                              className="text-muted-foreground hover:text-foreground hover:bg-primary/10"
-                            >
-                              <MoveDown size={16} />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => removeLogo(index)}
-                              className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                            >
-                              <Trash2 size={16} />
-                            </Button>
+                          {/* Image Upload Section */}
+                          <div className="border-t border-border/30 pt-4">
+                            <ImageUpload
+                              label="Logo Image"
+                              value={logo.imageUrl}
+                              onChange={(url) =>
+                                updateLogo(index, { imageUrl: url })
+                              }
+                              placeholder="Click to upload logo image or drag and drop"
+                              helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                              accept="image/png,image/jpeg,image/jpg,image/webp"
+                              aspectRatio={4}
+                              maxSize={5}
+                              showPreview={true}
+                              onSuccess={(url) => {
+                                toast.success(
+                                  "Logo image uploaded successfully"
+                                );
+                              }}
+                              onError={(error) => {
+                                toast.error(error);
+                              }}
+                            />
                           </div>
                         </div>
-                        
+
                         {/* Status Badge */}
                         <div className="absolute top-3 right-3">
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            logo.isActive !== false 
-                              ? 'bg-success/20 text-success border border-success/30' 
-                              : 'bg-muted text-muted-foreground border border-border'
-                          }`}>
-                            {logo.isActive !== false ? 'Active' : 'Inactive'}
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${
+                              logo.isActive !== false
+                                ? "bg-success/20 text-success border border-success/30"
+                                : "bg-muted text-muted-foreground border border-border"
+                            }`}
+                          >
+                            {logo.isActive !== false ? "Active" : "Inactive"}
                           </span>
                         </div>
                       </div>
@@ -464,10 +514,13 @@ export default function LogoMarqueeAdminPage() {
                       }
                       className="w-32"
                     />
-                    <span className="text-muted-foreground text-sm">seconds per cycle</span>
+                    <span className="text-muted-foreground text-sm">
+                      seconds per cycle
+                    </span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Lower values = faster animation, Higher values = slower animation
+                    Lower values = faster animation, Higher values = slower
+                    animation
                   </p>
                 </div>
 
@@ -478,7 +531,11 @@ export default function LogoMarqueeAdminPage() {
                   </label>
                   <div className="flex gap-3">
                     <Button
-                      variant={state.config.direction === "left" ? "primary" : "outline"}
+                      variant={
+                        state.config.direction === "left"
+                          ? "primary"
+                          : "outline"
+                      }
                       size="sm"
                       onClick={() =>
                         updateConfig((config) => ({
@@ -491,7 +548,11 @@ export default function LogoMarqueeAdminPage() {
                       ← Left to Right
                     </Button>
                     <Button
-                      variant={state.config.direction === "right" ? "primary" : "outline"}
+                      variant={
+                        state.config.direction === "right"
+                          ? "primary"
+                          : "outline"
+                      }
                       size="sm"
                       onClick={() =>
                         updateConfig((config) => ({
@@ -534,10 +595,16 @@ export default function LogoMarqueeAdminPage() {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-info rounded-full mt-2 flex-shrink-0"></div>
                     <div>
-                      <h4 className="font-medium text-info-foreground mb-1">Preview Information</h4>
+                      <h4 className="font-medium text-info-foreground mb-1">
+                        Preview Information
+                      </h4>
                       <p className="text-sm text-info-foreground/80">
-                        Current settings: {state.config.speed}s cycle, {state.config.direction} direction, 
-                        {state.config.isActive !== false ? ' visible' : ' hidden'} on website
+                        Current settings: {state.config.speed}s cycle,{" "}
+                        {state.config.direction} direction,
+                        {state.config.isActive !== false
+                          ? " visible"
+                          : " hidden"}{" "}
+                        on website
                       </p>
                     </div>
                   </div>

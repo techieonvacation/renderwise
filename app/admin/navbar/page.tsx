@@ -24,6 +24,7 @@ import { Card } from "@/app/components/ui/Card";
 import { Input } from "@/app/components/ui/Input";
 import { Checkbox } from "@/app/components/ui/Checkbox";
 import Loader from "@/app/components/ui/Loader";
+import { ImageUpload } from "@/app/components/ui/ImageUpload";
 import {
   NavbarConfig,
   NavItem,
@@ -1071,7 +1072,7 @@ export default function NavbarAdminPage() {
                 <div>
                   <label className="text-sm font-medium">Title</label>
                   <Input
-                    value={slide.title}
+                    value={slide.title} 
                     onChange={(e) =>
                       updateSliderData(index, { title: e.target.value })
                     }
@@ -1079,13 +1080,22 @@ export default function NavbarAdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium">Image URL</label>
-                  <Input
+                  <ImageUpload
+                    label="Slide Image"
                     value={slide.image}
-                    onChange={(e) =>
-                      updateSliderData(index, { image: e.target.value })
-                    }
-                    placeholder="/images/slide.jpg"
+                    onChange={(url) => updateSliderData(index, { image: url })}
+                    placeholder="Click to upload slide image or drag and drop"
+                    helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                    accept="image/png,image/jpeg,image/jpg,image/webp"
+                    maxSize={5}
+                    aspectRatio={4}
+                    showPreview={true}
+                    onSuccess={(url) => {
+                      toast.success("Image uploaded successfully");
+                    }}
+                    onError={(error) => {
+                      toast.error(error);
+                    }}
                   />
                 </div>
                 <div className="md:col-span-2">
