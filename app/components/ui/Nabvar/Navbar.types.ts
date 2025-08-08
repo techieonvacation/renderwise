@@ -44,6 +44,9 @@ export interface NavItem {
   badge?: string;
   order?: number;
   isActive?: boolean;
+  
+  // Individual slider data for grouped layout items
+  sliderData?: SliderData[];
 }
 
 /**

@@ -17,7 +17,7 @@
 
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 import Link from "next/link";
@@ -26,54 +26,66 @@ import SubMenuFooter from "./SubMenuFooter";
 import Image from "next/image";
 import { DesktopMenuProps, SubMenuItem, SliderData } from "./Navbar.types";
 
-export default function DesktopMenu({ menu }: DesktopMenuProps) {
+interface ExtendedDesktopMenuProps extends DesktopMenuProps {
+  onHover?: (menuName: string) => void;
+  onLeave?: () => void;
+  currentSliderData?: SliderData[];
+}
+
+export default function DesktopMenu({ 
+  menu, 
+  onHover, 
+  onLeave, 
+  currentSliderData = [] 
+}: ExtendedDesktopMenuProps) {
   // State management for menu interactions and animations
   const [isHover, setIsHover] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuPosition, setMenuPosition] = useState<"left" | "center" | "right">(
     "center"
   );
-  const [sliderData, setSliderData] = useState<SliderData[]>([]);
 
   // Refs for DOM manipulation and positioning calculations
   const menuRef = useRef<HTMLLIElement>(null);
   const subMenuRef = useRef<HTMLDivElement>(null);
 
-  // Fetch slider data from API
-  useEffect(() => {
-    const fetchSliderData = async () => {
-      try {
-        const response = await fetch("/api/navbar", {
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.sliderData && Array.isArray(data.sliderData)) {
-            setSliderData(
-              data.sliderData.sort(
-                (a: SliderData, b: SliderData) =>
-                  (a.order || 0) - (b.order || 0)
-              )
-            );
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching slider data:", error);
-      }
-    };
-
-    fetchSliderData();
-  }, []);
+  // Use the passed slider data or fallback to menu's own slider data
+  const sliderData = useMemo(() => {
+    // For grouped layouts, use the menu's own slider data if available
+    if (menu.layout === "grouped" && menu.sliderData && menu.sliderData.length > 0) {
+      return menu.sliderData;
+    }
+    
+    // For grouped layouts without own slider data, use passed currentSliderData
+    if (menu.layout === "grouped" && currentSliderData.length > 0) {
+      return currentSliderData;
+    }
+    
+    // For default layouts, don't show slider
+    return [];
+  }, [menu.layout, menu.sliderData, currentSliderData]);
 
   /**
    * Handles menu item clicks and closes sub-menus
    */
   const handleMenuItemClick = () => {
     setIsHover(false);
+  };
+
+  /**
+   * Handles mouse enter with hover callback
+   */
+  const handleMouseEnter = () => {
+    setIsHover(true);
+    onHover?.(menu.name);
+  };
+
+  /**
+   * Handles mouse leave with leave callback
+   */
+  const handleMouseLeave = () => {
+    setIsHover(false);
+    onLeave?.();
   };
 
   /**
@@ -88,11 +100,11 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
 
   /**
    * Determines if this menu should use the advanced sub-menu layout
-   * Based on menu name and configuration
+   * Based on layout property - "grouped" layout shows advanced sub-menu with slider
    */
   const useAdvancedSubMenu = React.useMemo(
-    () => ["Services", "Solutions"].includes(menu.name) && menu.subMenu,
-    [menu.name, menu.subMenu]
+    () => menu.layout === "grouped" && menu.subMenu,
+    [menu.layout, menu.subMenu]
   );
 
   /**
@@ -148,7 +160,7 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
 
   /**
    * Auto-slider effect for enhanced visual appeal
-   * Automatically cycles through slides when sub-menu is open
+   * Automatically cycles through slides when sub-menu is open for grouped layouts
    */
   useEffect(() => {
     if (!isHover || !useAdvancedSubMenu || sliderData.length === 0) return;
@@ -164,8 +176,8 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
     <li
       ref={menuRef}
       className="group/link"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Main Menu Item - Link or Dropdown Trigger */}
       {!hasSubMenu && menu.href ? (
@@ -209,7 +221,12 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
           role="menu"
           aria-label={`${menu.name} submenu`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:h-[500px]">
+          <div className={cn(
+            "grid min-h-[400px] lg:h-[500px]",
+            sliderData.length > 0 
+              ? "grid-cols-1 lg:grid-cols-2" 
+              : "grid-cols-1"
+          )}>
             {/* Left Side - Menu Items */}
             <div className="p-6 lg:p-8 overflow-y-auto custom-scrollbar">
               {menu.layout === "grouped" &&
@@ -279,57 +296,59 @@ export default function DesktopMenu({ menu }: DesktopMenuProps) {
             </div>
 
             {/* Right Side - Auto Slider */}
-            <div className="relative bg-gradient-to-br from-primary/5 to-secondary/5 p-6 lg:p-8 items-center justify-center hidden lg:flex">
-              <div className="relative w-full h-full overflow-hidden rounded-2xl">
-                {sliderData.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={cn(
-                      "absolute inset-0 flex flex-col items-center justify-center text-center p-6 transition-all duration-500 ease-in-out",
-                      currentSlide === index
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-4"
-                    )}
-                  >
-                    <div className="relative z-10">
-                      <div className="mb-4 lg:mb-6 rounded-2xl overflow-hidden max-w-[200px] mx-auto w-full">
-                        <Image
-                          src={slide.image}
-                          alt={slide.title}
-                          width={100}
-                          height={100}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <h4 className="text-lg lg:text-xl font-bold font-urbanist text-foreground mb-2 lg:mb-3">
-                        {slide.title}
-                      </h4>
-                      <p className="text-foreground/80 text-sm leading-relaxed">
-                        {slide.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Slide indicators */}
-              {sliderData.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                  {sliderData.map((_, index) => (
-                    <button
+            {sliderData.length > 0 && (
+              <div className="relative bg-gradient-to-br from-primary/5 to-secondary/5 p-6 lg:p-8 items-center justify-center hidden lg:flex">
+                <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                  {sliderData.map((slide, index) => (
+                    <div
                       key={index}
-                      onClick={() => setCurrentSlide(index)}
                       className={cn(
-                        "w-2 h-2 rounded-full transition-all duration-300",
+                        "absolute inset-0 flex flex-col items-center justify-center text-center p-6 transition-all duration-500 ease-in-out",
                         currentSlide === index
-                          ? "bg-primary scale-125"
-                          : "bg-foreground/30 hover:bg-foreground/50"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4"
                       )}
-                    />
+                    >
+                      <div className="relative z-10">
+                        <div className="mb-4 lg:mb-6 rounded-2xl overflow-hidden max-w-[200px] mx-auto w-full">
+                          <Image
+                            src={slide.image}
+                            alt={slide.title}
+                            width={100}
+                            height={100}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h4 className="text-lg lg:text-xl font-bold font-urbanist text-foreground mb-2 lg:mb-3">
+                          {slide.title}
+                        </h4>
+                        <p className="text-foreground/80 text-sm leading-relaxed">
+                          {slide.description}
+                        </p>
+                      </div>
+                    </div>
                   ))}
                 </div>
-              )}
-            </div>
+
+                {/* Slide indicators */}
+                {sliderData.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    {sliderData.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={cn(
+                          "w-2 h-2 rounded-full transition-all duration-300",
+                          currentSlide === index
+                            ? "bg-primary scale-125"
+                            : "bg-foreground/30 hover:bg-foreground/50"
+                        )}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Footer */}

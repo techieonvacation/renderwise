@@ -36,6 +36,7 @@ export const NavItemSchema = z.object({
   badge: z.string().optional(),
   order: z.number().int().positive().optional(),
   isActive: z.boolean().optional().default(true),
+  sliderData: z.array(SliderDataSchema).optional(),
 });
 
 export const SocialIconSchema = z.object({
@@ -102,6 +103,7 @@ export interface NavItem {
   badge?: string;
   order?: number;
   isActive?: boolean;
+  sliderData?: SliderData[];
 }
 
 export interface SocialIcon {
@@ -193,6 +195,38 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       footerLink: "/services",
       order: 2,
       isActive: true,
+      sliderData: [
+        {
+          title: "Web Development",
+          description: "Modern, responsive websites built with cutting-edge technologies",
+          image: "/images/services/web-development.jpg",
+          order: 1,
+        },
+        {
+          title: "Mobile Development",
+          description: "Native and cross-platform mobile applications",
+          image: "/images/services/mobile-dev.jpg",
+          order: 2,
+        },
+        {
+          title: "Cloud Solutions",
+          description: "Scalable cloud infrastructure for modern businesses",
+          image: "/images/services/cloud-solutions.jpg",
+          order: 3,
+        },
+        {
+          title: "UI/UX Design",
+          description: "Beautiful and intuitive user experiences",
+          image: "/images/services/ui-ux-design.jpg",
+          order: 4,
+        },
+        {
+          title: "DevOps & Security",
+          description: "Secure deployment pipelines and infrastructure",
+          image: "/images/services/devops.jpg",
+          order: 5,
+        },
+      ],
     },
     {
       name: "Solutions",
@@ -230,6 +264,38 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       footerLink: "/solutions",
       order: 3,
       isActive: true,
+      sliderData: [
+        {
+          title: "Enterprise Solutions",
+          description: "Large-scale business solutions with enterprise-grade security",
+          image: "/images/solutions/enterprise.jpg",
+          order: 1,
+        },
+        {
+          title: "E-commerce Platforms",
+          description: "Custom online stores with payment gateway integrations",
+          image: "/images/solutions/ecommerce.jpg",
+          order: 2,
+        },
+        {
+          title: "SaaS Products",
+          description: "Software as a Service platforms with subscription management",
+          image: "/images/solutions/saas.jpg",
+          order: 3,
+        },
+        {
+          title: "AI & Machine Learning",
+          description: "Intelligent automation and data-driven insights",
+          image: "/images/solutions/ai-ml.jpg",
+          order: 4,
+        },
+        {
+          title: "Blockchain Development",
+          description: "Decentralized applications and smart contracts",
+          image: "/images/solutions/blockchain.jpg",
+          order: 5,
+        },
+      ],
     },
     {
       name: "About",
@@ -268,6 +334,32 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       ],
       order: 4,
       isActive: true,
+      sliderData: [
+        {
+          title: "Our Story",
+          description: "Learn about our journey and mission to deliver exceptional solutions",
+          image: "/images/about/our-story.jpg",
+          order: 1,
+        },
+        {
+          title: "Our Team",
+          description: "Meet the talented professionals behind our success",
+          image: "/images/about/our-team.jpg",
+          order: 2,
+        },
+        {
+          title: "Careers",
+          description: "Join our team and build the future of technology together",
+          image: "/images/about/careers.jpg",
+          order: 3,
+        },
+        {
+          title: "Culture & Values",
+          description: "Discover our core values and company culture",
+          image: "/images/about/culture.jpg",
+          order: 4,
+        },
+      ],
     },
     {
       name: "Contact",
@@ -306,6 +398,20 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       ],
       order: 2,
       isActive: true,
+      sliderData: [
+        {
+          title: "Help Center",
+          description: "Find answers to frequently asked questions",
+          image: "/images/support/help-center.jpg",
+          order: 1,
+        },
+        {
+          title: "Technical Support",
+          description: "Get technical assistance for your projects",
+          image: "/images/support/technical-support.jpg",
+          order: 2,
+        },
+      ],
     },
   ],
   socialIcons: [

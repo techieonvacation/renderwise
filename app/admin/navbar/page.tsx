@@ -37,7 +37,13 @@ import {
 interface NavbarAdminState {
   config: NavbarConfig;
   isEditing: boolean;
-  activeTab: "main" | "secondary" | "social" | "slider" | "settings";
+  activeTab:
+    | "main"
+    | "secondary"
+    | "social"
+    | "slider"
+    | "menuSliders"
+    | "settings";
   expandedItems: Set<string>;
   editingItem: string | null;
 }
@@ -407,6 +413,79 @@ export default function NavbarAdminPage() {
     [updateConfig]
   );
 
+  const addMenuSliderData = useCallback(
+    (section: "mainNavItems" | "secondaryNavItems", navIndex: number) => {
+      updateConfig((config) => ({
+        ...config,
+        [section]: config[section].map((item, i) => {
+          if (i === navIndex) {
+            return {
+              ...item,
+              sliderData: [
+                ...(item.sliderData || []),
+                {
+                  title: "New Slide",
+                  description: "Description for new slide",
+                  image: "/images/services/new-slide.jpg",
+                  order: (item.sliderData?.length || 0) + 1,
+                },
+              ],
+            };
+          }
+          return item;
+        }),
+      }));
+    },
+    [updateConfig]
+  );
+
+  const updateMenuSliderData = useCallback(
+    (
+      section: "mainNavItems" | "secondaryNavItems",
+      navIndex: number,
+      slideIndex: number,
+      updates: Partial<SliderData>
+    ) => {
+      updateConfig((config) => ({
+        ...config,
+        [section]: config[section].map((item, i) => {
+          if (i === navIndex) {
+            return {
+              ...item,
+              sliderData: item.sliderData?.map((slide, j) =>
+                j === slideIndex ? { ...slide, ...updates } : slide
+              ),
+            };
+          }
+          return item;
+        }),
+      }));
+    },
+    [updateConfig]
+  );
+
+  const removeMenuSliderData = useCallback(
+    (
+      section: "mainNavItems" | "secondaryNavItems",
+      navIndex: number,
+      slideIndex: number
+    ) => {
+      updateConfig((config) => ({
+        ...config,
+        [section]: config[section].map((item, i) => {
+          if (i === navIndex) {
+            return {
+              ...item,
+              sliderData: item.sliderData?.filter((_, j) => j !== slideIndex),
+            };
+          }
+          return item;
+        }),
+      }));
+    },
+    [updateConfig]
+  );
+
   if (isLoading) {
     return <Loader />;
   }
@@ -446,7 +525,8 @@ export default function NavbarAdminPage() {
           { id: "main", label: "Main Menu", icon: Menu },
           { id: "secondary", label: "Secondary Menu", icon: Users },
           { id: "social", label: "Social Links", icon: Share2 },
-          { id: "slider", label: "Slider Content", icon: ImageIcon },
+          { id: "slider", label: "Global Slider", icon: ImageIcon },
+          { id: "menuSliders", label: "Menu Sliders", icon: ImageIcon },
           { id: "settings", label: "Settings", icon: Settings },
         ].map(({ id, label, icon: Icon }) => (
           <button
@@ -581,6 +661,42 @@ export default function NavbarAdminPage() {
 
                   {item.hasDropdown && (
                     <div className="space-y-4">
+                      {/* Dropdown Configuration */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+                        <div>
+                          <label className="text-sm font-medium">Layout</label>
+                          <select
+                            value={item.layout || "default"}
+                            onChange={(e) =>
+                              updateNavItem("mainNavItems", index, {
+                                layout: e.target.value as "grouped" | "default",
+                              })
+                            }
+                            className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                          >
+                            <option value="default">Default</option>
+                            <option value="grouped">Grouped</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium">
+                            Sub Menu Headings (comma-separated)
+                          </label>
+                          <Input
+                            value={item.subMenuHeading?.join(", ") || ""}
+                            onChange={(e) =>
+                              updateNavItem("mainNavItems", index, {
+                                subMenuHeading: e.target.value
+                                  .split(",")
+                                  .map((heading) => heading.trim())
+                                  .filter((heading) => heading.length > 0),
+                              })
+                            }
+                            placeholder="Development, Infrastructure, Design"
+                          />
+                        </div>
+                      </div>
+
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-medium">Sub Menu Items</h3>
                         <Button
@@ -688,6 +804,146 @@ export default function NavbarAdminPage() {
                                   </option>
                                 ))}
                               </select>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                              <label className="text-sm font-medium">
+                                Group
+                              </label>
+                              <select
+                                value={subItem.group || ""}
+                                onChange={(e) =>
+                                  updateSubMenuItem(
+                                    "mainNavItems",
+                                    index,
+                                    subIndex,
+                                    { group: e.target.value }
+                                  )
+                                }
+                                className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                              >
+                                <option value="">Select a group</option>
+                                {item.subMenuHeading?.map((heading) => (
+                                  <option key={heading} value={heading}>
+                                    {heading}
+                                  </option>
+                                )) || []}
+                              </select>
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Slider Management for Grouped Layout */}
+                  {item.hasDropdown && item.layout === "grouped" && (
+                    <div className="space-y-4 mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="text-lg font-medium text-primary">
+                            Slider Images
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            Add slider images that will appear on the right side
+                            of the dropdown menu
+                          </p>
+                        </div>
+                        <Button
+                          onClick={() =>
+                            addMenuSliderData("mainNavItems", index)
+                          }
+                          variant="outline"
+                          size="sm"
+                          leftIcon={<Plus />}
+                        >
+                          Add Slide
+                        </Button>
+                      </div>
+
+                      {item.sliderData?.map((slide, slideIndex) => (
+                        <Card key={slideIndex} className="p-4">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">{slide.title}</span>
+                            </div>
+                            <Button
+                              onClick={() =>
+                                removeMenuSliderData(
+                                  "mainNavItems",
+                                  index,
+                                  slideIndex
+                                )
+                              }
+                              variant="ghost"
+                              size="sm"
+                              leftIcon={<Trash2 />}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium">
+                                Title
+                              </label>
+                              <Input
+                                value={slide.title}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { title: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide title"
+                              />
+                            </div>
+                            <div>
+                              <ImageUpload
+                                label="Slide Image"
+                                value={slide.image}
+                                onChange={(url) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { image: url }
+                                  )
+                                }
+                                placeholder="Click to upload slide image or drag and drop"
+                                helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                                accept="image/png,image/jpeg,image/jpg,image/webp"
+                                maxSize={5}
+                                aspectRatio={4}
+                                showPreview={true}
+                                onSuccess={(url) => {
+                                  toast.success("Image uploaded successfully");
+                                }}
+                                onError={(error) => {
+                                  toast.error(error);
+                                }}
+                              />
+                            </div>
+                            <div className="md:col-span-2">
+                              <label className="text-sm font-medium">
+                                Description
+                              </label>
+                              <Input
+                                value={slide.description}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { description: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide description"
+                              />
                             </div>
                           </div>
                         </Card>
@@ -818,6 +1074,42 @@ export default function NavbarAdminPage() {
 
                   {item.hasDropdown && (
                     <div className="space-y-4">
+                      {/* Dropdown Configuration */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+                        <div>
+                          <label className="text-sm font-medium">Layout</label>
+                          <select
+                            value={item.layout || "default"}
+                            onChange={(e) =>
+                              updateNavItem("secondaryNavItems", index, {
+                                layout: e.target.value as "grouped" | "default",
+                              })
+                            }
+                            className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                          >
+                            <option value="default">Default</option>
+                            <option value="grouped">Grouped</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium">
+                            Sub Menu Headings (comma-separated)
+                          </label>
+                          <Input
+                            value={item.subMenuHeading?.join(", ") || ""}
+                            onChange={(e) =>
+                              updateNavItem("secondaryNavItems", index, {
+                                subMenuHeading: e.target.value
+                                  .split(",")
+                                  .map((heading) => heading.trim())
+                                  .filter((heading) => heading.length > 0),
+                              })
+                            }
+                            placeholder="Enterprise, E-commerce, Specialized"
+                          />
+                        </div>
+                      </div>
+
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-medium">Sub Menu Items</h3>
                         <Button
@@ -927,6 +1219,146 @@ export default function NavbarAdminPage() {
                                   </option>
                                 ))}
                               </select>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                              <label className="text-sm font-medium">
+                                Group
+                              </label>
+                              <select
+                                value={subItem.group || ""}
+                                onChange={(e) =>
+                                  updateSubMenuItem(
+                                    "secondaryNavItems",
+                                    index,
+                                    subIndex,
+                                    { group: e.target.value }
+                                  )
+                                }
+                                className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                              >
+                                <option value="">Select a group</option>
+                                {item.subMenuHeading?.map((heading) => (
+                                  <option key={heading} value={heading}>
+                                    {heading}
+                                  </option>
+                                )) || []}
+                              </select>
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Slider Management for Grouped Layout */}
+                  {item.hasDropdown && item.layout === "grouped" && (
+                    <div className="space-y-4 mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="text-lg font-medium text-primary">
+                            Slider Images
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            Add slider images that will appear on the right side
+                            of the dropdown menu
+                          </p>
+                        </div>
+                        <Button
+                          onClick={() =>
+                            addMenuSliderData("secondaryNavItems", index)
+                          }
+                          variant="outline"
+                          size="sm"
+                          leftIcon={<Plus />}
+                        >
+                          Add Slide
+                        </Button>
+                      </div>
+
+                      {item.sliderData?.map((slide, slideIndex) => (
+                        <Card key={slideIndex} className="p-4">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">{slide.title}</span>
+                            </div>
+                            <Button
+                              onClick={() =>
+                                removeMenuSliderData(
+                                  "secondaryNavItems",
+                                  index,
+                                  slideIndex
+                                )
+                              }
+                              variant="ghost"
+                              size="sm"
+                              leftIcon={<Trash2 />}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium">
+                                Title
+                              </label>
+                              <Input
+                                value={slide.title}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "secondaryNavItems",
+                                    index,
+                                    slideIndex,
+                                    { title: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide title"
+                              />
+                            </div>
+                            <div>
+                              <ImageUpload
+                                label="Slide Image"
+                                value={slide.image}
+                                onChange={(url) =>
+                                  updateMenuSliderData(
+                                    "secondaryNavItems",
+                                    index,
+                                    slideIndex,
+                                    { image: url }
+                                  )
+                                }
+                                placeholder="Click to upload slide image or drag and drop"
+                                helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                                accept="image/png,image/jpeg,image/jpg,image/webp"
+                                maxSize={5}
+                                aspectRatio={4}
+                                showPreview={true}
+                                onSuccess={(url) => {
+                                  toast.success("Image uploaded successfully");
+                                }}
+                                onError={(error) => {
+                                  toast.error(error);
+                                }}
+                              />
+                            </div>
+                            <div className="md:col-span-2">
+                              <label className="text-sm font-medium">
+                                Description
+                              </label>
+                              <Input
+                                value={slide.description}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "secondaryNavItems",
+                                    index,
+                                    slideIndex,
+                                    { description: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide description"
+                              />
                             </div>
                           </div>
                         </Card>
@@ -1072,7 +1504,7 @@ export default function NavbarAdminPage() {
                 <div>
                   <label className="text-sm font-medium">Title</label>
                   <Input
-                    value={slide.title} 
+                    value={slide.title}
                     onChange={(e) =>
                       updateSliderData(index, { title: e.target.value })
                     }
@@ -1111,6 +1543,316 @@ export default function NavbarAdminPage() {
               </div>
             </Card>
           ))}
+        </div>
+      )}
+
+      {/* Menu Sliders Tab */}
+      {state.activeTab === "menuSliders" && (
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold">Menu Dropdown Sliders</h2>
+            <p className="text-sm text-muted-foreground">
+              Manage slider images for dropdown menu items
+            </p>
+          </div>
+
+          {/* Main Menu Items with Dropdowns */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-medium">Main Menu Items</h3>
+            {state.config.mainNavItems
+              .filter((item) => item.hasDropdown)
+              .map((item, index) => (
+                <Card key={index} className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="text-lg font-medium">{item.name}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Dropdown menu with {item.subMenu?.length || 0} items
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() =>
+                        toggleExpanded(`menu-slider-main-${index}`)
+                      }
+                      variant="outline"
+                      size="sm"
+                      leftIcon={
+                        state.expandedItems.has(`menu-slider-main-${index}`) ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )
+                      }
+                    >
+                      {state.expandedItems.has(`menu-slider-main-${index}`)
+                        ? "Hide"
+                        : "Manage Sliders"}
+                    </Button>
+                  </div>
+
+                  {state.expandedItems.has(`menu-slider-main-${index}`) && (
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h5 className="text-md font-medium">
+                          Slider Images for {item.name}
+                        </h5>
+                        <Button
+                          onClick={() =>
+                            addMenuSliderData("mainNavItems", index)
+                          }
+                          variant="outline"
+                          size="sm"
+                          leftIcon={<Plus />}
+                        >
+                          Add Slide
+                        </Button>
+                      </div>
+
+                      {item.sliderData?.map((slide, slideIndex) => (
+                        <Card key={slideIndex} className="p-4">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">{slide.title}</span>
+                            </div>
+                            <Button
+                              onClick={() =>
+                                removeMenuSliderData(
+                                  "mainNavItems",
+                                  index,
+                                  slideIndex
+                                )
+                              }
+                              variant="ghost"
+                              size="sm"
+                              leftIcon={<Trash2 />}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium">
+                                Title
+                              </label>
+                              <Input
+                                value={slide.title}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { title: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide title"
+                              />
+                            </div>
+                            <div>
+                              <ImageUpload
+                                label="Slide Image"
+                                value={slide.image}
+                                onChange={(url) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { image: url }
+                                  )
+                                }
+                                placeholder="Click to upload slide image or drag and drop"
+                                helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                                accept="image/png,image/jpeg,image/jpg,image/webp"
+                                maxSize={5}
+                                aspectRatio={4}
+                                showPreview={true}
+                                onSuccess={(url) => {
+                                  toast.success("Image uploaded successfully");
+                                }}
+                                onError={(error) => {
+                                  toast.error(error);
+                                }}
+                              />
+                            </div>
+                            <div className="md:col-span-2">
+                              <label className="text-sm font-medium">
+                                Description
+                              </label>
+                              <Input
+                                value={slide.description}
+                                onChange={(e) =>
+                                  updateMenuSliderData(
+                                    "mainNavItems",
+                                    index,
+                                    slideIndex,
+                                    { description: e.target.value }
+                                  )
+                                }
+                                placeholder="Slide description"
+                              />
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </Card>
+              ))}
+
+            {/* Secondary Menu Items with Dropdowns */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-medium">Secondary Menu Items</h3>
+              {state.config.secondaryNavItems
+                .filter((item) => item.hasDropdown)
+                .map((item, index) => (
+                  <Card key={index} className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h4 className="text-lg font-medium">{item.name}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Dropdown menu with {item.subMenu?.length || 0} items
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() =>
+                          toggleExpanded(`menu-slider-secondary-${index}`)
+                        }
+                        variant="outline"
+                        size="sm"
+                        leftIcon={
+                          state.expandedItems.has(
+                            `menu-slider-secondary-${index}`
+                          ) ? (
+                            <ChevronUp className="h-4 w-4" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4" />
+                          )
+                        }
+                      >
+                        {state.expandedItems.has(
+                          `menu-slider-secondary-${index}`
+                        )
+                          ? "Hide"
+                          : "Manage Sliders"}
+                      </Button>
+                    </div>
+
+                    {state.expandedItems.has(
+                      `menu-slider-secondary-${index}`
+                    ) && (
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <h5 className="text-md font-medium">
+                            Slider Images for {item.name}
+                          </h5>
+                          <Button
+                            onClick={() =>
+                              addMenuSliderData("secondaryNavItems", index)
+                            }
+                            variant="outline"
+                            size="sm"
+                            leftIcon={<Plus />}
+                          >
+                            Add Slide
+                          </Button>
+                        </div>
+
+                        {item.sliderData?.map((slide, slideIndex) => (
+                          <Card key={slideIndex} className="p-4">
+                            <div className="flex justify-between items-start mb-4">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium">
+                                  {slide.title}
+                                </span>
+                              </div>
+                              <Button
+                                onClick={() =>
+                                  removeMenuSliderData(
+                                    "secondaryNavItems",
+                                    index,
+                                    slideIndex
+                                  )
+                                }
+                                variant="ghost"
+                                size="sm"
+                                leftIcon={<Trash2 />}
+                              >
+                                Remove
+                              </Button>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="text-sm font-medium">
+                                  Title
+                                </label>
+                                <Input
+                                  value={slide.title}
+                                  onChange={(e) =>
+                                    updateMenuSliderData(
+                                      "secondaryNavItems",
+                                      index,
+                                      slideIndex,
+                                      { title: e.target.value }
+                                    )
+                                  }
+                                  placeholder="Slide title"
+                                />
+                              </div>
+                              <div>
+                                <ImageUpload
+                                  label="Slide Image"
+                                  value={slide.image}
+                                  onChange={(url) =>
+                                    updateMenuSliderData(
+                                      "secondaryNavItems",
+                                      index,
+                                      slideIndex,
+                                      { image: url }
+                                    )
+                                  }
+                                  placeholder="Click to upload slide image or drag and drop"
+                                  helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+                                  accept="image/png,image/jpeg,image/jpg,image/webp"
+                                  maxSize={5}
+                                  aspectRatio={4}
+                                  showPreview={true}
+                                  onSuccess={(url) => {
+                                    toast.success(
+                                      "Image uploaded successfully"
+                                    );
+                                  }}
+                                  onError={(error) => {
+                                    toast.error(error);
+                                  }}
+                                />
+                              </div>
+                              <div className="md:col-span-2">
+                                <label className="text-sm font-medium">
+                                  Description
+                                </label>
+                                <Input
+                                  value={slide.description}
+                                  onChange={(e) =>
+                                    updateMenuSliderData(
+                                      "secondaryNavItems",
+                                      index,
+                                      slideIndex,
+                                      { description: e.target.value }
+                                    )
+                                  }
+                                  placeholder="Slide description"
+                                />
+                              </div>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </Card>
+                ))}
+            </div>
+          </div>
         </div>
       )}
 

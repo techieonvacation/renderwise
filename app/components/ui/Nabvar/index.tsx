@@ -30,6 +30,7 @@ export default function Navbar({
     DEFAULT_NAVBAR_CONFIG
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [hoveredMenuItem, setHoveredMenuItem] = useState<string | null>(null);
   const pathname = usePathname();
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -70,6 +71,30 @@ export default function Navbar({
     () => ({ ...navbarConfig, ...config }),
     [navbarConfig, config]
   );
+
+  // Get current slider data based on hovered menu item
+  const currentSliderData = useMemo(() => {
+    if (!hoveredMenuItem) {
+      return finalConfig.sliderData || [];
+    }
+
+    // Find the menu item that's being hovered
+    const allMenuItems = [...finalConfig.mainNavItems, ...finalConfig.secondaryNavItems];
+    const hoveredItem = allMenuItems.find(item => item.name === hoveredMenuItem);
+    
+    // Only return slider data for grouped layout items
+    if (hoveredItem?.layout === "grouped" && hoveredItem?.sliderData) {
+      return hoveredItem.sliderData;
+    }
+    
+    // For grouped layouts without own slider data, use global slider data
+    if (hoveredItem?.layout === "grouped") {
+      return finalConfig.sliderData || [];
+    }
+    
+    // For default layouts, don't show slider
+    return [];
+  }, [hoveredMenuItem, finalConfig]);
 
   // Advanced scroll effect with throttling
   useEffect(() => {
@@ -247,7 +272,13 @@ export default function Navbar({
                   .filter((item) => item.isActive !== false)
                   .sort((a, b) => (a.order || 0) - (b.order || 0))
                   .map((item, index) => (
-                    <DesktopMenu key={`${item.name}-${index}`} menu={item} />
+                    <DesktopMenu 
+                      key={`${item.name}-${index}`} 
+                      menu={item}
+                      onHover={(menuName) => setHoveredMenuItem(menuName)}
+                      onLeave={() => setHoveredMenuItem(null)}
+                      currentSliderData={currentSliderData}
+                    />
                   ))}
               </ul>
             </nav>

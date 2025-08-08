@@ -6,6 +6,7 @@
  * - Detailed service descriptions
  * - Dynamic icon assignments
  * - Footer configurations for sub-menus
+ * - Individual slider images for dropdown menu items
  * - Backward compatibility with existing structure
  */
 
@@ -23,7 +24,6 @@ export const NAVBAR_CONFIG = {
       href: "/services",
       hasDropdown: true,
       layout: "grouped",
-      subMenuHeading: ["Development", "Infrastructure", "Design"],
       subMenu: [
         // Development Group
         {
@@ -108,13 +108,44 @@ export const NAVBAR_CONFIG = {
       ],
       footerText: "Explore All Services",
       footerLink: "/services",
+      sliderData: [
+        {
+          title: "Web Development",
+          description: "Modern, responsive websites built with cutting-edge technologies",
+          image: "/images/services/web-development.jpg",
+          order: 1,
+        },
+        {
+          title: "Mobile Development",
+          description: "Native and cross-platform mobile applications",
+          image: "/images/services/mobile-dev.jpg",
+          order: 2,
+        },
+        {
+          title: "Cloud Solutions",
+          description: "Scalable cloud infrastructure for modern businesses",
+          image: "/images/services/cloud-solutions.jpg",
+          order: 3,
+        },
+        {
+          title: "UI/UX Design",
+          description: "Beautiful and intuitive user experiences",
+          image: "/images/services/ui-ux-design.jpg",
+          order: 4,
+        },
+        {
+          title: "DevOps & Security",
+          description: "Secure deployment pipelines and infrastructure",
+          image: "/images/services/devops.jpg",
+          order: 5,
+        },
+      ],
     },
     {
       name: "Solutions",
       href: "/solutions",
       hasDropdown: true,
       layout: "grouped",
-      subMenuHeading: ["Enterprise", "E-commerce", "Specialized"],
       subMenu: [
         // Enterprise Group
         {
@@ -199,6 +230,38 @@ export const NAVBAR_CONFIG = {
       ],
       footerText: "View All Solutions",
       footerLink: "/solutions",
+      sliderData: [
+        {
+          title: "Enterprise Solutions",
+          description: "Large-scale business solutions with enterprise-grade security",
+          image: "/images/solutions/enterprise.jpg",
+          order: 1,
+        },
+        {
+          title: "E-commerce Platforms",
+          description: "Custom online stores with payment gateway integrations",
+          image: "/images/solutions/ecommerce.jpg",
+          order: 2,
+        },
+        {
+          title: "SaaS Products",
+          description: "Software as a Service platforms with subscription management",
+          image: "/images/solutions/saas.jpg",
+          order: 3,
+        },
+        {
+          title: "AI & Machine Learning",
+          description: "Intelligent automation and data-driven insights",
+          image: "/images/solutions/ai-ml.jpg",
+          order: 4,
+        },
+        {
+          title: "Blockchain Development",
+          description: "Decentralized applications and smart contracts",
+          image: "/images/solutions/blockchain.jpg",
+          order: 5,
+        },
+      ],
     },
     {
       name: "About",
@@ -230,6 +293,32 @@ export const NAVBAR_CONFIG = {
           href: "/about/culture",
           desc: "Discover our core values and company culture",
           iconName: "Heart" as const,
+        },
+      ],
+      sliderData: [
+        {
+          title: "Our Story",
+          description: "Learn about our journey and mission to deliver exceptional solutions",
+          image: "/images/about/our-story.jpg",
+          order: 1,
+        },
+        {
+          title: "Our Team",
+          description: "Meet the talented professionals behind our success",
+          image: "/images/about/our-team.jpg",
+          order: 2,
+        },
+        {
+          title: "Careers",
+          description: "Join our team and build the future of technology together",
+          image: "/images/about/careers.jpg",
+          order: 3,
+        },
+        {
+          title: "Culture & Values",
+          description: "Discover our core values and company culture",
+          image: "/images/about/culture.jpg",
+          order: 4,
         },
       ],
     },
@@ -265,6 +354,32 @@ export const NAVBAR_CONFIG = {
           iconName: "Globe" as const,
         },
       ],
+      sliderData: [
+        {
+          title: "Featured Projects",
+          description: "Showcase of our most impactful and innovative projects",
+          image: "/images/portfolio/featured-projects.jpg",
+          order: 1,
+        },
+        {
+          title: "Case Studies",
+          description: "In-depth analysis of our successful project implementations",
+          image: "/images/portfolio/case-studies.jpg",
+          order: 2,
+        },
+        {
+          title: "Client Testimonials",
+          description: "What our clients say about working with us",
+          image: "/images/portfolio/testimonials.jpg",
+          order: 3,
+        },
+        {
+          title: "Industries We Serve",
+          description: "Explore our expertise across various industry sectors",
+          image: "/images/portfolio/industries.jpg",
+          order: 4,
+        },
+      ],
     },
     {
       name: "Blog",
@@ -296,6 +411,32 @@ export const NAVBAR_CONFIG = {
           href: "/blog/news",
           desc: "Latest updates and announcements from Renderwise",
           iconName: "Newspaper" as const,
+        },
+      ],
+      sliderData: [
+        {
+          title: "Technical Insights",
+          description: "Deep dives into the latest technologies and development practices",
+          image: "/images/blog/technical-insights.jpg",
+          order: 1,
+        },
+        {
+          title: "Industry Trends",
+          description: "Analysis of current trends and future predictions in tech",
+          image: "/images/blog/industry-trends.jpg",
+          order: 2,
+        },
+        {
+          title: "Best Practices",
+          description: "Proven methodologies and strategies for successful projects",
+          image: "/images/blog/best-practices.jpg",
+          order: 3,
+        },
+        {
+          title: "Company News",
+          description: "Latest updates and announcements from Renderwise",
+          image: "/images/blog/company-news.jpg",
+          order: 4,
         },
       ],
     },
@@ -336,6 +477,26 @@ export const NAVBAR_CONFIG = {
           href: "/support/contact",
           desc: "Reach out to our support team directly",
           iconName: "Mail" as const,
+        },
+      ],
+      sliderData: [
+        {
+          title: "Help Center",
+          description: "Find answers to frequently asked questions",
+          image: "/images/support/help-center.jpg",
+          order: 1,
+        },
+        {
+          title: "Technical Support",
+          description: "Get technical assistance for your projects",
+          image: "/images/support/technical-support.jpg",
+          order: 2,
+        },
+        {
+          title: "Contact Support",
+          description: "Reach out to our support team directly",
+          image: "/images/support/contact-support.jpg",
+          order: 3,
         },
       ],
     },
