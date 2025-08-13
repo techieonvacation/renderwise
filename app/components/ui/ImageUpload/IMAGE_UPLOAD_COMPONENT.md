@@ -133,21 +133,24 @@ The component uses `/api/upload` endpoint for file uploads.
 ### API Features
 
 - **File Validation**: Checks file size and type
-- **Secure Storage**: Files stored in `public/uploads/` directory
-- **Unique Naming**: Prevents filename conflicts
+- **Secure Storage**: Files stored in Cloudinary cloud storage
+- **Unique Naming**: Prevents filename conflicts with Cloudinary public IDs
 - **Error Handling**: Comprehensive error responses
 - **Supported Formats**: PNG, JPG, JPEG, WebP, GIF
 - **Size Limit**: 5MB default (configurable)
+- **CDN**: Automatic global CDN distribution
 
 ### API Response
 
 ```json
 {
   "success": true,
-  "url": "/uploads/1703123456789-abc123.png",
-  "fileName": "1703123456789-abc123.png",
+  "url": "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/renderwise-uploads/image.jpg",
+  "fileName": "image.jpg",
+  "publicId": "renderwise-uploads/image",
   "size": 1024000,
-  "type": "image/png"
+  "type": "image/jpeg",
+  "cloudinaryId": "renderwise-uploads/image"
 }
 ```
 
@@ -161,10 +164,11 @@ The component uses `/api/upload` endpoint for file uploads.
 
 ## File Storage
 
-Uploaded files are stored in:
-- **Directory**: `public/uploads/`
-- **URL Pattern**: `/uploads/{timestamp}-{random}.{extension}`
-- **Example**: `/uploads/1703123456789-abc123.png`
+Uploaded files are stored in Cloudinary cloud storage:
+- **Cloud Service**: Cloudinary
+- **Folder**: `renderwise-uploads`
+- **URL Pattern**: `https://res.cloudinary.com/{cloud-name}/image/upload/v{version}/{folder}/{filename}`
+- **Example**: `https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/renderwise-uploads/image.jpg`
 
 ## Validation Rules
 
@@ -209,7 +213,8 @@ The component uses Tailwind CSS classes and follows the design system:
 - File existence check
 - Size limit enforcement
 - Type validation
-- Storage error handling
+- Cloudinary upload error handling
+- Network connectivity validation
 
 ## Performance Features
 
@@ -226,6 +231,11 @@ The component uses Tailwind CSS classes and follows the design system:
 - **FileReader**: Used for preview generation
 
 ## Security Considerations
+
+- **Cloud Storage**: Files stored securely in Cloudinary
+- **No Local Storage**: Eliminates server filesystem security risks
+- **CDN Protection**: Cloudinary provides DDoS protection
+- **Access Control**: Images are publicly accessible but with unique URLs
 
 - **File Type Validation**: Both client and server-side
 - **Size Limits**: Prevents large file uploads
