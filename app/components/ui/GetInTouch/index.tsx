@@ -89,7 +89,7 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left Column */}
-          <div className="space-y-8 max-w-xl">
+          <div className="space-y-8 max-w-xl order-2 lg:order-1">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">
                 Get in Touch with
@@ -186,7 +186,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-border bg-card text-card-foreground p-6 shadow-lg md:p-8"
+            className="rounded-2xl border border-border bg-card text-card-foreground p-6 shadow-lg md:p-8 order-1 lg:order-2"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid gap-6 md:grid-cols-2">

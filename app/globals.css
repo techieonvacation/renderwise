@@ -189,6 +189,20 @@ body {
   @apply max-w-7xl mx-auto px-4;
 }
 
+/* Title styling with responsive typography and proper contrast */
+.title {
+  @apply text-3xl md:text-4xl lg:text-5xl font-medium leading-tight font-dm-sans;
+}
+
+/* Highlight styling with primary color accent */
+.highlight {
+  @apply font-dm-sans font-medium;
+  background: linear-gradient(135deg, #615fff, #ee50ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Custom animations */
 @keyframes rotateme {
   from {

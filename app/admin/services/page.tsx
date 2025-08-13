@@ -11,6 +11,8 @@ import { Select } from "@/app/components/ui/Select";
 import { Checkbox } from "@/app/components/ui/Checkbox";
 import Loader from "@/app/components/ui/Loader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
+import { ImageUpload } from "@/app/components/ui/ImageUpload";
+import { toast } from "react-hot-toast";
 import { 
   ServicesConfig, 
   ServiceFeature, 
@@ -104,6 +106,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
       })));
     } catch (error) {
       console.error("Error loading services data:", error);
+      toast.error("Failed to load services configuration");
     } finally {
       setIsLoading(false);
     }
@@ -132,6 +135,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
       if (response.ok) {
         setCurrentData(updatedData);
         setSaveStatus("success");
+        toast.success("Services configuration saved successfully!");
         setTimeout(() => setSaveStatus("idle"), 3000);
       } else {
         throw new Error("Failed to save");
@@ -139,6 +143,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
     } catch (error) {
       console.error("Error saving services data:", error);
       setSaveStatus("error");
+      toast.error("Failed to save services configuration");
       setTimeout(() => setSaveStatus("idle"), 3000);
     } finally {
       setIsSaving(false);
@@ -152,8 +157,10 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
         setIsSaving(true);
         await fetch("/api/services", { method: "DELETE" });
         await loadServicesData();
+        toast.success("Services configuration reset to default successfully!");
       } catch (error) {
         console.error("Error resetting to default:", error);
+        toast.error("Failed to reset services configuration");
       } finally {
         setIsSaving(false);
       }
@@ -174,6 +181,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
     };
     setServices([...services, newService]);
     setEditingService(newService.id);
+    toast.success("New service added successfully!");
   };
 
   const updateService = (id: string, updates: Partial<ServiceFormData>) => {
@@ -185,11 +193,15 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
   const deleteService = (id: string) => {
     if (confirm("Are you sure you want to delete this service?")) {
       setServices(services.filter(service => service.id !== id));
+      toast.success("Service deleted successfully!");
     }
   };
 
   const toggleServiceActive = (id: string) => {
-    updateService(id, { isActive: !services.find(s => s.id === id)?.isActive });
+    const service = services.find(s => s.id === id);
+    const newStatus = !service?.isActive;
+    updateService(id, { isActive: newStatus });
+    toast.success(`Service ${newStatus ? 'activated' : 'deactivated'} successfully!`);
   };
 
   const addBulletPoint = (serviceId: string) => {
@@ -198,6 +210,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
       updateService(serviceId, {
         bulletPoints: [...service.bulletPoints, "New feature"]
       });
+      toast.success("Feature added successfully!");
     }
   };
 
@@ -215,6 +228,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
     if (service && service.bulletPoints.length > 1) {
       const newBulletPoints = service.bulletPoints.filter((_, i) => i !== index);
       updateService(serviceId, { bulletPoints: newBulletPoints });
+      toast.success("Feature removed successfully!");
     }
   };
 
@@ -224,6 +238,7 @@ const ServicesCMS: React.FC<ServicesCMSProps> = () => {
     const [movedService] = newServices.splice(fromIndex, 1);
     newServices.splice(toIndex, 0, movedService);
     setServices(newServices.map((service, index) => ({ ...service, order: index + 1 })));
+    toast.success("Service order updated successfully!");
   };
 
   if (isLoading) {
@@ -645,6 +660,23 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               </Button>
             </div>
             <span className="text-sm text-muted-foreground">#{index + 1}</span>
+            
+            {/* Service Image Preview */}
+            <div className="flex-shrink-0 w-12 h-12 bg-muted rounded-lg flex items-center justify-center border border-border/50 overflow-hidden">
+              {service.image ? (
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/home/web-dev.webp";
+                  }}
+                />
+              ) : (
+                <LucideIcons.Image className="w-6 h-6 text-muted-foreground" />
+              )}
+            </div>
+            
             <div className="flex items-center gap-2">
               <Checkbox
                 checked={service.isActive}
@@ -713,11 +745,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Image URL</label>
-            <Input
+            <ImageUpload
+              label="Service Image"
               value={service.image}
-              onChange={(e) => onUpdate({ image: e.target.value })}
-              placeholder="/images/home/service-image.webp"
+              onChange={(url) => onUpdate({ image: url })}
+              placeholder="Click to upload service image or drag and drop"
+              helperText="Supports PNG, JPG, JPEG, WebP formats up to 5MB"
+              accept="image/png,image/jpeg,image/jpg,image/webp"
+              aspectRatio={4}
+              maxSize={5}
+              showPreview={true}
+              onSuccess={(url) => {
+                toast.success("Service image uploaded successfully");
+              }}
+              onError={(error) => {
+                toast.error(error);
+              }}
             />
           </div>
 
