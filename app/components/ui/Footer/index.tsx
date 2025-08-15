@@ -9,10 +9,12 @@ import { FaXTwitter } from "react-icons/fa6";
 import { IoMdArrowUp } from "react-icons/io";
 import { Mail, Phone } from "lucide-react";
 import { IoLocation } from "react-icons/io5";
+import { useTheme } from "@/app/lib/theme-provider";
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [subscribed, setSubscribed] = useState<boolean>(false);
+  const { theme } = useTheme();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -134,11 +136,22 @@ const Footer: React.FC = () => {
               className="inline-block text-2xl xl:text-3xl mb-3 w-full h-auto max-w-[140px] sm:max-w-[180px] xl:max-w-[180px]"
             >
               <Image
-                src="/images/logo.png"
+                src="/images/light-logo.webp"
                 alt="eleservsoftech"
-                width={180}
-                height={180}
-                className="w-full h-full"
+                width={100}
+                height={100}
+                className={`w-full h-full transition-all duration-300 ${
+                  theme === "dark" ? "hidden" : "block"
+                }`}
+              />
+              <Image
+                src="/images/dark-logo.webp"
+                alt="eleservsoftech"
+                width={100}
+                height={100}
+                className={`w-full h-full transition-all duration-300 ${
+                  theme === "dark" ? "block" : "hidden"
+                }`}
               />
             </Link>
             <p className="text-sm text-muted-foreground sub-title text-left leading-relaxed mb-4 lg:mb-6 xl:mb-8 font-inter font-normal max-w-md">
@@ -194,7 +207,7 @@ const Footer: React.FC = () => {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-foreground transition-colors hover:text-primary text-base font-space-grotesk font-normal"
+                    className="text-foreground transition-colors hover:text-primary text-base font-dm-sans  font-normal"
                   >
                     {name}
                   </Link>
@@ -211,7 +224,7 @@ const Footer: React.FC = () => {
             variants={fadeIn}
             viewport={{ once: true }}
           >
-            <h4 className="text-lg lg:text-xl xl:text-2xl font-semibold text-foreground"> 
+            <h4 className="text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
               Our Services
             </h4>
             <ul className="space-y-3 text-sm">
@@ -219,7 +232,7 @@ const Footer: React.FC = () => {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-foreground transition-colors hover:text-primary text-base font-space-grotesk font-normal"
+                    className="text-foreground transition-colors hover:text-primary text-base font-dm-sans  font-normal"
                   >
                     {name}
                   </Link>
@@ -249,17 +262,17 @@ const Footer: React.FC = () => {
                   className="text-sm font-normal flex items-center gap-2 lg:gap-4"
                 >
                   <Phone className="size-4 md:size-5" />
-                  <span className="text-sm lg:text-base text-foreground font-space-grotesk font-normal">
+                  <span className="text-sm lg:text-base text-foreground font-dm-sans font-normal">
                     +91 8851967714
                   </span>
                 </Link>
                 <Link
-                  href="mailto:eleservsoftechtech@gmail.com"
+                  href="mailto:info@eleservsoft.com"
                   className="text-sm font-normal flex items-center gap-2 lg:gap-4"
                 >
                   <Mail className="size-4 md:size-5" />
-                  <span className="text-sm lg:text-base text-foreground font-space-grotesk font-normal">
-                    eleservsoftechtech@gmail.com
+                  <span className="text-sm lg:text-base text-foreground font-dm-sans  font-normal">
+                    info@eleservsoft.com
                   </span>
                 </Link>
                 <Link
@@ -267,9 +280,8 @@ const Footer: React.FC = () => {
                   className="text-sm font-normal flex items-center gap-2 lg:gap-4"
                 >
                   <IoLocation className="size-5 lg:size-7 xl:size-8" />
-                  <span className="text-sm lg:text-base text-foreground font-space-grotesk font-normal">
-                    C-113 , 4rth floor , Sector 2, Noida Near by SBI Bank,
-                    201301
+                  <span className="text-sm lg:text-base text-foreground font-dm-sans  font-normal">
+                    C-29, UG Floor LIC Building, Naraina, Delhi-110028
                   </span>
                 </Link>
               </div>

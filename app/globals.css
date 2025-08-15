@@ -197,7 +197,7 @@ body {
 /* Highlight styling with primary color accent */
 .highlight {
   @apply font-dm-sans font-medium;
-  background: linear-gradient(135deg, #615fff, #ee50ff);
+  background: linear-gradient(135deg, #b22e2e, #b22e2e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

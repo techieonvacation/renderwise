@@ -108,17 +108,17 @@ export default function ContactSection() {
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="rounded-lg bg-muted p-3">
-                  <MapPin className="h-6 w-6 lg:h-8 lg:w-8 text-primary" />
+                  <MapPin className="h-6 w-6 lg:h-8 lg:w-8 text-primary font-dm-sans" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm lg:text-base xl:text-lg text-foreground">
                     Visit Us
                   </h3>
                   <p className="text-muted-foreground text-sm font-inter">
-                    C-113 , 4rth floor , Sector 2,
+                    C-29, UG Floor LIC Building,
                     <br />
                     <span className="text-muted-foreground text-sm font-inter">
-                      Noida Near by SBI Bank, 201301
+                      Naraina, Delhi-110028
                     </span>
                     <br />
                   </p>
@@ -127,54 +127,48 @@ export default function ContactSection() {
 
               <div className="flex items-start gap-4">
                 <div className="rounded-lg bg-muted p-3">
-                  <Phone className="h-6 w-6 lg:h-8 lg:w-8 text-primary" />
+                  <Phone className="h-6 w-6 lg:h-8 lg:w-8 text-primary font-dm-sans" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm lg:text-base xl:text-lg text-foreground">
                     Call Us
                   </h3>
                   <Link
-                    href="tel:+918851967714"
+                    href="tel:+919899566611"
                     className="text-muted-foreground hover:text-primary transition-colors font-inter"
                   >
-                    +91 8851-967-714
+                    +91 9899566611
                   </Link>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="rounded-lg bg-muted p-3">
-                  <Mail className="h-6 w-6 lg:h-8 lg:w-8 text-primary" />
+                  <Mail className="h-6 w-6 lg:h-8 lg:w-8 text-primary font-dm-sans" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm lg:text-base xl:text-lg text-foreground">
                     Email Us
                   </h3>
                   <Link
-                    href="mailto:hackintowntech@gmail.com"
+                    href="mailto:info@eleservsoft.com"
                     className="text-muted-foreground hover:text-primary transition-colors font-inter"
                   >
-                    hackintowntech@gmail.com
+                    info@eleservsoft.com
                   </Link>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="rounded-lg bg-muted p-3">
-                  <Clock className="h-6 w-6 lg:h-8 lg:w-8 text-primary" />
+                  <Clock className="h-6 w-6 lg:h-8 lg:w-8 text-primary font-dm-sans" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm lg:text-base xl:text-lg text-foreground">
                     Working Hours
                   </h3>
                   <p className="text-muted-foreground text-sm font-inter">
-                    Mon - Fri: 9:00 AM - 7:00 PM
-                  </p>
-                  <p className="text-muted-foreground text-sm font-inter">
-                    Saturday: Closed
-                  </p>
-                  <p className="text-muted-foreground text-sm font-inter">
-                    Sunday: Closed
+                    Mon - Fri: 9:00 AM - 6:00 PM
                   </p>
                 </div>
               </div>
@@ -285,15 +279,15 @@ export default function ContactSection() {
                     type="range"
                     name="budget"
                     min="5000"
-                    max="50000"
+                    max="5000000"
                     step="1000"
                     value={formData.budget}
                     onChange={handleChange}
                     className="w-full bg-input-background"
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>${formData.budget.toLocaleString()}</span>
-                    <span>$50,000</span>
+                    <span>&#8377;{formData.budget.toLocaleString()}</span>
+                    <span>&#8377;50,000</span>
                   </div>
                 </div>
               </div>
