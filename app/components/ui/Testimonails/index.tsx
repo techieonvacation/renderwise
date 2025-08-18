@@ -198,10 +198,10 @@ export default function Testimonials() {
 
           <div className="mt-16 grid gap-8 md:grid-cols-4">
             {[
-              { label: "Years of Experience", value: "15+" },
-              { label: "Clients Worldwide", value: "200+" },
+              { label: "Years of Excellence", value: "15+" },
+              { label: "Clients Across The Globe", value: "200+" },
               { label: "Team Members", value: "50+" },
-              { label: "Success Rate", value: "99%" },
+              { label: "Success Rate", value: "99.99%" },
             ].map((stat, index) => (
               <div
                 key={index}

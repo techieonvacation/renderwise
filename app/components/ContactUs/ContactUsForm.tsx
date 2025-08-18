@@ -80,7 +80,7 @@ export default function ContactUsForm() {
             {/* Contact Details Grid */}
             <div className="grid gap-6">
               {/* Phone */}
-              <div className="bg-card p-6 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
+              <div className="bg-card p-3 lg:p-4 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
                 <div className="flex items-center gap-x-6">
                   <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
                     <TbPhoneCall className="size-5 md:size-6 lg:size-7 text-primary relative z-10" />
@@ -91,23 +91,23 @@ export default function ContactUsForm() {
                       Call Us 7/24
                     </h3>
                     <Link
-                      href="tel:+918851967714"
+                      href="tel:+919899566611"
                       className="text-muted-foreground font-inter"
                     >
-                      +91 8851967714
+                      +91 9899566611
                     </Link>
                     <Link
-                      href="tel:+918851967714"
+                      href="tel:+919899566611"
                       className="text-muted-foreground font-inter"
                     >
-                      +91 8851967714
+                      +91 9899566611
                     </Link>
                   </div>
                 </div>
               </div>
 
               {/* Email */}
-              <div className="bg-card p-6 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
+              <div className="bg-card p-3 lg:p-4 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
                 <div className="flex items-center gap-x-6">
                   <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
                     <IoMailUnread className="size-5 md:size-6 lg:size-7 text-primary relative z-10" />
@@ -118,37 +118,37 @@ export default function ContactUsForm() {
                       Make a Quote
                     </h3>
                     <Link
-                      href="mailto:hackintowntech@gmail.com"
+                      href="mailto:info@eleservsoft.com"
                       className="text-sm lg:text-base text-muted-foreground font-inter"
                     >
-                      hackintowntech@gmail.com
+                      info@eleservsoft.com
                     </Link>
                   </div>
                 </div>
               </div>
               {/* Location */}
-              <div className="bg-card p-6 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
-                <div className="flex items-center gap-x-6">
+              <div className="bg-card p-3 lg:p-4 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
+                <div className="flex items-center w-full gap-x-6">
                   <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
                     <IoLocationOutline className="size-5 md:size-6 lg:size-7 text-primary relative z-10" />
                     <div className="absolute inset-0 w-full h-full  animate-spin-slow before:content-[''] before:absolute before:inset-0 before:rounded-full before:border-3 before:border-dotted before:border-primary before:animate-spin-slow" />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col max-w-[70%] w-full">
                     <h3 className="font-semibold font-lg lg:text-xl text-foreground mb-2">
                       Location
                     </h3>
                     <p className="text-muted-foreground font-inter text-sm lg:text-base">
-                      C-113 , 4rth floor , Sector 2,
+                      C-29 UG floor, <br className="block lg:hidden" />
+                      LIC building community center near kotak mahindra bank
+                      industrial area phase-1 Naraina
                       <br className="block lg:hidden" />
-                      Noida Near by SBI Bank, 201301,
-                      <br />
-                      Uttar Pradesh, India
+                      New Delhi, 110028
                     </p>
                   </div>
                 </div>
               </div>
               {/* Social Links */}
-              <div className="bg-card p-6 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
+              <div className="bg-card p-3 lg:p-4 rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
                 <div className="flex items-center gap-x-6">
                   <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
                     <Users className="size-5 md:size-6 lg:size-7 text-primary relative z-10" />
@@ -308,17 +308,6 @@ export default function ContactUsForm() {
                   </>
                 )}
               </Button>
-
-              <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                Protected by reCAPTCHA •{" "}
-                <a href="#" className="text-blue-500 hover:underline">
-                  Privacy
-                </a>{" "}
-                •{" "}
-                <a href="#" className="text-blue-500 hover:underline">
-                  Terms
-                </a>
-              </p>
             </form>
           </div>
         </div>
@@ -327,7 +316,7 @@ export default function ContactUsForm() {
       <div className="container my-8">
         <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.5725158662257!2d77.31455147556707!3d28.553969175699736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5d11da7c7e7%3A0x3a4b1b67144f3612!2sSector%202%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1709914527044!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d28018.60734957063!2d77.10366688853665!3d28.619992492949308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e0!4m3!3m2!1d28.617666!2d77.11166899999999!4m5!1s0x16f807bafd4176b%3A0x78faf8a66b72413e!2sELESERV%20SOFTECH%20PVT%20LTD.!3m2!1d28.631383699999997!2d77.13785279999999!5e0!3m2!1sen!2sin!4v1755501353055!5m2!1sen!2sin&z=50"
             className="absolute inset-0 w-full h-full border-0"
             allowFullScreen={true}
             loading="lazy"

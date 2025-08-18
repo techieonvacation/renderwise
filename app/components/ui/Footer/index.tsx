@@ -258,12 +258,12 @@ const Footer: React.FC = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <div className="flex flex-col gap-3 mb-3">
                 <Link
-                  href="tel:+918851967714"
+                  href="tel:+919899566611"
                   className="text-sm font-normal flex items-center gap-2 lg:gap-4"
                 >
                   <Phone className="size-4 md:size-5" />
                   <span className="text-sm lg:text-base text-foreground font-dm-sans font-normal">
-                    +91 8851967714
+                    +91 9899566611
                   </span>
                 </Link>
                 <Link

@@ -16,7 +16,7 @@ const DEFAULT_SECONDARY_HERO = {
     "https://base.demo.nextjstemplates.com/_next/image?url=%2Fimages%2Fhero%2Fhero.png&w=750&q=75",
   ctaLabel: "Get Started Now",
   ctaLink: "#",
-  phoneNumber: "(+91) 8851967714",
+  phoneNumber: "(+91) 9899566611",
   phoneText: "For any question or concern",
   stats: [
     { value: "99.9%", label: "Uptime" },
