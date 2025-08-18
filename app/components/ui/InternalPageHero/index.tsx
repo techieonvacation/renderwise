@@ -13,42 +13,32 @@ import { useRef, useState } from "react";
 import { cn } from "@/app/lib/utils";
 import Tagline from "../../ui/Tagline";
 
-export default function Hero() {
-  // Component data
-  const badge = "IT Staffing Solutions";
-  const title = "Secure Your IT Infrastructure with";
-  const description =
-    "Technology moves fast and so should your hiring. Whether you need specialized tech expertise for short-term projects or long-term support for scaling teams, we provide highly skilled professionals ready to integrate and deliver from day one.";
-  const flipWords = [
-    "Specialized Tech",
-    "Long-term Support",
-    "Short-term Projects",
-    "Ready to Integrate",
-    "Deliver from Day One",
-  ];
-  const imageSlides = ["/images/hero/itstaff-slide3.png"];
-  const buttonText = "Talk to an Expert";
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Rahul Agarwal",
-      designation: "CEO",
-      image: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-    },
-    {
-      id: 2,
-      name: "Manoj Kumar",
-      designation: "Full Stack Developer",
-      image: "https://api.uifaces.co/our-content/donated/FJkauyEa.jpg",
-    },
-    {
-      id: 3,
-      name: "Ruchi Agarwal",
-      designation: "Lead Architect",
-      image: "https://api.uifaces.co/our-content/donated/1H_7AxP0.jpg",
-    },
-  ];
+interface TeamMember {
+  id: number;
+  name: string;
+  designation: string;
+  image: string;
+}
 
+interface InternalPageHeroProps {
+  badge: string;
+  title: string;
+  description: string;
+  flipWords: string[];
+  imageSlides: string[];
+  buttonText: string;
+  teamMembers?: TeamMember[];
+}
+
+export default function InternalPageHero({
+  badge,
+  title,
+  description,
+  flipWords,
+  imageSlides,
+  buttonText,
+  teamMembers,
+}: InternalPageHeroProps) {
   // Component state
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -156,7 +146,7 @@ export default function Hero() {
               </Button>
             </div>
 
-            {teamMembers && (
+            {teamMembers && teamMembers.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-4">
                   <AnimatedTooltip items={teamMembers} />

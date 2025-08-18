@@ -1,18 +1,15 @@
-import Hero from "../components/it-staffing/Hero";
-import WhatWeOffer from "../components/it-staffing/WhatWeOffer";
-import WhyChooseUs from "../components/it-staffing/WhyChooseUs";
+import { heroContent } from "../components/system-integration/heroContent";
 import FAQ from "../components/ui/Faq";
+import InternalPageHero from "../components/ui/InternalPageHero";
 import { LogoMarquee } from "../components/ui/MarqueeWrapper/logoMarquee";
 import { getLogoMarqueeConfig } from "../lib/services/logoMarqueeService";
 
-export default async function ItStaffingPage() {
+export default async function SystemIntegrationPage() {
   const logoMarqueeConfig = await getLogoMarqueeConfig();
   return (
-    <div>
-      <Hero />
+    <div className="overflow-hidden">
+      <InternalPageHero {...heroContent} />
       <LogoMarquee config={logoMarqueeConfig} />
-      <WhatWeOffer />
-      <WhyChooseUs />
       <FAQ />
     </div>
   );
