@@ -32,11 +32,11 @@ interface ExtendedDesktopMenuProps extends DesktopMenuProps {
   currentSliderData?: SliderData[];
 }
 
-export default function DesktopMenu({ 
-  menu, 
-  onHover, 
-  onLeave, 
-  currentSliderData = [] 
+export default function DesktopMenu({
+  menu,
+  onHover,
+  onLeave,
+  currentSliderData = [],
 }: ExtendedDesktopMenuProps) {
   // State management for menu interactions and animations
   const [isHover, setIsHover] = useState(false);
@@ -52,15 +52,19 @@ export default function DesktopMenu({
   // Use the passed slider data or fallback to menu's own slider data
   const sliderData = useMemo(() => {
     // For grouped layouts, use the menu's own slider data if available
-    if (menu.layout === "grouped" && menu.sliderData && menu.sliderData.length > 0) {
+    if (
+      menu.layout === "grouped" &&
+      menu.sliderData &&
+      menu.sliderData.length > 0
+    ) {
       return menu.sliderData;
     }
-    
+
     // For grouped layouts without own slider data, use passed currentSliderData
     if (menu.layout === "grouped" && currentSliderData.length > 0) {
       return currentSliderData;
     }
-    
+
     // For default layouts, don't show slider
     return [];
   }, [menu.layout, menu.sliderData, currentSliderData]);
@@ -221,12 +225,14 @@ export default function DesktopMenu({
           role="menu"
           aria-label={`${menu.name} submenu`}
         >
-          <div className={cn(
-            "grid min-h-[400px] lg:h-[500px]",
-            sliderData.length > 0 
-              ? "grid-cols-1 lg:grid-cols-2" 
-              : "grid-cols-1"
-          )}>
+          <div
+            className={cn(
+              "grid min-h-[400px] lg:h-[500px]",
+              sliderData.length > 0
+                ? "grid-cols-1 lg:grid-cols-2"
+                : "grid-cols-1"
+            )}
+          >
             {/* Left Side - Menu Items */}
             <div className="p-6 lg:p-8 overflow-y-auto custom-scrollbar">
               {menu.layout === "grouped" &&
@@ -297,20 +303,20 @@ export default function DesktopMenu({
 
             {/* Right Side - Auto Slider */}
             {sliderData.length > 0 && (
-              <div className="relative bg-gradient-to-br from-primary/5 to-secondary/5 p-6 lg:p-8 items-center justify-center hidden lg:flex">
+              <div className="relative bg-gradient-to-br from-primary/5 to-secondary/5 items-center justify-center hidden lg:flex">
                 <div className="relative w-full h-full overflow-hidden rounded-2xl">
                   {sliderData.map((slide, index) => (
                     <div
                       key={index}
                       className={cn(
-                        "absolute inset-0 flex flex-col items-center justify-center text-center p-6 transition-all duration-500 ease-in-out",
+                        "absolute inset-0 flex flex-col text-center p-6 transition-all duration-500 ease-in-out",
                         currentSlide === index
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-4"
                       )}
                     >
                       <div className="relative z-10">
-                        <div className="mb-4 lg:mb-6 rounded-2xl overflow-hidden max-w-[200px] mx-auto w-full">
+                        <div className="mb-4 lg:mb-6 rounded-2xl overflow-hidden mx-auto w-full">
                           <Image
                             src={slide.image}
                             alt={slide.title}

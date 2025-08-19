@@ -9,6 +9,8 @@ import { IoLocationOutline, IoMailUnread } from "react-icons/io5";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { Input } from "../ui/Input";
+import { Textarea } from "../ui/textarea";
 interface FormData {
   name: string;
   email: string;
@@ -229,11 +231,10 @@ export default function ContactUsForm() {
                         <span className="text-red-500">*</span>
                       )}
                     </label>
-                    <input
+                    <Input
                       type={field.type}
                       required={field.required}
                       placeholder={field.placeholder}
-                      className="w-full px-4 py-2.5 rounded-lg bg-input border border-border focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-gray-800 dark:text-gray-200 placeholder:text-gray-400"
                       value={formData[field.key as keyof FormData]}
                       onChange={(e) =>
                         setFormData({
@@ -250,10 +251,9 @@ export default function ContactUsForm() {
                 <label className="text-sm font-medium font-space-grotesk text-foreground">
                   Phone
                 </label>
-                <input
+                <Input
                   type="tel"
                   placeholder="+1 (555) 123-4567"
-                  className="w-full px-4 py-2.5 rounded-lg bg-input border border-border focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-gray-800 dark:text-gray-200 placeholder:text-gray-400"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -265,11 +265,10 @@ export default function ContactUsForm() {
                 <label className="text-sm font-medium text-foreground font-space-grotesk flex items-center gap-1">
                   Subject<span className="text-red-500">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   required
                   placeholder="Project Inquiry"
-                  className="w-full px-4 py-2.5 rounded-lg bg-input border border-border focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-gray-800 dark:text-gray-200 placeholder:text-gray-400"
                   value={formData.subject}
                   onChange={(e) =>
                     setFormData({ ...formData, subject: e.target.value })
@@ -281,12 +280,12 @@ export default function ContactUsForm() {
                 <label className="text-sm font-medium text-foreground font-space-grotesk flex items-center gap-1">
                   Message<span className="text-red-500">*</span>
                 </label>
-                <textarea
+                <Textarea
                   required
                   rows={4}
                   placeholder="Tell us about your project needs..."
-                  className="w-full px-4 py-2.5 rounded-lg bg-input border border-border focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-y text-gray-800 dark:text-gray-200 placeholder:text-gray-400"
                   value={formData.message}
+                  className="focus-visible:ring-1"
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
