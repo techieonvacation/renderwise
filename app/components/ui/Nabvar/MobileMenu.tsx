@@ -129,7 +129,7 @@ export default function MobileMenu({
             <Link href="/" onClick={handleMenuItemClick}>
               <Image
                 src="/images/light-logo.webp"
-                alt={config.companyName || "Renderwise"}
+                alt={config.companyName || "Eleservsoftech"}
                 width={100}
                 height={100}
                 className={`w-full h-full transition-all duration-300 ${
@@ -138,7 +138,7 @@ export default function MobileMenu({
               />
               <Image
                 src="/images/dark-logo.webp"
-                alt={config.companyName || "Renderwise"}
+                alt={config.companyName || "Eleservsoftech"}
                 width={100}
                 height={100}
                 className={`w-full h-full transition-all duration-300 ${
@@ -275,7 +275,7 @@ export default function MobileMenu({
             {/* Company Info */}
             <div className="mt-4 pt-4 border-t border-border/20 text-center">
               <p className="text-xs text-foreground/50">
-                © 2024 {config.companyName || "Renderwise"}. All rights
+                © 2024 {config.companyName || "Eleservsoftech"}. All rights
                 reserved.
               </p>
             </div>

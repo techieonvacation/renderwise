@@ -1,6 +1,6 @@
-# SEO Implementation Guide for RenderWise Services
+# SEO Implementation Guide for Eleservsoftech Services
 
-This document outlines the comprehensive SEO implementation for RenderWise services pages using Next.js 15 best practices.
+This document outlines the comprehensive SEO implementation for Eleservsoftech services pages using Next.js 15 best practices.
 
 ## 🚀 Overview
 
@@ -45,7 +45,7 @@ Each service page includes comprehensive metadata:
 
 ```typescript
 export const metadata: Metadata = {
-  title: "Service Name | Service Type | RenderWise",
+  title: "Service Name | Service Type | Eleservsoftech",
   description: "Detailed service description with keywords...",
   keywords: ["relevant", "keywords", "for", "seo"],
   openGraph: {
@@ -76,7 +76,7 @@ export const SERVICE_STRUCTURED_DATA = {
   description: "Service description",
   provider: {
     "@type": "Organization",
-    name: "RenderWise",
+    name: "Eleservsoftech",
     url: "https://eleservsoftech.vercel.app",
   },
   // ... more structured data
@@ -210,7 +210,7 @@ To add a new service page:
    // app/lib/metadata/servicesMetadata.ts
    export const NEW_SERVICE_METADATA: Metadata = {
      ...BASE_SERVICES_METADATA,
-     title: "New Service | Service Type | RenderWise",
+     title: "New Service | Service Type | Eleservsoftech",
      // ... other metadata
    };
    ```

@@ -65,7 +65,7 @@ export default function WhyChooseUs() {
                 whileInView="visible"
                 custom={index}
                 viewport={{ once: true, margin: "-50px" }}
-                variants={itemVariants}
+                
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={cn(
                   "flex gap-4 p-2 sm:p-4 rounded-lg bg-background shadow-sm border border-border",

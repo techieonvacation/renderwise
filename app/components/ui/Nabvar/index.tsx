@@ -247,7 +247,7 @@ export default function Navbar({
             <Link href="/">
               <Image
                 src="/images/light-logo.webp"
-                alt={finalConfig.companyName || "Renderwise"}
+                alt={finalConfig.companyName || "Eleservsoftech"}
                 width={100}
                 height={100}
                 className={`w-full h-full transition-all duration-300 ${
@@ -256,7 +256,7 @@ export default function Navbar({
               />
               <Image
                 src="/images/dark-logo.webp"
-                alt={finalConfig.companyName || "Renderwise"}
+                alt={finalConfig.companyName || "Eleservsoftech"}
                 width={100}
                 height={100}
                 className={`w-full h-full transition-all duration-300 ${

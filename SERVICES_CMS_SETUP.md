@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Services CMS is a comprehensive content management system for managing the Services section of the Renderwise website. It provides a beautiful, advanced interface for managing service content, configuration, and animations with instant updates and no loading delays.
+The Services CMS is a comprehensive content management system for managing the Services section of the Eleservsoftech website. It provides a beautiful, advanced interface for managing service content, configuration, and animations with instant updates and no loading delays.
 
 ## Features
 
@@ -34,7 +34,7 @@ The Services CMS is a comprehensive content management system for managing the S
 ## File Structure
 
 ```
-renderwise/
+Eleservsoftech/
 ├── app/
 │   ├── admin/
 │   │   └── services/
@@ -248,5 +248,5 @@ For issues or questions:
 
 ---
 
-**Built with ❤️ for Renderwise**
+**Built with ❤️ for Eleservsoftech**
 *Production-ready, scalable, and maintainable CMS solution* 

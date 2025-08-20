@@ -145,12 +145,12 @@ The component uses `/api/upload` endpoint for file uploads.
 ```json
 {
   "success": true,
-  "url": "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/renderwise-uploads/image.jpg",
+  "url": "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/Eleservsoftech-uploads/image.jpg",
   "fileName": "image.jpg",
-  "publicId": "renderwise-uploads/image",
+  "publicId": "Eleservsoftech-uploads/image",
   "size": 1024000,
   "type": "image/jpeg",
-  "cloudinaryId": "renderwise-uploads/image"
+  "cloudinaryId": "Eleservsoftech-uploads/image"
 }
 ```
 
@@ -166,9 +166,9 @@ The component uses `/api/upload` endpoint for file uploads.
 
 Uploaded files are stored in Cloudinary cloud storage:
 - **Cloud Service**: Cloudinary
-- **Folder**: `renderwise-uploads`
+- **Folder**: `Eleservsoftech-uploads`
 - **URL Pattern**: `https://res.cloudinary.com/{cloud-name}/image/upload/v{version}/{folder}/{filename}`
-- **Example**: `https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/renderwise-uploads/image.jpg`
+- **Example**: `https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/Eleservsoftech-uploads/image.jpg`
 
 ## Validation Rules
 

@@ -229,7 +229,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose RenderWise?
+              Why Choose Eleservsoftech?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We combine technical expertise with business understanding to

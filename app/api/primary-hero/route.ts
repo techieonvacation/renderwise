@@ -9,7 +9,7 @@ import { ObjectId } from "mongodb";
 const DEFAULT_PRIMARY_HERO = [
   {
     _id: "default_1",
-    subTitle: "Welcome to RenderWise",
+    subTitle: "Welcome to Eleservsoftech",
     title: "Transform Your Business with",
     highlightedWord: "Innovation",
     desc: "We provide cutting-edge solutions that drive growth and success. Our team of experts is dedicated to helping you achieve your business goals through innovative technology and strategic thinking.",

@@ -46,7 +46,7 @@ CLOUDINARY_API_SECRET=your_api_secret_here
 ✅ **Secure** - Images stored in the cloud, not on your server
 
 ## File Structure
-- Images are uploaded to the `renderwise-uploads` folder in Cloudinary
+- Images are uploaded to the `Eleservsoftech-uploads` folder in Cloudinary
 - Each image gets a unique public ID
 - URLs are returned in the format: `https://res.cloudinary.com/your-cloud-name/image/upload/...`
 

@@ -55,7 +55,7 @@ export const NavbarConfigSchema = z.object({
   showSearch: z.boolean().optional().default(true),
   showThemeToggle: z.boolean().optional().default(true),
   showConsultation: z.boolean().optional().default(true),
-  companyName: z.string().optional().default("Renderwise"),
+  companyName: z.string().optional().default("Eleservsoftech"),
   sliderData: z.array(SliderDataSchema).optional(),
 });
 
@@ -417,7 +417,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
   socialIcons: [
     {
       icon: "Github",
-      href: "https://github.com/renderwise",
+      href: "https://github.com/eleservsoftech",
       label: "GitHub",
       external: true,
       order: 1,
@@ -425,7 +425,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
     },
     {
       icon: "Linkedin",
-      href: "https://linkedin.com/company/renderwise",
+      href: "https://linkedin.com/company/eleservsoftech",
       label: "LinkedIn",
       external: true,
       order: 2,
@@ -433,7 +433,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
     },
     {
       icon: "Twitter",
-      href: "https://twitter.com/renderwise",
+      href: "https://twitter.com/eleservsoftech",
       label: "Twitter",
       external: true,
       order: 3,
@@ -441,7 +441,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
     },
     {
       icon: "Mail",
-      href: "mailto:hello@renderwise.com",
+      href: "mailto:hello@eleservsoftech.com",
       label: "Email",
       external: true,
       order: 4,
@@ -451,7 +451,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
   showSearch: true,
   showThemeToggle: true,
   showConsultation: true,
-  companyName: "Renderwise",
+  companyName: "Eleservsoftech",
   sliderData: [
     {
       title: "Web Development",

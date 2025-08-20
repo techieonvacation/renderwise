@@ -1,7 +1,7 @@
 /**
  * Enhanced Navbar Configuration
  *
- * Comprehensive configuration for the Renderwise navbar including:
+ * Comprehensive configuration for the Eleservsoftech navbar including:
  * - Advanced sub-menu layouts with grouping
  * - Detailed service descriptions
  * - Dynamic icon assignments
@@ -409,7 +409,7 @@ export const NAVBAR_CONFIG = {
         {
           name: "Company News",
           href: "/blog/news",
-          desc: "Latest updates and announcements from Renderwise",
+          desc: "Latest updates and announcements from Eleservsoftech",
           iconName: "Newspaper" as const,
         },
       ],
@@ -434,7 +434,7 @@ export const NAVBAR_CONFIG = {
         },
         {
           title: "Company News",
-          description: "Latest updates and announcements from Renderwise",
+          description: "Latest updates and announcements from Eleservsoftech",
           image: "/images/blog/company-news.jpg",
           order: 4,
         },
@@ -513,25 +513,25 @@ export const NAVBAR_CONFIG = {
   socialIcons: [
     {
       icon: "Github",
-      href: "https://github.com/renderwise",
+      href: "https://github.com/eleservsoftech",
       label: "GitHub",
       external: true,
     },
     {
       icon: "Linkedin",
-      href: "https://linkedin.com/company/renderwise",
+      href: "https://linkedin.com/company/eleservsoftech",
       label: "LinkedIn",
       external: true,
     },
     {
       icon: "Twitter",
-      href: "https://twitter.com/renderwise",
+      href: "https://twitter.com/eleservsoftech",
       label: "Twitter",
       external: true,
     },
     {
       icon: "Mail",
-      href: "mailto:hello@renderwise.com",
+      href: "mailto:hello@eleservsoftech.com",
       label: "Email",
       external: true,
     },
@@ -540,5 +540,5 @@ export const NAVBAR_CONFIG = {
   showSearch: true,
   showThemeToggle: true,
   showConsultation: true,
-  companyName: "Renderwise",
+  companyName: "Eleservsoftech",
 };
