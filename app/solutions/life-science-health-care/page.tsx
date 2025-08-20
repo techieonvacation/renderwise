@@ -11,6 +11,15 @@ import {
 import StructuredData from "../../components/ui/SEO/StructuredData";
 import { heroContent } from "@/app/components/life-science-health-care/heroContent";
 import GetInTouch from "../../components/ui/GetInTouch";
+import {
+  IntroSection,
+  ChallengesSection,
+  SolutionsSection,
+  ImpactSection,
+  TechnologyStack,
+  SuccessStories,
+  FutureSection,
+} from "../../components/life-science-health-care";
 
 // Generate metadata for the page
 export const metadata: Metadata = LIFE_SCIENCE_HEALTH_CARE_METADATA;
@@ -34,6 +43,13 @@ export default async function LifeScienceHealthCare() {
       <div className="overflow-hidden">
         <InternalPageHero {...heroContent} />
         <LogoMarquee config={logoMarqueeConfig} />
+        <IntroSection />
+        <ChallengesSection />
+        <SolutionsSection />
+        <ImpactSection />
+        <TechnologyStack />
+        <SuccessStories />
+        <FutureSection />
         <GetInTouch />
         <FAQ />
       </div>

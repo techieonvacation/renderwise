@@ -146,6 +146,27 @@ export const LIFE_SCIENCE_HEALTH_CARE_STRUCTURED_DATA: ServiceStructuredData = {
   },
 };
 
+// Supply Chain & Logistics Service Structured Data
+
+export const SUPPLY_CHAIN_LOGISTICS_STRUCTURED_DATA: ServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Supply Chain & Logistics Services",
+  description:
+    "Supply Chain & Logistics Services include supply chain management, logistics, and transportation services. We help businesses transform their digital presence and achieve technological excellence.",
+  provider: BASE_PROVIDER,
+  areaServed: "Worldwide",
+  serviceType:
+    "Supply Chain Management, Logistics, and Transportation Services",
+  category: "Supply Chain Management, Logistics, and Transportation Services",
+  offers: {
+    "@type": "Offer",
+    price: "Contact for pricing",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+
 // Organization Structured Data for Eleservsoftech
 export const ORGANIZATION_STRUCTURED_DATA = {
   "@context": "https://schema.org",

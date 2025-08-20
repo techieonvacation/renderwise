@@ -407,6 +407,61 @@ export const LIFE_SCIENCE_HEALTH_CARE_METADATA: Metadata = {
   },
 };
 
+// Supply Chain & Logistics Services Metadata
+export const SUPPLY_CHAIN_LOGISTICS_METADATA: Metadata = {
+  ...BASE_SERVICES_METADATA,
+  title: "Supply Chain & Logistics Services | Eleservsoftech",
+  description:
+    "Supply chain and logistics are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+  keywords: [
+    "Supply Chain & Logistics Services",
+    "Supply Chain & Logistics",
+    "Logistics Services",
+    "Supply Chain",
+    "Logistics",
+  ],
+  openGraph: {
+    ...BASE_SERVICES_METADATA.openGraph,
+    title: "Supply Chain & Logistics Services | Eleservsoftech",
+    description:
+      "Supply chain and logistics are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    url: "/solutions/supply-chain-logistics",
+    images: [
+      {
+        url: "/images/home/custom-dev.webp",
+        width: 1200,
+        height: 630,
+        alt: "Supply Chain & Logistics Services - Eleservsoftech",
+      },
+    ],
+  },
+  twitter: {
+    ...BASE_SERVICES_METADATA.twitter,
+    title: "Supply Chain & Logistics Services | Eleservsoftech",
+    description:
+      "Supply chain and logistics are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    images: ["/images/home/custom-dev.webp"],
+  },
+  alternates: {
+    canonical: "/solutions/supply-chain-logistics",
+  },
+  other: {
+    "DC.title": "Supply Chain & Logistics Services",
+    "DC.description":
+      "Supply chain and logistics are the backbone of modern business",
+    "DC.subject":
+      "Supply Chain & Logistics Services, Supply Chain, Logistics, Supply Chain & Logistics Services",
+    "DC.creator": "Eleservsoftech",
+    "DC.publisher": "Eleservsoftech",
+    "DC.date": new Date().toISOString(),
+    "DC.type": "Service",
+    "DC.format": "text/html",
+    "DC.language": "en",
+    "DC.coverage": "Worldwide",
+    "DC.rights": "Copyright Eleservsoftech",
+  },
+};
+
 // Main Services Page Metadata
 export const SERVICES_INDEX_METADATA: Metadata = {
   ...BASE_SERVICES_METADATA,

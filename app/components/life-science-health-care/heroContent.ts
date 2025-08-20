@@ -1,14 +1,14 @@
 export const heroContent = {
-  badge: "QA Automation Services",
-  title: "Transform Your Testing with",
+  badge: "Life Sciences & Healthcare",
+  title: "Shaping Health Through",
   description:
-    "Accelerate your software delivery with cutting-edge QA automation solutions. Our expert team delivers robust, scalable testing frameworks that ensure quality, reduce time-to-market, and provide comprehensive coverage across all platforms and devices.",
+    "Transforming healthcare with cutting-edge technology solutions. We accelerate drug discovery, enhance patient care, ensure regulatory compliance, and create secure, interoperable systems that revolutionize the life sciences industry.",
   flipWords: [
-    "Automated Testing",
-    "Quality Assurance",
-    "Faster Delivery",
-    "Comprehensive Coverage",
-    "Scalable Solutions",
+    "Advanced Technology",
+    "Patient-Centric Care",
+    "Research Innovation",
+    "Regulatory Compliance",
+    "Digital Health",
   ],
   imageSlides: ["/images/hero/itstaff-slide3.png"],
   buttonText: "Get Started",
