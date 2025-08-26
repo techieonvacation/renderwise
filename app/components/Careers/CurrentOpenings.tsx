@@ -10,11 +10,13 @@ import {
   BsEnvelope,
   BsBookmark,
 } from "react-icons/bs";
+import { ArrowRight, IndianRupee } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import { Card } from "@/app/components/ui/Card";
 import { toast } from "react-hot-toast";
+import Tagline from "../ui/Tagline";
 
 interface Job {
   _id: string;
@@ -144,32 +146,44 @@ export default function CurrentOpenings() {
   });
 
   return (
-    <section className="py-20 bg-primary/5">
-      <div className="container mx-auto px-4">
+    <section className="py-10 lg:py-16 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl font-bold text-foreground mb-4">Current Openings</h2>
-          <p className="text-lg text-muted-foreground mx-auto">
+          <Tagline variant="center">Current Opportunities</Tagline>
+          <h2 className="section-title text-foreground mb-3">
+            Current <span className="highlight">Openings</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Join our team of passionate professionals and help build the future
-            of technology
+            of technology. Discover your next career opportunity with us.
           </p>
         </motion.div>
 
-        <div className="mb-8">
-          <div className="relative max-w-md mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <div className="relative max-w-lg mx-auto">
             <Input
               type="text"
               placeholder="Search for jobs, locations, departments..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-12 pr-4 py-4 text-lg border border-border focus:border-primary rounded-xl shadow-lg hover:shadow-xl
+               transition-all duration-300 bg-card/50 backdrop-blur-sm"
             />
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="h-5 w-5 text-muted-foreground"
+                className="h-6 w-6 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -183,128 +197,186 @@ export default function CurrentOpenings() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <Tabs
-          defaultValue="All"
-          onValueChange={(value) => setSelectedDepartment(value)}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
         >
-          <TabsList className="flex space-x-2 bg-card shadow-lg mb-8 overflow-x-auto w-full">
-            {departments.map((dept) => (
-              <TabsTrigger
-                key={dept}
-                value={dept}
-                className="flex-1"
-              >
-                {dept}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <Tabs
+            defaultValue="All"
+            onValueChange={(value) => setSelectedDepartment(value)}
+          >
+            <TabsList className="flex space-x-2 bg-card/80 backdrop-blur-sm shadow-xl mb-12 overflow-x-auto w-full rounded-xl border border-border">
+              {departments.map((dept) => (
+                <TabsTrigger
+                  key={dept}
+                  value={dept}
+                  className="flex-1 data-[state=active]:bg-primary data-[state=active]:from-primary data-[state=active]:to-primary-hover data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+                >
+                  {dept}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job, idx) => (
-                <Card key={`${job._id}-${idx}`}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {filteredJobs.length > 0 ? (
+                filteredJobs.map((job, idx) => (
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    key={`${job._id}-${idx}`}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="p-6"
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
                   >
-                    <h3 className="text-2xl text-foreground font-bold mb-2">
-                      {job.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-4 text-muted-foreground mb-4">
-                      <div className="flex items-center">
-                        <BsBriefcase className="mr-2" />
-                        {job.department}
-                      </div>
-                      <div className="flex items-center">
-                        <BsGeoAlt className="mr-2" />
-                        {job.location || "Remote"}
-                      </div>
-                      <div className="flex items-center">
-                        <BsClock className="mr-2" />
-                        {job.type}
-                      </div>
-                    </div>
+                    <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-card/80 backdrop-blur-sm group-hover:-translate-y-2 overflow-hidden">
+                      <div className="p-8 h-full flex flex-col">
+                        {/* Job header with gradient accent */}
+                        <div className="relative mb-6">
+                          <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full opacity-50 group-hover:opacity-70 transition-opacity" />
+                          <h3 className="text-2xl text-foreground font-bold mb-4 group-hover:text-primary transition-colors relative z-10">
+                            {job.title}
+                          </h3>
+                        </div>
 
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold mb-2 text-foreground">
-                          Responsibilities:
-                        </h4>
-                        <ul className="list-disc pl-5 text-muted-foreground">
-                          {job.responsibilities.slice(0, 3).map((resp, idx) => (
-                            <li key={`${job._id}-resp-${idx}`}>{resp}</li>
-                          ))}
-                          {job.responsibilities.length > 3 && (
-                            <li
-                              className="text-primary cursor-pointer"
-                              onClick={() => setViewingJobDetails(job)}
-                            >
-                              + {job.responsibilities.length - 3} more
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-
-                      <div className="flex flex-wrap justify-between items-center gap-4">
-                        <div>
-                          <div className="flex items-center text-foreground mb-1">
-                            <BsBookmark className="mr-2 text-accent" />
-                            Experience: {job.experience}
+                        <div className="flex flex-wrap gap-4 text-muted-foreground mb-6">
+                          <div className="flex items-center bg-primary/5 px-3 py-1 rounded-full">
+                            <BsBriefcase className="mr-2 text-primary" />
+                            <span className="text-sm font-medium">
+                              {job.department}
+                            </span>
                           </div>
-                          <div className="flex items-center text-muted-foreground">
-                            <BsCurrencyDollar className="mr-2 text-accent" />
-                            {job.ctc}
+                          <div className="flex items-center bg-accent/5 px-3 py-1 rounded-full">
+                            <BsGeoAlt className="mr-2 text-accent" />
+                            <span className="text-sm font-medium">
+                              {job.location || "Remote"}
+                            </span>
+                          </div>
+                          <div className="flex items-center bg-secondary/10 px-3 py-1 rounded-full">
+                            <BsClock className="mr-2 text-secondary" />
+                            <span className="text-sm font-medium">
+                              {job.type}
+                            </span>
                           </div>
                         </div>
-                        <div className="flex gap-2">
-                          <Button
-                            onClick={() => setViewingJobDetails(job)}
-                            variant="outline"
-                          >
-                            View Details
-                          </Button>
-                          <Button
-                            onClick={() => setSelectedJob(job)}
-                            variant="primary"
-                          >
-                            Apply Now
-                          </Button>
+
+                        <div className="space-y-6 flex-grow">
+                          <div>
+                            <h4 className="font-semibold mb-3 text-foreground flex items-center">
+                              <div className="w-1 h-5 bg-primary rounded-full mr-3"></div>
+                              Key Responsibilities
+                            </h4>
+                            <ul className="space-y-2 text-muted-foreground">
+                              {job.responsibilities
+                                .slice(0, 3)
+                                .map((resp, idx) => (
+                                  <li
+                                    key={`${job._id}-resp-${idx}`}
+                                    className="flex items-start"
+                                  >
+                                    <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span className="text-sm leading-relaxed">
+                                      {resp}
+                                    </span>
+                                  </li>
+                                ))}
+                              {job.responsibilities.length > 3 && (
+                                <li className="flex items-center">
+                                  <button
+                                    className="text-primary hover:text-primary-hover font-medium text-sm flex items-center transition-colors"
+                                    onClick={() => setViewingJobDetails(job)}
+                                  >
+                                    <span>
+                                      + {job.responsibilities.length - 3} more
+                                      responsibilities
+                                    </span>
+                                    <ArrowRight className="ml-1 w-3 h-3" />
+                                  </button>
+                                </li>
+                              )}
+                            </ul>
+                          </div>
+
+                          <div className="border-t border-border/50 pt-6 mt-auto">
+                            <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
+                              <div className="space-y-2">
+                                <div className="flex items-center text-foreground">
+                                  <BsBookmark className="mr-2 text-primary" />
+                                  <span className="font-medium text-sm">
+                                    Experience: {job.experience}
+                                  </span>
+                                </div>
+                                <div className="flex items-center text-foreground">
+                                  <IndianRupee className="mr-2 size-5 text-accent" />
+                                  <span className="font-medium text-sm">
+                                    {job.ctc}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex gap-3">
+                              <Button
+                                onClick={() => setViewingJobDetails(job)}
+                                variant="outline"
+                              >
+                                View Details
+                              </Button>
+                              <Button
+                                onClick={() => setSelectedJob(job)}
+                                variant="primary"
+                              >
+                                Apply Now
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   </motion.div>
-                </Card>
-              ))
-            ) : (
-              <div className="col-span-2 text-center py-12">
-                <div className="text-muted-foreground text-5xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold mb-2">No jobs found</h3>
-                <p className="text-muted-foreground">
-                  {searchTerm
-                    ? `No jobs match your search for "${searchTerm}"`
-                    : "No jobs available in this department at the moment"}
-                </p>
-              </div>
-            )}
-          </div>
-        </Tabs>
+                ))
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-2 text-center py-16"
+                >
+                  <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-12 border border-primary/10">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <span className="text-3xl">🔍</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">
+                      No opportunities found
+                    </h3>
+                    <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                      {searchTerm
+                        ? `No positions match your search for "${searchTerm}". Try different keywords.`
+                        : "No jobs available in this department at the moment. Check back soon!"}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </Tabs>
+        </motion.div>
       </div>
 
       {/* Job Details Modal */}
       {viewingJobDetails && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <Card className="max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+          <Card className="max-w-3xl w-full max-h-[75vh] overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               className="p-6"
             >
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-foreground">{viewingJobDetails.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground">
+                  {viewingJobDetails.title}
+                </h3>
                 <Button
                   variant="ghost"
                   onClick={() => setViewingJobDetails(null)}
@@ -335,7 +407,9 @@ export default function CurrentOpenings() {
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-lg font-semibold text-foreground mb-2">Job Description</h4>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">
+                    Job Description
+                  </h4>
                   <ul className="list-disc pl-5 text-muted-foreground space-y-1">
                     {viewingJobDetails.description.map((desc, idx) => (
                       <li key={`desc-${idx}`}>{desc}</li>
@@ -344,7 +418,9 @@ export default function CurrentOpenings() {
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-semibold text-foreground mb-2">Responsibilities</h4>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">
+                    Responsibilities
+                  </h4>
                   <ul className="list-disc pl-5 text-muted-foreground space-y-1">
                     {viewingJobDetails.responsibilities.map((resp, idx) => (
                       <li key={`resp-${idx}`}>{resp}</li>
@@ -353,7 +429,9 @@ export default function CurrentOpenings() {
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-semibold text-foreground mb-2">Required Skills</h4>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">
+                    Required Skills
+                  </h4>
                   <ul className="list-disc pl-5 text-muted-foreground space-y-1">
                     {viewingJobDetails.skills.map((skill, idx) => (
                       <li key={`skill-${idx}`}>{skill}</li>
@@ -371,8 +449,12 @@ export default function CurrentOpenings() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-foreground mb-2">Education</h4>
-                    <p className="text-muted-foreground">{viewingJobDetails.education}</p>
+                    <h4 className="text-lg font-semibold text-foreground mb-2">
+                      Education
+                    </h4>
+                    <p className="text-muted-foreground">
+                      {viewingJobDetails.education}
+                    </p>
                   </div>
                 </div>
 
@@ -400,7 +482,7 @@ export default function CurrentOpenings() {
       {/* Application Modal */}
       {selectedJob && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <Card className="max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <Card className="max-w-2xl w-full max-h-[75vh] overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -412,7 +494,8 @@ export default function CurrentOpenings() {
                     Apply for {selectedJob.title}
                   </h3>
                   <p className="text-muted-foreground">
-                    {selectedJob.department} • {selectedJob.location || "Remote"}
+                    {selectedJob.department} •{" "}
+                    {selectedJob.location || "Remote"}
                   </p>
                 </div>
                 <Button

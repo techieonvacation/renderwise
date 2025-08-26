@@ -33,7 +33,7 @@ export function LogoMarquee({
   }
 
   return (
-    <div className={`relative overflow-hidden py-8 ${className}`}>
+    <div className={`section-bg-marquee relative overflow-hidden py-8 ${className}`}>
       <div
         className={`flex ${animationClass}`}
         style={{ animationDuration: `${finalSpeed}s` }}

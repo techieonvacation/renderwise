@@ -112,7 +112,7 @@ export default function Counter() {
   };
 
   return (
-    <section className="py-10 lg:py-16 bg-background">
+    <section className="section-bg-counter py-10 lg:py-16">
       <div className="container">
         <div className="text-center mb-16">
           <Tagline variant="center">PROVEN RESULTS</Tagline>

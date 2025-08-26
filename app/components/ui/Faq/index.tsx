@@ -63,7 +63,7 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="py-10">
+    <div className="section-bg-faq py-10">
       <div className="container !max-w-5xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <Tagline variant="center">FAQ</Tagline>

@@ -16,6 +16,8 @@ import {
   FaChartLine,
   FaStar,
 } from "react-icons/fa";
+import Tagline from "../ui/Tagline";
+import { CTA } from "../ui/CTA";
 
 interface BenefitProps {
   icon: React.ReactNode;
@@ -24,24 +26,39 @@ interface BenefitProps {
 }
 
 const Benefit: React.FC<BenefitProps> = ({ icon, title, description }) => (
-  <Card>
+  <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-card/80 backdrop-blur-sm hover:-translate-y-3 overflow-hidden">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="p-6"
+      className="p-8 h-full flex flex-col relative"
     >
-      <div className="flex items-start space-x-4">
-        <div className="flex-shrink-0 p-3 bg-secondary rounded-lg group-hover:bg-secondary/80 transition-colors duration-300">
-          <div className="text-secondary-foreground text-3xl group-hover:scale-110 transition-transform duration-300">
-            {icon}
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-bl-full opacity-50 group-hover:opacity-70 transition-opacity" />
+
+      <div className="flex items-start space-x-6 mb-4">
+        <div className="flex-shrink-0 relative">
+          <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-hover rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+            <div className="text-primary-foreground text-2xl">{icon}</div>
           </div>
+          {/* Pulse ring */}
+          <div className="absolute inset-0 rounded-2xl bg-primary/20 group-hover:animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
-        <div>
-          <h3 className="text-xl font-bold mb-2 text-foreground">{title}</h3>
-          <p className="text-muted-foreground leading-relaxed">{description}</p>
+
+        <div className="flex-grow">
+          <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+            {title}
+          </h3>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            {description}
+          </p>
         </div>
+      </div>
+
+      {/* Bottom accent */}
+      <div className="mt-auto pt-4">
+        <div className="h-1 w-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </motion.div>
   </Card>
@@ -124,37 +141,69 @@ export default function BenefitsAndPerks() {
   ];
 
   return (
-    <section className="py-12">
-      <div className="container mx-auto px-4">
+    <section className="py-10 lg:py-16 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto text-center mb-20"
         >
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Benefits & Perks
+          <Tagline variant="center">Why Join Us</Tagline>
+          <h2 className="section-title text-foreground mb-3">
+            Benefits & <span className="highlight">Perks</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             We believe in taking care of our team members with comprehensive
             benefits that matter. Here&apos;s what you can expect when joining
-            our family.
+            our family and building your career with us.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="h-full"
             >
               <Benefit {...benefit} />
             </motion.div>
           ))}
         </div>
+
+        {/* Call to action */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          {/* CTA */}
+          <CTA
+            variant="image"
+            title="Ready to start your journey with us?"
+            description="Discover exciting opportunities and be part of a team that values your growth and well-being."
+            badge={{
+              text: "Ready to Transform",
+            }}
+            primaryButton={{
+              text: "View Open Positions",
+              onClick: () => {},
+            }}
+            secondaryButton={{
+              text: "Learn More About Us",
+              onClick: () => {},
+            }}
+            backgroundImage="/images/cta-bg.webp"
+            className="mt-16"
+          />
+        </motion.div>
       </div>
     </section>
   );

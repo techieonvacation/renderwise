@@ -93,7 +93,7 @@ const Services: React.FC = () => {
   // If still loading, show skeleton or return null
   if (isLoading || !servicesData) {
     return (
-      <section className="relative py-16 xl:py-20 bg-background overflow-hidden">
+      <section className="section-bg-services relative py-16 xl:py-20 overflow-hidden">
         <div className="container relative">
           <div className="flex justify-between items-center mb-10">
             <div className="flex flex-col max-w-xl">
@@ -157,7 +157,7 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section className="relative py-16 xl:py-20 bg-background overflow-hidden">
+    <section className="section-bg-services relative py-16 xl:py-20 overflow-hidden">
       <div className="container relative">
         {/* Header with Navigation Arrows */}
         <div className="flex justify-between items-center mb-10">

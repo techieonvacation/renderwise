@@ -8,19 +8,36 @@ import Loader from "@/app/components/ui/Loader";
 const AboutUs = dynamic(() => import("./AboutUs"));
 const BenefitsAndPerks = dynamic(() => import("./BenefitsAndPerks"));
 const CurrentOpenings = dynamic(() => import("./CurrentOpenings"));
+const ApplicationProcess = dynamic(() => import("./ApplicationProcess"));
 
 const Careers = () => {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Suspense fallback={<Loader />}>
+      {/* About Us Section with Hero Background */}
+      <div className="section-bg-hero">
         <AboutUs />
-      </Suspense>
-      <Suspense fallback={<Loader />}>
-        <CurrentOpenings />
-      </Suspense>
-      <Suspense fallback={<Loader />}>
-        <BenefitsAndPerks />
-      </Suspense>
+      </div>
+
+      {/* Current Openings Section with Professional Background */}
+      <div className="section-bg-services">
+        <Suspense fallback={<Loader />}>
+          <CurrentOpenings />
+        </Suspense>
+      </div>
+
+      {/* Benefits Section with Accent Background */}
+      <div className="section-bg-capabilities">
+        <Suspense fallback={<Loader />}>
+          <BenefitsAndPerks />
+        </Suspense>
+      </div>
+
+      {/* Application Process Section */}
+      <div className="section-bg-testimonials">
+        <Suspense fallback={<Loader />}>
+          <ApplicationProcess />
+        </Suspense>
+      </div>
     </main>
   );
 };

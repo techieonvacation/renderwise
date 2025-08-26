@@ -85,7 +85,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="get-in-touch" className="py-12 md:py-24">
+    <section id="get-in-touch" className="section-bg-contact py-12 md:py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left Column */}
@@ -272,7 +272,7 @@ export default function ContactSection() {
                 </label>
                 <div className="mt-2 space-y-2">
                   <Progress
-                    value={(formData.budget / 50000) * 100}
+                    value={(formData.budget / 5000000) * 100}
                     className="h-2 bg-muted"
                   />
                   <input
@@ -280,14 +280,14 @@ export default function ContactSection() {
                     name="budget"
                     min="5000"
                     max="5000000"
-                    step="1000"
+                    step="50000"
                     value={formData.budget}
                     onChange={handleChange}
                     className="w-full bg-input-background"
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>&#8377;{formData.budget.toLocaleString()}</span>
-                    <span>&#8377;50,000</span>
+                    <span>&#8377;50,00,000</span>
                   </div>
                 </div>
               </div>

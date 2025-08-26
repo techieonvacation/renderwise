@@ -29,14 +29,7 @@ export default function TechShowcaseVariant1() {
 
   return (
     <section
-      className="min-h-screen bg-background py-10 md:py-16"
-      style={{
-        backgroundImage: `url("/images/white-bg.png")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundBlendMode: "multiply",
-      }}
+      className="section-bg-capabilities min-h-screen py-10 md:py-16"
       aria-label="Our Capabilities"
     >
       <div className="container">

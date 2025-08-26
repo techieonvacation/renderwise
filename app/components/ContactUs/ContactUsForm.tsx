@@ -98,12 +98,6 @@ export default function ContactUsForm() {
                     >
                       +91 9899566611
                     </Link>
-                    <Link
-                      href="tel:+919899566611"
-                      className="text-muted-foreground font-inter"
-                    >
-                      +91 9899566611
-                    </Link>
                   </div>
                 </div>
               </div>

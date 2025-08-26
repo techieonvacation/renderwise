@@ -111,7 +111,8 @@ export const NAVBAR_CONFIG = {
       sliderData: [
         {
           title: "Web Development",
-          description: "Modern, responsive websites built with cutting-edge technologies",
+          description:
+            "Modern, responsive websites built with cutting-edge technologies",
           image: "/images/services/web-development.jpg",
           order: 1,
         },
@@ -233,7 +234,8 @@ export const NAVBAR_CONFIG = {
       sliderData: [
         {
           title: "Enterprise Solutions",
-          description: "Large-scale business solutions with enterprise-grade security",
+          description:
+            "Large-scale business solutions with enterprise-grade security",
           image: "/images/solutions/enterprise.jpg",
           order: 1,
         },
@@ -245,7 +247,8 @@ export const NAVBAR_CONFIG = {
         },
         {
           title: "SaaS Products",
-          description: "Software as a Service platforms with subscription management",
+          description:
+            "Software as a Service platforms with subscription management",
           image: "/images/solutions/saas.jpg",
           order: 3,
         },
@@ -271,34 +274,23 @@ export const NAVBAR_CONFIG = {
       gridCols: 2,
       subMenu: [
         {
-          name: "Our Story",
-          href: "/about/story",
-          desc: "Learn about our journey and mission to deliver exceptional solutions",
-          iconName: "Book" as const,
-        },
-        {
-          name: "Our Team",
-          href: "/about/team",
-          desc: "Meet the talented professionals behind our success",
-          iconName: "Users" as const,
-        },
-        {
           name: "Careers",
           href: "/careers",
           desc: "Join our team and build the future of technology together",
           iconName: "Briefcase" as const,
         },
         {
-          name: "Culture & Values",
-          href: "/about/culture",
-          desc: "Discover our core values and company culture",
-          iconName: "Heart" as const,
+          name: "Blog",
+          href: "/blog",
+          desc: "Read our latest blog posts and stay updated with the latest trends in technology",
+          iconName: "Book" as const,
         },
       ],
       sliderData: [
         {
           title: "Our Story",
-          description: "Learn about our journey and mission to deliver exceptional solutions",
+          description:
+            "Learn about our journey and mission to deliver exceptional solutions",
           image: "/images/about/our-story.jpg",
           order: 1,
         },
@@ -310,7 +302,8 @@ export const NAVBAR_CONFIG = {
         },
         {
           title: "Careers",
-          description: "Join our team and build the future of technology together",
+          description:
+            "Join our team and build the future of technology together",
           image: "/images/about/careers.jpg",
           order: 3,
         },
@@ -363,7 +356,8 @@ export const NAVBAR_CONFIG = {
         },
         {
           title: "Case Studies",
-          description: "In-depth analysis of our successful project implementations",
+          description:
+            "In-depth analysis of our successful project implementations",
           image: "/images/portfolio/case-studies.jpg",
           order: 2,
         },
@@ -416,19 +410,22 @@ export const NAVBAR_CONFIG = {
       sliderData: [
         {
           title: "Technical Insights",
-          description: "Deep dives into the latest technologies and development practices",
+          description:
+            "Deep dives into the latest technologies and development practices",
           image: "/images/blog/technical-insights.jpg",
           order: 1,
         },
         {
           title: "Industry Trends",
-          description: "Analysis of current trends and future predictions in tech",
+          description:
+            "Analysis of current trends and future predictions in tech",
           image: "/images/blog/industry-trends.jpg",
           order: 2,
         },
         {
           title: "Best Practices",
-          description: "Proven methodologies and strategies for successful projects",
+          description:
+            "Proven methodologies and strategies for successful projects",
           image: "/images/blog/best-practices.jpg",
           order: 3,
         },

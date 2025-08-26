@@ -37,7 +37,7 @@ export default function HeroSection({ heroSettings }: HeroSectionProps) {
 
   if (filteredHeroComponents.length === 0) {
     return (
-      <div className="py-20 flex flex-col items-center justify-center bg-muted/10">
+      <div className="section-bg-hero py-20 flex flex-col items-center justify-center">
         <h2 className="text-2xl font-bold mb-4">Hero Sections Hidden</h2>
         <p className="text-muted-foreground mb-6 text-center max-w-md">
           All hero sections are currently hidden. Visit the admin panel to
@@ -51,10 +51,10 @@ export default function HeroSection({ heroSettings }: HeroSectionProps) {
   }
 
   return (
-    <>
+    <div className="section-bg-hero">
       {filteredHeroComponents.map((component, index) => (
         <div key={index}>{component}</div>
       ))}
-    </>
+    </div>
   );
 }

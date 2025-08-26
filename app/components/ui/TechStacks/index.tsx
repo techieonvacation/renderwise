@@ -9,7 +9,7 @@ const TechStackTabs = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section className="py-10 lg:py-16 bg-background">
+    <section className="section-bg-techstack py-10 lg:py-16">
       <div className="container">
         <div className="max-w-4xl mx-auto mb-8 lg:mb-16 flex flex-col items-center justify-center">
           <Tagline variant="center">Tech Stack</Tagline>

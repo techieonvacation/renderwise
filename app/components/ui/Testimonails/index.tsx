@@ -95,7 +95,7 @@ export default function Testimonials() {
   }, [current]);
 
   return (
-    <section className="relative overflow-hidden py-10 lg:py-16">
+    <section className="section-bg-testimonials relative overflow-hidden py-10 lg:py-16">
       <div className="container relative">
         <div className="max-w-4xl mx-auto mb-8 lg:mb-16 flex flex-col items-center justify-center">
           <Tagline variant="center">Testimonials</Tagline>
@@ -200,7 +200,7 @@ export default function Testimonials() {
             {[
               { label: "Years of Excellence", value: "15+" },
               { label: "Clients Across The Globe", value: "200+" },
-              { label: "Team Members", value: "50+" },
+              { label: "Team Members", value: "150+" },
               { label: "Success Rate", value: "99.99%" },
             ].map((stat, index) => (
               <div
