@@ -6,6 +6,7 @@ import {
   DEFAULT_NAVBAR_CONFIG,
   type NavbarDocument,
 } from "@/app/lib/models/navbar";
+import { clearNavbarCache } from "@/app/lib/services/navbarService";
 
 // Cache MongoDB connection and collection reference
 let cachedDb: any = null;
@@ -115,7 +116,8 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Revalidate paths
+    // Clear server-side cache and revalidate paths
+    clearNavbarCache();
     revalidatePath("/api/navbar");
     revalidatePath("/");
     revalidatePath("/admin/navbar");
@@ -172,7 +174,8 @@ export async function DELETE() {
 
     const result = await collection.deleteOne({ id: "main" });
 
-    // Revalidate paths
+    // Clear server-side cache and revalidate paths
+    clearNavbarCache();
     revalidatePath("/api/navbar");
     revalidatePath("/");
     revalidatePath("/admin/navbar");

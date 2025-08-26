@@ -8,7 +8,7 @@ async function getBaseUrl() {
     // During build time, use environment variables or default values
     if (process.env.NODE_ENV === "production") {
       // Use your production URL or environment variable
-      return process.env.NEXT_PUBLIC_BASE_URL || "https://eleservsoftech.com";
+      return process.env.NEXT_PUBLIC_BASE_URL || "https://eleservsoftech.vercel.app";
     }
     
     // During development, try to get headers safely

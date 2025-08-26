@@ -1,18 +1,9 @@
-"use client";
+import { getNavbarConfig } from "@/app/lib/services/navbarService";
+import ConditionalNavbarClient from "./ConditionalNavbarClient";
 
-import { usePathname } from "next/navigation";
-import Navbar from "./ui/Nabvar";
-
-export default function ConditionalNavbar() {
-  const pathname = usePathname();
+export default async function ConditionalNavbar() {
+  // Fetch navbar configuration server-side
+  const navbarConfig = await getNavbarConfig();
   
-  // Hide navbar on admin routes
-  const isAdminRoute = pathname.startsWith("/admin");
-  
-  // Don't render navbar on admin routes
-  if (isAdminRoute) {
-    return null;
-  }
-  
-  return <Navbar />;
+  return <ConditionalNavbarClient config={navbarConfig} />;
 } 

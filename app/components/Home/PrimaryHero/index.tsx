@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,40 +7,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Button } from "@/app/components/ui/Button";
 import { ArrowRightIcon } from "lucide-react";
-import Loader from "@/app/components/ui/Loader";
+import { SlideData } from "./api";
 
-// TypeScript interface for slide data
-interface SlideData {
-  _id?: string;
-  subTitle: string;
-  title: string;
-  highlightedWord: string;
-  desc: string;
-  image: string;
-  profileImage: string;
-  order: number;
+interface PrimaryHeroProps {
+  heroData: SlideData[];
 }
 
-const PrimaryHero: React.FC = () => {
-  const [heroData, setHeroData] = useState<SlideData[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch hero data on component mount
-  useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        const response = await fetch("/api/primary-hero");
-        const data = await response.json();
-        setHeroData(data);
-      } catch (error) {
-        console.error("Error fetching hero data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHeroData();
-  }, []);
+const PrimaryHero: React.FC<PrimaryHeroProps> = ({ heroData }) => {
 
   const settings = {
     dots: false,
@@ -56,12 +29,9 @@ const PrimaryHero: React.FC = () => {
     cssEase: "ease-in-out",
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-[660px] flex items-center justify-center">
-        <Loader />
-      </div>
-    );
+  // Don't render if no data
+  if (!heroData || heroData.length === 0) {
+    return null;
   }
 
   return (

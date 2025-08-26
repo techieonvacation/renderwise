@@ -91,7 +91,7 @@ export interface NavbarConfig {
  * Props for the main Navbar component
  */
 export interface NavbarProps {
-  config?: Partial<NavbarConfig>;
+  config?: NavbarConfig;
   className?: string;
   onSearchSubmit?: (query: string) => void;
   onConsultationClick?: () => void;

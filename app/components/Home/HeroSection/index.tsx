@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Button } from "@/app/components/ui/Button";
+import { getPrimaryHeroData, SlideData } from "@/app/components/Home/PrimaryHero/api";
 
 // Dynamic imports with no SSR to prevent streaming issues
 const PrimaryHero = dynamic(() => import("@/app/components/Home/PrimaryHero"), {
@@ -20,13 +21,14 @@ interface HeroSectionProps {
     primaryHeroOrder: number;
     secondaryHeroOrder: number;
   };
+  primaryHeroData: SlideData[];
 }
 
-export default function HeroSection({ heroSettings }: HeroSectionProps) {
+export default function HeroSection({ heroSettings, primaryHeroData }: HeroSectionProps) {
   const heroComponents: ReactElement[] = [];
 
   if (heroSettings.primaryHeroVisible) {
-    heroComponents[heroSettings.primaryHeroOrder - 1] = <PrimaryHero key="primary" />;
+    heroComponents[heroSettings.primaryHeroOrder - 1] = <PrimaryHero key="primary" heroData={primaryHeroData} />;
   }
 
   if (heroSettings.secondaryHeroVisible) {

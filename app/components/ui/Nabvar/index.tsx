@@ -12,10 +12,10 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { Hamburger } from "../Humberger";
 import Image from "next/image";
-import { NavbarConfig, DEFAULT_NAVBAR_CONFIG } from "@/app/lib/models/navbar";
+import { DEFAULT_NAVBAR_CONFIG } from "@/app/lib/models/navbar";
 
 export default function Navbar({
-  config = {},
+  config = DEFAULT_NAVBAR_CONFIG,
   className = "",
   onSearchSubmit,
   onConsultationClick,
@@ -26,10 +26,6 @@ export default function Navbar({
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [navbarConfig, setNavbarConfig] = useState<NavbarConfig>(
-    DEFAULT_NAVBAR_CONFIG
-  );
-  const [isLoading, setIsLoading] = useState(true);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<string | null>(null);
   const pathname = usePathname();
   const searchRef = useRef<HTMLInputElement>(null);
@@ -38,38 +34,9 @@ export default function Navbar({
     setMounted(true);
   }, []);
 
-  // Fetch navbar configuration from API
-  useEffect(() => {
-    const fetchNavbarConfig = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch("/api/navbar", {
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch navbar configuration");
-        }
-
-        const data = await response.json();
-        setNavbarConfig(data);
-      } catch (error) {
-        console.error("Error fetching navbar configuration:", error);
-        setNavbarConfig(DEFAULT_NAVBAR_CONFIG);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchNavbarConfig();
-  }, []);
-
   const finalConfig = useMemo(
-    () => ({ ...navbarConfig, ...config }),
-    [navbarConfig, config]
+    () => ({ ...DEFAULT_NAVBAR_CONFIG, ...config }),
+    [config]
   );
 
   // Get current slider data based on hovered menu item
@@ -212,19 +179,7 @@ export default function Navbar({
     );
   };
 
-  if (isLoading) {
-    return (
-      <header className="fixed top-0 left-0 right-0 z-40 bg-background border-b border-border">
-        <div className="container">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            <div className="animate-pulse bg-muted h-8 w-32 rounded"></div>
-            <div className="animate-pulse bg-muted h-8 w-48 rounded"></div>
-            <div className="animate-pulse bg-muted h-8 w-24 rounded"></div>
-          </div>
-        </div>
-      </header>
-    );
-  }
+
 
   return (
     <>

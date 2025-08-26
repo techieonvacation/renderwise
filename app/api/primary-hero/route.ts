@@ -25,7 +25,7 @@ const DEFAULT_PRIMARY_HERO = [
     title: "Build Amazing Experiences with",
     highlightedWord: "Technology",
     desc: "From concept to execution, we deliver exceptional digital experiences that engage your audience and drive meaningful results. Let us help you stay ahead in the digital landscape.",
-    image: "/images/hero/hero-thum2.png",
+    image: "/images/hero/hero-thum.png",
     profileImage: "/images/hero/hero-pro.png",
     order: 2,
     createdAt: new Date().toISOString(),
@@ -241,10 +241,7 @@ export async function DELETE(request: Request) {
       .deleteOne({ _id: objectId });
 
     if (result.deletedCount === 0) {
-      return NextResponse.json(
-        { error: "Slide not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Slide not found" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true });
