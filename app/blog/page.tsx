@@ -18,19 +18,20 @@ export const metadata: Metadata = {
 };
 
 interface BlogPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     category?: string;
     tag?: string;
     search?: string;
-  };
+  }>;
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const page = parseInt(searchParams.page || "1");
-  const category = searchParams.category;
-  const tag = searchParams.tag;
-  const search = searchParams.search;
+  const params = await searchParams;
+  const page = parseInt(params.page || "1");
+  const category = params.category;
+  const tag = params.tag;
+  const search = params.search;
 
   try {
     console.log("🔍 Loading blog page with params:", { page, category, tag, search });

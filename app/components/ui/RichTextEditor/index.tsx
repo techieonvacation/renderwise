@@ -35,43 +35,51 @@ interface RichTextEditorProps {
   onImageUpload?: (file: File) => Promise<string>;
 }
 
-type FormatType = 
-  | 'bold' 
-  | 'italic' 
-  | 'underline' 
-  | 'insertOrderedList' 
-  | 'insertUnorderedList'
-  | 'justifyLeft'
-  | 'justifyCenter'
-  | 'justifyRight'
-  | 'formatBlock'
-  | 'insertHTML'
-  | 'createLink'
-  | 'unlink';
+type FormatType =
+  | "bold"
+  | "italic"
+  | "underline"
+  | "insertOrderedList"
+  | "insertUnorderedList"
+  | "justifyLeft"
+  | "justifyCenter"
+  | "justifyRight"
+  | "formatBlock"
+  | "insertHTML"
+  | "createLink"
+  | "unlink";
 
 interface ToolbarButton {
-  command: FormatType | 'heading1' | 'heading2' | 'heading3' | 'quote' | 'code' | 'image' | 'link';
+  command:
+    | FormatType
+    | "heading1"
+    | "heading2"
+    | "heading3"
+    | "quote"
+    | "code"
+    | "image"
+    | "link";
   icon: React.ElementType;
   title: string;
   value?: string;
 }
 
 const toolbarButtons: ToolbarButton[] = [
-  { command: 'bold', icon: BoldIcon, title: 'Bold' },
-  { command: 'italic', icon: ItalicIcon, title: 'Italic' },
-  { command: 'underline', icon: UnderlineIcon, title: 'Underline' },
-  { command: 'heading1', icon: Heading1Icon, title: 'Heading 1' },
-  { command: 'heading2', icon: Heading2Icon, title: 'Heading 2' },
-  { command: 'heading3', icon: Heading3Icon, title: 'Heading 3' },
-  { command: 'insertUnorderedList', icon: ListIcon, title: 'Bullet List' },
-  { command: 'insertOrderedList', icon: ListIcon, title: 'Numbered List' },
-  { command: 'justifyLeft', icon: AlignLeftIcon, title: 'Align Left' },
-  { command: 'justifyCenter', icon: AlignCenterIcon, title: 'Align Center' },
-  { command: 'justifyRight', icon: AlignRightIcon, title: 'Align Right' },
-  { command: 'quote', icon: QuoteIcon, title: 'Quote' },
-  { command: 'code', icon: CodeIcon, title: 'Code Block' },
-  { command: 'link', icon: LinkIcon, title: 'Insert Link' },
-  { command: 'image', icon: ImageIcon, title: 'Insert Image' },
+  { command: "bold", icon: BoldIcon, title: "Bold" },
+  { command: "italic", icon: ItalicIcon, title: "Italic" },
+  { command: "underline", icon: UnderlineIcon, title: "Underline" },
+  { command: "heading1", icon: Heading1Icon, title: "Heading 1" },
+  { command: "heading2", icon: Heading2Icon, title: "Heading 2" },
+  { command: "heading3", icon: Heading3Icon, title: "Heading 3" },
+  { command: "insertUnorderedList", icon: ListIcon, title: "Bullet List" },
+  { command: "insertOrderedList", icon: ListIcon, title: "Numbered List" },
+  { command: "justifyLeft", icon: AlignLeftIcon, title: "Align Left" },
+  { command: "justifyCenter", icon: AlignCenterIcon, title: "Align Center" },
+  { command: "justifyRight", icon: AlignRightIcon, title: "Align Right" },
+  { command: "quote", icon: QuoteIcon, title: "Quote" },
+  { command: "code", icon: CodeIcon, title: "Code Block" },
+  { command: "link", icon: LinkIcon, title: "Insert Link" },
+  { command: "image", icon: ImageIcon, title: "Insert Image" },
 ];
 
 export function RichTextEditor({
@@ -92,49 +100,55 @@ export function RichTextEditor({
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const executeCommand = useCallback((command: FormatType, value?: string) => {
-    if (!editorRef.current || disabled) return;
-    
-    document.execCommand(command, false, value);
-    editorRef.current.focus();
-    
-    // Update content after command execution
-    setTimeout(() => {
-      if (editorRef.current) {
-        onChange(editorRef.current.innerHTML);
+  const executeCommand = useCallback(
+    (command: FormatType, value?: string) => {
+      if (!editorRef.current || disabled) return;
+
+      document.execCommand(command, false, value);
+      editorRef.current.focus();
+
+      // Update content after command execution
+      setTimeout(() => {
+        if (editorRef.current) {
+          onChange(editorRef.current.innerHTML);
+        }
+      }, 0);
+    },
+    [onChange, disabled]
+  );
+
+  const handleToolbarClick = useCallback(
+    (button: ToolbarButton) => {
+      if (disabled) return;
+
+      switch (button.command) {
+        case "heading1":
+          executeCommand("formatBlock", "<h1>");
+          break;
+        case "heading2":
+          executeCommand("formatBlock", "<h2>");
+          break;
+        case "heading3":
+          executeCommand("formatBlock", "<h3>");
+          break;
+        case "quote":
+          executeCommand("formatBlock", "<blockquote>");
+          break;
+        case "code":
+          executeCommand("formatBlock", "<pre>");
+          break;
+        case "link":
+          handleLinkClick();
+          break;
+        case "image":
+          handleImageClick();
+          break;
+        default:
+          executeCommand(button.command as FormatType, button.value);
       }
-    }, 0);
-  }, [onChange, disabled]);
-
-  const handleToolbarClick = useCallback((button: ToolbarButton) => {
-    if (disabled) return;
-
-    switch (button.command) {
-      case 'heading1':
-        executeCommand('formatBlock', '<h1>');
-        break;
-      case 'heading2':
-        executeCommand('formatBlock', '<h2>');
-        break;
-      case 'heading3':
-        executeCommand('formatBlock', '<h3>');
-        break;
-      case 'quote':
-        executeCommand('formatBlock', '<blockquote>');
-        break;
-      case 'code':
-        executeCommand('formatBlock', '<pre>');
-        break;
-      case 'link':
-        handleLinkClick();
-        break;
-      case 'image':
-        handleImageClick();
-        break;
-      default:
-        executeCommand(button.command as FormatType, button.value);
-    }
-  }, [executeCommand, disabled]);
+    },
+    [executeCommand, disabled]
+  );
 
   const handleLinkClick = () => {
     const selection = window.getSelection();
@@ -147,9 +161,12 @@ export function RichTextEditor({
   const insertLink = () => {
     if (linkUrl) {
       if (linkText) {
-        executeCommand('insertHTML', `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`);
+        executeCommand(
+          "insertHTML",
+          `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
+        );
       } else {
-        executeCommand('createLink', linkUrl);
+        executeCommand("createLink", linkUrl);
       }
     }
     setIsLinkModalOpen(false);
@@ -161,13 +178,18 @@ export function RichTextEditor({
     fileInputRef.current?.click();
   };
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (!file || !onImageUpload) return;
 
     try {
       const imageUrl = await onImageUpload(file);
-      executeCommand('insertHTML', `<img src="${imageUrl}" alt="${file.name}" style="max-width: 100%; height: auto;" />`);
+      executeCommand(
+        "insertHTML",
+        `<img src="${imageUrl}" alt="${file.name}" style="max-width: 100%; height: auto;" />`
+      );
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -182,43 +204,54 @@ export function RichTextEditor({
     }
   }, [onChange]);
 
-  const handlePaste = useCallback((e: React.ClipboardEvent) => {
-    e.preventDefault();
-    const text = e.clipboardData.getData('text/plain');
-    executeCommand('insertHTML', text);
-  }, [executeCommand]);
+  const handlePaste = useCallback(
+    (e: React.ClipboardEvent) => {
+      e.preventDefault();
+      const text = e.clipboardData.getData("text/plain");
+      executeCommand("insertHTML", text);
+    },
+    [executeCommand]
+  );
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    // Handle common keyboard shortcuts
-    if (e.ctrlKey || e.metaKey) {
-      switch (e.key) {
-        case 'b':
-          e.preventDefault();
-          executeCommand('bold');
-          break;
-        case 'i':
-          e.preventDefault();
-          executeCommand('italic');
-          break;
-        case 'u':
-          e.preventDefault();
-          executeCommand('underline');
-          break;
-        case 'z':
-          if (e.shiftKey) {
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      // Handle common keyboard shortcuts
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key) {
+          case "b":
             e.preventDefault();
-            document.execCommand('redo');
-          } else {
+            executeCommand("bold");
+            break;
+          case "i":
             e.preventDefault();
-            document.execCommand('undo');
-          }
-          break;
+            executeCommand("italic");
+            break;
+          case "u":
+            e.preventDefault();
+            executeCommand("underline");
+            break;
+          case "z":
+            if (e.shiftKey) {
+              e.preventDefault();
+              document.execCommand("redo");
+            } else {
+              e.preventDefault();
+              document.execCommand("undo");
+            }
+            break;
+        }
       }
-    }
-  }, [executeCommand]);
+    },
+    [executeCommand]
+  );
 
   return (
-    <div className={cn("border rounded-lg overflow-hidden bg-background", className)}>
+    <div
+      className={cn(
+        "border rounded-lg overflow-hidden bg-background",
+        className
+      )}
+    >
       {/* Toolbar */}
       <div className="border-b bg-muted/30 p-2 flex flex-wrap gap-1">
         <div className="flex items-center gap-1 mr-4">
@@ -226,7 +259,7 @@ export function RichTextEditor({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => document.execCommand('undo')}
+            onClick={() => document.execCommand("undo")}
             disabled={disabled}
             className="h-8 w-8 p-0"
           >
@@ -236,7 +269,7 @@ export function RichTextEditor({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => document.execCommand('redo')}
+            onClick={() => document.execCommand("redo")}
             disabled={disabled}
             className="h-8 w-8 p-0"
           >
@@ -263,7 +296,7 @@ export function RichTextEditor({
           <div className="ml-auto flex items-center gap-2">
             <Button
               type="button"
-              variant={isPreviewMode ? "ghost" : "default"}
+              variant={isPreviewMode ? "ghost" : "primary"}
               size="sm"
               onClick={() => setIsPreviewMode(false)}
               disabled={disabled}
@@ -274,7 +307,7 @@ export function RichTextEditor({
             </Button>
             <Button
               type="button"
-              variant={isPreviewMode ? "default" : "ghost"}
+              variant={isPreviewMode ? "primary" : "ghost"}
               size="sm"
               onClick={() => setIsPreviewMode(true)}
               disabled={disabled}
@@ -292,7 +325,7 @@ export function RichTextEditor({
         {isPreviewMode ? (
           <div
             className="p-4 prose prose-sm max-w-none"
-            style={{ minHeight, maxHeight, overflowY: 'auto' }}
+            style={{ minHeight, maxHeight, overflowY: "auto" }}
             dangerouslySetInnerHTML={{ __html: value }}
           />
         ) : (
@@ -307,7 +340,7 @@ export function RichTextEditor({
               "prose prose-sm max-w-none",
               disabled && "opacity-50 cursor-not-allowed"
             )}
-            style={{ minHeight, maxHeight, overflowY: 'auto' }}
+            style={{ minHeight, maxHeight, overflowY: "auto" }}
             data-placeholder={placeholder}
             dangerouslySetInnerHTML={{ __html: value }}
             suppressContentEditableWarning={true}
@@ -317,7 +350,7 @@ export function RichTextEditor({
         {!value && !isPreviewMode && (
           <div
             className="absolute top-4 left-4 text-muted-foreground pointer-events-none select-none"
-            style={{ fontSize: '14px' }}
+            style={{ fontSize: "14px" }}
           >
             {placeholder}
           </div>
@@ -350,7 +383,9 @@ export function RichTextEditor({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Link Text (optional)</label>
+                <label className="block text-sm font-medium mb-2">
+                  Link Text (optional)
+                </label>
                 <input
                   type="text"
                   value={linkText}
@@ -371,11 +406,7 @@ export function RichTextEditor({
                 >
                   Cancel
                 </Button>
-                <Button
-                  type="button"
-                  onClick={insertLink}
-                  disabled={!linkUrl}
-                >
+                <Button type="button" onClick={insertLink} disabled={!linkUrl}>
                   Insert Link
                 </Button>
               </div>
@@ -390,25 +421,25 @@ export function RichTextEditor({
           content: attr(data-placeholder);
           color: #9ca3af;
         }
-        
+
         .prose h1 {
           font-size: 2em;
           font-weight: bold;
           margin: 0.5em 0;
         }
-        
+
         .prose h2 {
           font-size: 1.5em;
           font-weight: bold;
           margin: 0.5em 0;
         }
-        
+
         .prose h3 {
           font-size: 1.25em;
           font-weight: bold;
           margin: 0.5em 0;
         }
-        
+
         .prose blockquote {
           border-left: 4px solid #e5e7eb;
           padding-left: 1em;
@@ -416,35 +447,36 @@ export function RichTextEditor({
           font-style: italic;
           color: #6b7280;
         }
-        
+
         .prose pre {
           background: #f3f4f6;
           border: 1px solid #e5e7eb;
           border-radius: 0.375rem;
           padding: 1em;
           margin: 1em 0;
-          font-family: 'Courier New', monospace;
+          font-family: "Courier New", monospace;
           overflow-x: auto;
         }
-        
-        .prose ul, .prose ol {
+
+        .prose ul,
+        .prose ol {
           margin: 1em 0;
           padding-left: 2em;
         }
-        
+
         .prose li {
           margin: 0.5em 0;
         }
-        
+
         .prose a {
           color: #3b82f6;
           text-decoration: underline;
         }
-        
+
         .prose a:hover {
           color: #1d4ed8;
         }
-        
+
         .prose img {
           max-width: 100%;
           height: auto;

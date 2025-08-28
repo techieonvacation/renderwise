@@ -91,7 +91,7 @@ export default function CategoriesManagementPage() {
       newErrors.name = "Category name must be at least 2 characters";
     }
 
-    if (!formData.slug.trim()) {
+    if (!formData.slug?.trim()) {
       newErrors.slug = "Slug is required";
     } else if (!/^[a-z0-9-]+$/.test(formData.slug)) {
       newErrors.slug = "Slug can only contain lowercase letters, numbers, and hyphens";
@@ -386,7 +386,7 @@ export default function CategoriesManagementPage() {
                 />
                 <div className="flex justify-between text-sm mt-1">
                   {errors.description && <p className="text-destructive">{errors.description}</p>}
-                  <p className="text-muted-foreground ml-auto">{formData.description.length}/200</p>
+                  <p className="text-muted-foreground ml-auto">{formData.description?.length || 0}/200</p>
                 </div>
               </div>
 

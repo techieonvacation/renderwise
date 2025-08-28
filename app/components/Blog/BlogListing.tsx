@@ -122,14 +122,14 @@ export default function BlogListing({
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
                     <Button
-                      variant={viewMode === "grid" ? "default" : "ghost"}
+                      variant={viewMode === "grid" ? "primary" : "ghost"}
                       size="sm"
                       onClick={() => setViewMode("grid")}
                     >
                       <GridIcon className="w-4 h-4" />
                     </Button>
                     <Button
-                      variant={viewMode === "list" ? "default" : "ghost"}
+                      variant={viewMode === "list" ? "primary" : "ghost"}
                       size="sm"
                       onClick={() => setViewMode("list")}
                     >
@@ -316,7 +316,7 @@ export default function BlogListing({
                     return (
                       <Button
                         key={pageNum}
-                        variant={pageNum === pagination.currentPage ? "default" : "ghost"}
+                        variant={pageNum === pagination.currentPage ? "primary" : "ghost"}
                         size="sm"
                         onClick={() => handlePageChange(pageNum)}
                         className="w-10"
