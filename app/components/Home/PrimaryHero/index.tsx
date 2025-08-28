@@ -14,7 +14,6 @@ interface PrimaryHeroProps {
 }
 
 const PrimaryHero: React.FC<PrimaryHeroProps> = ({ heroData }) => {
-
   const settings = {
     dots: false,
     infinite: true,
@@ -68,27 +67,30 @@ const PrimaryHero: React.FC<PrimaryHeroProps> = ({ heroData }) => {
                       {/* Buttons */}
                       <div className="flex items-center gap-2 mt-10">
                         {/* Get Started Button */}
-                        <Button
-                          variant={"primary"}
-                          size={"sm"}
-                          rightIcon={
-                            <ArrowRightIcon className="size-4 sm:size-5" />
-                          }
-                          className="lg:hidden"
-                        >
-                          Get Started
-                        </Button>
-                        <Button
-                          variant={"primary"}
-                          size={"lg"}
-                          rightIcon={
-                            <ArrowRightIcon className="size-4 sm:size-5" />
-                          }
-                          className="hidden lg:flex"
-                        >
-                          Get Started
-                        </Button>
-
+                        <Link href="/contact-us" passHref>
+                          <Button
+                            variant={"primary"}
+                            size={"sm"}
+                            rightIcon={
+                              <ArrowRightIcon className="size-4 sm:size-5" />
+                            }
+                            className="lg:hidden"
+                          >
+                            Get Started
+                          </Button>
+                        </Link>
+                        <Link href="/contact-us" passHref>
+                          <Button
+                            variant={"primary"}
+                            size={"lg"}
+                            rightIcon={
+                              <ArrowRightIcon className="size-4 sm:size-5" />
+                            }
+                            className="hidden lg:flex"
+                          >
+                            Get Started
+                          </Button>
+                        </Link>
                         {/* Meet Experts Button */}
                         <div className="inline-flex items-center">
                           <div className="flex items-center">
@@ -113,7 +115,7 @@ const PrimaryHero: React.FC<PrimaryHeroProps> = ({ heroData }) => {
                       </div>
 
                       {/* Rotating Decorative Shape */}
-                      <div className="hero-left-shape lg:block hidden z-0">
+                      <div className="hero-left-shape lg:block hidden z-0 pointer-events-none">
                         <div className="">
                           <Image
                             src="/images/hero/hero-geo.png"

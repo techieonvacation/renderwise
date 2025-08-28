@@ -298,6 +298,12 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       ],
     },
     {
+      name: "Blog",
+      href: "/blog",
+      order: 4,
+      isActive: true,
+    },
+    {
       name: "About",
       href: "/about",
       hasDropdown: true,
@@ -332,7 +338,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
           order: 4,
         },
       ],
-      order: 4,
+      order: 5,
       isActive: true,
       sliderData: [
         {
@@ -364,7 +370,7 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
     {
       name: "Contact",
       href: "/contact-us",
-      order: 5,
+      order: 6,
       isActive: true,
     },
   ],
