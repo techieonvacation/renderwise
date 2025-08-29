@@ -141,6 +141,8 @@ const TransformRepetition = () => {
           >
             <Button
               size="lg"
+              scrollToBottom={true}
+              scrollTarget="#get-in-touch"
               className="group bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-4 text-lg"
             >
               Start Your Automation Journey
@@ -150,6 +152,8 @@ const TransformRepetition = () => {
             <Button
               variant="outline"
               size="lg"
+              scrollToBottom={true}
+              scrollTarget="#get-in-touch"
               className="px-8 py-4 text-lg border-2 hover:bg-primary/5"
             >
               View Case Studies

@@ -10,7 +10,11 @@ export const heroContent = {
     "Predictive Analytics",
     "Connected Systems",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/supply-chain-logistic-1.webp",
+    "/images/supply-chain-logistic-2.webp",
+    "/images/supply-chain-logistic-3.webp",
+  ],
   buttonText: "Transform Your Supply Chain",
   teamMembers: [
     {

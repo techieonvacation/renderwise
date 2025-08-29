@@ -455,6 +455,8 @@ const IntelligentSolutions = () => {
         >
           <Button
             size="lg"
+            scrollToBottom={true}
+            scrollTarget="#get-in-touch"
             className="group bg-gradient-to-r from-primary to-accent hover:from-primary-hover hover:to-accent text-white px-8 py-4"
           >
             Explore Intelligent Automation

@@ -7,7 +7,6 @@ import { SubMenuFooterProps } from "./Navbar.types";
 export default function SubMenuFooter({
   className,
   text,
-  href,
 }: SubMenuFooterProps) {
   return (
     <div
@@ -19,7 +18,7 @@ export default function SubMenuFooter({
       <div className="text-sm  mb-2 md:mb-0">
         {text || "Ready to get started?"}
         <Link
-          href={href || "/contact"}
+          href={"/contact-us"}
           className="font-semibold text-sm text-primary hover:text-primary/80 transition-colors px-2 font-urbanist"
         >
           Let&apos;s talk
@@ -36,11 +35,11 @@ export default function SubMenuFooter({
         </Link>
 
         <Link
-          href="tel:+919826000000"
+          href="tel:+919899566611"
           className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-urbanist"
         >
           <Phone className="h-4 w-4" />
-          <span>+91 9826000000</span>
+          <span>+91 9899566611</span>
         </Link>
       </div>
     </div>

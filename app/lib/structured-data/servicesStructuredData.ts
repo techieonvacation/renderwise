@@ -167,6 +167,66 @@ export const SUPPLY_CHAIN_LOGISTICS_STRUCTURED_DATA: ServiceStructuredData = {
   },
 };
 
+// Telecom Service Structured Data
+
+export const TELECOM_STRUCTURED_DATA: ServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Telecom Services",
+  description:
+    "Telecom Services include telecom services, telecom solutions, and telecom infrastructure services. We help businesses transform their digital presence and achieve technological excellence.",
+  provider: BASE_PROVIDER,
+  areaServed: "Worldwide",
+  serviceType: "Telecom Services",
+  category: "Telecom Services",
+  offers: {
+    "@type": "Offer",
+    price: "Contact for pricing",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+
+// Insurance Service Structured Data
+
+export const INSURANCE_STRUCTURED_DATA: ServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Insurance Services",
+  description:
+    "Insurance Services include insurance services, insurance solutions, and insurance infrastructure services. We help businesses transform their digital presence and achieve technological excellence.",
+  provider: BASE_PROVIDER,
+  areaServed: "Worldwide",
+  serviceType: "Insurance Services",
+  category: "Insurance Services",
+  offers: {
+    "@type": "Offer",
+    price: "Contact for pricing",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+
+// Ecommerce Service Structured Data
+
+export const ECOMMERCE_STRUCTURED_DATA: ServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Ecommerce Services",
+  description:
+    "Ecommerce Services include ecommerce services, ecommerce solutions, and ecommerce infrastructure services. We help businesses transform their digital presence and achieve technological excellence.",
+  provider: BASE_PROVIDER,
+  areaServed: "Worldwide",
+  serviceType: "Ecommerce Services",
+  category: "Ecommerce Services",
+  offers: {
+    "@type": "Offer",
+    price: "Contact for pricing",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+
 // Organization Structured Data for Eleservsoftech
 export const ORGANIZATION_STRUCTURED_DATA = {
   "@context": "https://schema.org",

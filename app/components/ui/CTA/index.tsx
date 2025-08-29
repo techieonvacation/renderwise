@@ -135,6 +135,8 @@ export const CTA: React.FC<CTAProps> = ({
                   variant="primary"
                   size="lg"
                   onClick={primaryButton.onClick}
+                  scrollToBottom={true}
+                  scrollTarget="#get-in-touch"
                   rightIcon={
                     primaryButton.icon ? (
                       <primaryButton.icon className="w-4 h-4" />
@@ -159,6 +161,8 @@ export const CTA: React.FC<CTAProps> = ({
                   }
                   size="lg"
                   onClick={secondaryButton.onClick}
+                  scrollToBottom={true}
+                  scrollTarget="#get-in-touch"
                   rightIcon={
                     secondaryButton.icon ? (
                       <secondaryButton.icon className="w-4 h-4" />

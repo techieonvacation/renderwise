@@ -10,6 +10,8 @@ export const ServiceFeatureSchema = z.object({
   bulletPoints: z.array(z.string().min(1, "Bullet point cannot be empty")),
   order: z.number().int().positive().optional(),
   isActive: z.boolean().optional().default(true),
+  buttonText: z.string().optional().default("Get Started"),
+  buttonLink: z.string().optional().default("/contact-us"),
 });
 
 // Services section configuration schema
@@ -50,6 +52,8 @@ export interface ServiceFeature {
   bulletPoints: string[];
   order?: number;
   isActive?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 export interface ServicesConfig {
@@ -93,6 +97,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 1,
       isActive: true,
+      buttonText: "Start Web Project",
+      buttonLink: "/services/web-development",
     },
     {
       title: "Mobile App Development",
@@ -109,6 +115,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 2,
       isActive: true,
+      buttonText: "Build Mobile App",
+      buttonLink: "/services/mobile-app-development",
     },
     {
       title: "On Demand App Development",
@@ -125,6 +133,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 3,
       isActive: true,
+      buttonText: "Create Custom App",
+      buttonLink: "/services/on-demand-app-development",
     },
     {
       title: "E-Commerce Solutions",
@@ -141,6 +151,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 4,
       isActive: true,
+      buttonText: "Launch Store",
+      buttonLink: "/services/ecommerce-solutions",
     },
     {
       title: "UI/UX Design",
@@ -157,6 +169,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 5,
       isActive: true,
+      buttonText: "Design Project",
+      buttonLink: "/services/ui-ux-design",
     },
     {
       title: "SEO Services",
@@ -173,11 +187,13 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 6,
       isActive: true,
+      buttonText: "Boost SEO",
+      buttonLink: "/services/seo-services",
     },
     {
       title: "Content Writing",
       description:
-        "Implement robust security measures to protect your applications and data in the cloud environment.",
+        "Implement robust.security measures to protect your applications and data in the cloud environment.",
       icon: "Shield",
       image: "/images/home/content-writing.webp",
       bulletPoints: [
@@ -189,6 +205,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 7,
       isActive: true,
+      buttonText: "Write Content",
+      buttonLink: "/services/content-writing",
     },
     {
       title: "Influencer Marketing",
@@ -205,6 +223,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 8,
       isActive: true,
+      buttonText: "Start Campaign",
+      buttonLink: "/services/influencer-marketing",
     },
     {
       title: "RFP Management Solutions",
@@ -221,6 +241,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 9,
       isActive: true,
+      buttonText: "Manage RFP",
+      buttonLink: "/services/rfp-management",
     },
     {
       title: "SMS API Integration",
@@ -237,6 +259,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 10,
       isActive: true,
+      buttonText: "Integrate SMS",
+      buttonLink: "/services/sms-api-integration",
     },
     {
       title: "SMS Bundle Services",
@@ -253,6 +277,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 11,
       isActive: true,
+      buttonText: "Get SMS Bundle",
+      buttonLink: "/services/sms-bundle-services",
     },
     {
       title: "WhatsApp Business API",
@@ -269,6 +295,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 12,
       isActive: true,
+      buttonText: "Setup WhatsApp API",
+      buttonLink: "/services/whatsapp-business-api",
     },
     {
       title: "Social Media Automation",
@@ -285,6 +313,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 13,
       isActive: true,
+      buttonText: "Automate Social Media",
+      buttonLink: "/services/social-media-automation",
     },
     {
       title: "Email Marketing Automation",
@@ -301,6 +331,8 @@ export const DEFAULT_SERVICES_CONFIG: ServicesConfig = {
       ],
       order: 14,
       isActive: true,
+      buttonText: "Setup Email Automation",
+      buttonLink: "/services/email-marketing-automation",
     },
   ],
   showNavigation: true,

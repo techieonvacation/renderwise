@@ -34,7 +34,7 @@ const SuccessStories = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const, 
       },
     },
   };
@@ -241,7 +241,7 @@ const SuccessStories = () => {
                         
                         <div className="flex items-center space-x-3 pl-6">
                           <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-primary-foreground font-semibold">
-                            {study.author.split(' ').map(n => n[0]).join('')}
+                            {study.author.split(" ").map((n) => n[0]).join("")}
                           </div>
                           <div>
                             <div className="text-sm font-semibold text-foreground font-dm-sans">

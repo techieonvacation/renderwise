@@ -10,7 +10,11 @@ export const heroContent = {
     "Comprehensive Coverage",
     "Scalable Solutions",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/flutter-1.webp",
+    "/images/flutter-2.webp",
+    "/images/flutter-3.webp",
+  ],
   buttonText: "Get Started",
   teamMembers: [
     {

@@ -12,12 +12,12 @@ export default function Services() {
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <Tagline variant="center">Services</Tagline>
           <h2 className="title">
-            QA Automation&nbsp;
+            System Integration&nbsp;
             <span className="highlight">Services</span>
           </h2>
           <p className="mt-2 max-w-3xl mx-auto text-base font-thin lg:text-lg text-foreground text-center mb-8">
-            Our QA Automation services are designed to help you build and scale
-            your QA automation testing capabilities.
+            Our System Integration services are designed to help you build and
+            scale your system integration capabilities.
           </p>
         </div>
         <MultiStepCard multiStepData={multiStepData} />

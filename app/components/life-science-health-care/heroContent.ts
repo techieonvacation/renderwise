@@ -10,7 +10,11 @@ export const heroContent = {
     "Regulatory Compliance",
     "Digital Health",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/healthcare-1.webp",
+    "/images/healthcare-2.webp",
+    "/images/healthcare-3.webp",
+  ],
   buttonText: "Get Started",
   teamMembers: [
     {

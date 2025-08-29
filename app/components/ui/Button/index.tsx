@@ -118,6 +118,10 @@ interface ButtonProps
   rightIcon?: React.ReactNode;
   isLoading?: boolean;
   children?: React.ReactNode;
+  scrollToBottom?: boolean;
+  scrollTarget?: string; // Optional target selector for scrolling
+  scrollOffset?: number; // Optional offset from the target (in pixels)
+  scrollToTop?: boolean; // Alternative: scroll to top of page
 }
 
 /**
@@ -143,16 +147,57 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       animate,
       exit,
       transition,
+      scrollToBottom,
+      scrollTarget,
+      scrollOffset,
+      scrollToTop,
+      onClick,
       ...props
     },
     ref
   ) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      // Handle custom onClick if provided
+      if (onClick) {
+        onClick(e);
+      }
+      
+      // Handle scroll functionality
+      if (scrollToBottom) {
+        if (scrollTarget) {
+          // Scroll to specific target
+          const targetElement = document.querySelector(scrollTarget);
+          if (targetElement) {
+            const offset = scrollOffset || 0;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth"
+            });
+          }
+        } else {
+          // Scroll to bottom of page
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      } else if (scrollToTop) {
+        // Scroll to top of page
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    };
+
     return (
       <motion.button
         ref={ref}
         // Merge CVA classes + any custom classes
         className={cn(buttonVariants({ variant, size, fullWidth }), className)}
         disabled={disabled || isLoading}
+        onClick={handleClick}
         // Default (or custom) Framer Motion animations
         whileHover={whileHover ?? { scale: 1.02 }}
         whileTap={whileTap ?? { scale: 0.98 }}

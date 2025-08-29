@@ -23,7 +23,7 @@ export default function ContactSection() {
     companyName: "",
     interestedServices: "",
     launchTimeline: "",
-    budget: 5000,
+    budget: 50000,
     aboutProject: "",
   });
 
@@ -55,14 +55,14 @@ export default function ContactSection() {
         companyName: "",
         interestedServices: "",
         launchTimeline: "",
-        budget: 5000,
+        budget: 50000,
         aboutProject: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Failed to send message. Please try again.");
     } finally {
-      setLoading(false);
+      setLoading(false);    
     }
   };
 
@@ -278,7 +278,7 @@ export default function ContactSection() {
                   <input
                     type="range"
                     name="budget"
-                    min="5000"
+                    min="50000"
                     max="5000000"
                     step="50000"
                     value={formData.budget}

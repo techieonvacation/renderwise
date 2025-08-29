@@ -462,6 +462,171 @@ export const SUPPLY_CHAIN_LOGISTICS_METADATA: Metadata = {
   },
 };
 
+// Telecom Services Metadata
+export const TELECOM_METADATA: Metadata = {
+  ...BASE_SERVICES_METADATA,
+  title: "Telecom Services | Eleservsoftech",
+  description:
+    "Telecom services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+  keywords: [
+    "Telecom Services",
+    "Telecom Solutions",
+    "Telecom Infrastructure Services",
+    "Telecom Services",
+    "Telecom Solutions",
+    "Telecom Infrastructure Services",
+  ],
+  openGraph: {
+    ...BASE_SERVICES_METADATA.openGraph,
+    title: "Telecom Services | Eleservsoftech",
+    description:
+      "Telecom services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    url: "/solutions/telecom",
+    images: [
+      {
+        url: "/images/home/custom-dev.webp",
+        width: 1200,
+        height: 630,
+        alt: "Telecom Services - Eleservsoftech",
+      },
+    ],
+  },
+  twitter: {
+    ...BASE_SERVICES_METADATA.twitter,
+    title: "Telecom Services | Eleservsoftech",
+    description:
+      "Supply chain and logistics are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    images: ["/images/home/custom-dev.webp"],
+  },
+  alternates: {
+    canonical: "/solutions/telecom",
+  },
+  other: {
+    "DC.title": "Telecom Services",
+    "DC.description": "Telecom services are the backbone of modern business",
+    "DC.subject":
+      "Telecom Services, Telecom Solutions, Telecom Infrastructure Services",
+    "DC.creator": "Eleservsoftech",
+    "DC.publisher": "Eleservsoftech",
+    "DC.date": new Date().toISOString(),
+    "DC.type": "Service",
+    "DC.format": "text/html",
+    "DC.language": "en",
+    "DC.coverage": "Worldwide",
+    "DC.rights": "Copyright Eleservsoftech",
+  },
+};
+
+// Insurance Services Metadata
+export const INSURANCE_METADATA: Metadata = {
+  ...BASE_SERVICES_METADATA,
+  title: "Insurance Services | Eleservsoftech",
+  description:
+    "Insurance services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+  keywords: [
+    "Insurance Services",
+    "Insurance Solutions",
+    "Insurance Infrastructure Services",
+    "Insurance Services",
+    "Insurance Solutions",
+    "Insurance Infrastructure Services",
+  ],
+  openGraph: {
+    ...BASE_SERVICES_METADATA.openGraph,
+    title: "Insurance Services | Eleservsoftech",
+    description:
+      "Insurance services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    url: "/solutions/insurance",
+    images: [
+      {
+        url: "/images/home/custom-dev.webp",
+        width: 1200,
+        height: 630,
+        alt: "Insurance Services - Eleservsoftech",
+      },
+    ],
+  },
+  twitter: {
+    ...BASE_SERVICES_METADATA.twitter,
+    title: "Insurance Services | Eleservsoftech",
+    description:
+      "Insurance services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    images: ["/images/home/custom-dev.webp"],
+  },
+  alternates: {
+    canonical: "/solutions/insurance",
+  },
+  other: {
+    "DC.title": "Insurance Services",
+    "DC.description": "Insurance services are the backbone of modern business",
+    "DC.subject":
+      "Insurance Services, Insurance Solutions, Insurance Infrastructure Services",
+    "DC.creator": "Eleservsoftech",
+    "DC.publisher": "Eleservsoftech",
+    "DC.date": new Date().toISOString(),
+    "DC.type": "Service",
+    "DC.format": "text/html",
+    "DC.language": "en",
+    "DC.coverage": "Worldwide",
+    "DC.rights": "Copyright Eleservsoftech",
+  },
+};
+
+// Ecommerce Services Metadata
+export const ECOMMERCE_METADATA: Metadata = {
+  ...BASE_SERVICES_METADATA,
+  title: "Ecommerce Services | Eleservsoftech",
+  description:
+    "Ecommerce services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+  keywords: [
+    "Ecommerce Services",
+    "Ecommerce Solutions",
+    "Ecommerce Infrastructure Services",
+    "Ecommerce Services",
+    "Ecommerce Solutions",
+    "Ecommerce Infrastructure Services",
+  ],
+  openGraph: {
+    ...BASE_SERVICES_METADATA.openGraph,
+    title: "Ecommerce Services | Eleservsoftech",
+    description:
+      "Ecommerce services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    url: "/solutions/ecommerce",
+    images: [
+      {
+        url: "/images/home/custom-dev.webp",
+        width: 1200,
+        height: 630,
+        alt: "Ecommerce Services - Eleservsoftech",
+      },
+    ],
+  },
+  twitter: {
+    ...BASE_SERVICES_METADATA.twitter,
+    title: "Ecommerce Services | Eleservsoftech",
+    description:
+      "Ecommerce services are the backbone of modern business. They ensure products and services reach customers efficiently and cost-effectively.",
+    images: ["/images/home/custom-dev.webp"],
+  },
+  alternates: {
+    canonical: "/solutions/ecommerce",
+  },
+  other: {
+    "DC.title": "Ecommerce Services",
+    "DC.description": "Ecommerce services are the backbone of modern business",
+    "DC.subject":
+      "Ecommerce Services, Ecommerce Solutions, Ecommerce Infrastructure Services",
+    "DC.creator": "Eleservsoftech",
+    "DC.publisher": "Eleservsoftech",
+    "DC.date": new Date().toISOString(),
+    "DC.type": "Service",
+    "DC.format": "text/html",
+    "DC.language": "en",
+    "DC.coverage": "Worldwide",
+    "DC.rights": "Copyright Eleservsoftech",
+  },
+};
+
 // Main Services Page Metadata
 export const SERVICES_INDEX_METADATA: Metadata = {
   ...BASE_SERVICES_METADATA,

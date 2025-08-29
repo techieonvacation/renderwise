@@ -56,13 +56,19 @@ const WhatWeOffer = () => {
               monitoring, onboarding assistance, and scalable support so your
               projects stay on track and your teams stay optimized.
             </p>
-            <Button variant="primary" size="lg" rightIcon={<ArrowRightIcon />}>
-              Learn More
+            <Button
+              variant="primary"
+              size="lg"
+              rightIcon={<ArrowRightIcon />}
+              scrollToBottom={true}
+              scrollTarget="#get-in-touch"
+            >
+              Get Started
             </Button>
           </div>
           <div className="">
             <Image
-              src="/images/hero/itstaff-slide3.png"
+              src="/images/it-staffing-1.webp"
               alt="Flexible Talent"
               width={500}
               height={500}
@@ -72,7 +78,7 @@ const WhatWeOffer = () => {
         <div className="grid items-center justify-between grid-cols-1 md:grid-cols-2 gap-8 mt-12 lg:mt-20">
           <div className="">
             <Image
-              src="/images/hero/itstaff-slide3.png"
+              src="/images/it-staffing-2.webp"
               alt="Flexible Talent"
               width={500}
               height={500}
@@ -95,8 +101,14 @@ const WhatWeOffer = () => {
               productivity. We also offer scalable support to help you manage
               your team&apos;s growth and adapt to changing business needs.
             </p>
-            <Button variant="primary" size="lg" rightIcon={<ArrowRightIcon />}>
-              Learn More
+            <Button
+              variant="primary"
+              size="lg"
+              rightIcon={<ArrowRightIcon />}
+              scrollToBottom={true}
+              scrollTarget="#get-in-touch"
+            >
+              Get Started
             </Button>
           </div>
         </div>

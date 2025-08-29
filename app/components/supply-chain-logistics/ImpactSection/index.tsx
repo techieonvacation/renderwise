@@ -34,7 +34,7 @@ const ImpactSection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -171,7 +171,7 @@ const ImpactSection = () => {
               
               whileHover={{ 
                 scale: 1.05,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative"
             >
@@ -220,7 +220,7 @@ const ImpactSection = () => {
               
               whileHover={{ 
                 y: -4,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-all duration-300"
             >

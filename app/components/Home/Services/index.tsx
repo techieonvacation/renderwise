@@ -16,6 +16,7 @@ import {
 } from "@/app/components/ui/Card";
 import Tagline from "@/app/components/ui/Tagline";
 import { ServicesConfig, ServiceFeature } from "@/app/lib/models/services";
+import Link from "next/link";
 
 // Dynamic icon mapping
 const getIconComponent = (iconName: string) => {
@@ -51,7 +52,7 @@ const getIconComponent = (iconName: string) => {
     Award: LucideIcons.Award,
     CheckCircle: LucideIcons.CheckCircle,
   };
-  
+
   return iconMap[iconName] || LucideIcons.Code2;
 };
 
@@ -107,7 +108,10 @@ const Services: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-[480px] bg-muted rounded-2xl animate-pulse"></div>
+              <div
+                key={i}
+                className="h-[480px] bg-muted rounded-2xl animate-pulse"
+              ></div>
             ))}
           </div>
         </div>
@@ -117,7 +121,7 @@ const Services: React.FC = () => {
 
   // Filter active services and sort by order
   const activeServices = servicesData.features
-    .filter(service => service.isActive !== false)
+    .filter((service) => service.isActive !== false)
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
   const sliderSettings = {
@@ -162,7 +166,9 @@ const Services: React.FC = () => {
         {/* Header with Navigation Arrows */}
         <div className="flex justify-between items-center mb-10">
           <div className="flex flex-col max-w-xl">
-            <Tagline variant="left">{servicesData.subtitle.toUpperCase()}</Tagline>
+            <Tagline variant="left">
+              {servicesData.subtitle.toUpperCase()}
+            </Tagline>
             <h2 className="section-title">
               {servicesData.title}{" "}
               <span className="text-primary">{servicesData.highlight}</span>
@@ -199,19 +205,37 @@ const Services: React.FC = () => {
           >
             {activeServices.map((service, index) => {
               const IconComponent = getIconComponent(service.icon);
-              
+
               return (
                 <div key={index} className="px-2 py-2">
                   <motion.div
                     className="group h-[480px] cursor-pointer relative"
-                    onHoverStart={() => servicesData.enableHoverEffects && setHoveredIndex(index)}
-                    onHoverEnd={() => servicesData.enableHoverEffects && setHoveredIndex(null)}
-                    whileHover={servicesData.enableHoverEffects ? { scale: 1.02 } : {}}
+                    onHoverStart={() =>
+                      servicesData.enableHoverEffects && setHoveredIndex(index)
+                    }
+                    onHoverEnd={() =>
+                      servicesData.enableHoverEffects && setHoveredIndex(null)
+                    }
+                    whileHover={
+                      servicesData.enableHoverEffects ? { scale: 1.02 } : {}
+                    }
                   >
                     {/* Card Container */}
-                    <div className={`relative w-full h-full transition-all duration-500 ${servicesData.enableFlipAnimation ? '[transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]' : ''}`}>
+                    <div
+                      className={`relative w-full h-full transition-all duration-500 ${
+                        servicesData.enableFlipAnimation
+                          ? "[transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
+                          : ""
+                      }`}
+                    >
                       {/* Front Face */}
-                      <div className={`absolute inset-0 ${servicesData.enableFlipAnimation ? '[backface-visibility:hidden]' : ''}`}>
+                      <div
+                        className={`absolute inset-0 ${
+                          servicesData.enableFlipAnimation
+                            ? "[backface-visibility:hidden]"
+                            : ""
+                        }`}
+                      >
                         <Card className="h-full overflow-hidden rounded-2xl">
                           <div className="h-52 relative overflow-hidden">
                             <Image
@@ -237,7 +261,10 @@ const Services: React.FC = () => {
                             <motion.div
                               className="flex items-center space-x-2 text-muted-foreground group-hover:text-foreground transition-colors"
                               animate={
-                                servicesData.enableProgressAnimation && hoveredIndex === index ? { x: [0, 5, 0] } : {}
+                                servicesData.enableProgressAnimation &&
+                                hoveredIndex === index
+                                  ? { x: [0, 5, 0] }
+                                  : {}
                               }
                               transition={{ repeat: Infinity, duration: 1 }}
                             >
@@ -280,18 +307,19 @@ const Services: React.FC = () => {
                                   </ul>
                                 </div>
                               </div>
-
-                              <Button
-                                variant="primary"
-                                size="lg"
-                                fullWidth
-                                className="mt-6"
-                                rightIcon={
-                                  <LucideIcons.ArrowRight className="w-4 h-4" />
-                                }
-                              >
-                                Get Started
-                              </Button>
+                              <Link href={service.buttonLink || "/contact-us"}>
+                                <Button
+                                  variant="primary"
+                                  size="lg"
+                                  fullWidth
+                                  className="mt-6"
+                                  rightIcon={
+                                    <LucideIcons.ArrowRight className="w-4 h-4" />
+                                  }
+                                >
+                                  {service.buttonText || "Get Started"}
+                                </Button>
+                              </Link>
                             </CardContent>
                           </Card>
                         </div>

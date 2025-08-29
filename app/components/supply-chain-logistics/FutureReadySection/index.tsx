@@ -34,7 +34,7 @@ const FutureReadySection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const,  
       },
     },
   };
@@ -142,7 +142,7 @@ const FutureReadySection = () => {
               
               whileHover={{ 
                 y: -8,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative bg-card border border-border rounded-2xl p-8 text-center hover:border-primary/30 transition-all duration-300"
             >
@@ -243,7 +243,7 @@ const FutureReadySection = () => {
               
               whileHover={{ 
                 scale: 1.02,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-all duration-300"
             >

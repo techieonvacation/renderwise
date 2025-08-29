@@ -34,7 +34,7 @@ const ChallengesSection = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const, 
       },
     },
   };
@@ -152,7 +152,7 @@ const ChallengesSection = () => {
               
               whileHover={{ 
                 y: -8,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative"
             >

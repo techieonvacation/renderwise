@@ -23,7 +23,7 @@ const IntroSection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const,  
       },
     },
   };
@@ -116,7 +116,7 @@ const IntroSection = () => {
               
               whileHover={{ 
                 scale: 1.05,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               className="group relative bg-card border border-border rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 hover:border-primary/20"
             >

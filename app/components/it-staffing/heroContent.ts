@@ -10,7 +10,11 @@ export const heroContent = {
     "Ready to Integrate",
     "Deliver from Day One",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/it-staffing-1.webp",
+    "/images/it-staffing-2.webp",
+    "/images/it-staffing-3.webp",
+  ],
   buttonText: "Talk to an Expert",
   teamMembers: [
     {

@@ -33,7 +33,7 @@ export function LogoMarquee({
   }
 
   return (
-    <div className={`section-bg-marquee relative overflow-hidden py-8 ${className}`}>
+    <div className={`section-bg-marquee relative overflow-hidden py-4 ${className}`}>
       <div
         className={`flex ${animationClass}`}
         style={{ animationDuration: `${finalSpeed}s` }}
@@ -44,12 +44,12 @@ export function LogoMarquee({
             key={`first-${logo.id}`}
             className="flex-shrink-0 mx-8 group cursor-pointer"
           >
-            <div className="w-24 h-16 flex items-center justify-center transition-all duration-300">
+            <div className="w-24 h-16 lg:h-20 lg:w-32 flex items-center justify-center transition-all duration-300">
               <Image
                 src={logo.imageUrl || "/images/light-logo.webp"}
                 alt={logo.name}
-                width={100}
-                height={100}
+                width={120} 
+                height={120}
                 className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
                 onError={(e) => {
                   e.currentTarget.src = "/images/light-logo.webp";
@@ -69,8 +69,8 @@ export function LogoMarquee({
               <Image
                 src={logo.imageUrl || "/images/light-logo.webp"}
                 alt={logo.name}
-                width={100}
-                height={100}
+                width={120}
+                height={120}
                 className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
                 onError={(e) => {
                   e.currentTarget.src = "/images/light-logo.webp";

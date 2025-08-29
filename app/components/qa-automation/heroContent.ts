@@ -10,7 +10,11 @@ export const heroContent = {
     "Comprehensive Coverage",
     "Scalable Solutions",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/qa-automation-1.webp",
+    "/images/qa-automation-2.webp",
+    "/images/qa-automation-3.webp",
+  ],
   buttonText: "Get Started",
   teamMembers: [
     {

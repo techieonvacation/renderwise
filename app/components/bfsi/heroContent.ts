@@ -11,7 +11,11 @@ export const heroContent = {
     "Seamless Experiences",
     "Future-Ready Solutions",
   ],
-  imageSlides: ["/images/hero/hero-thum.png"],
+  imageSlides: [
+    "/images/bfsi-1.webp",
+    "/images/bfsi-2.webp",
+    "/images/bfsi-3.webp",
+  ],
   buttonText: "Start Your Digital Journey",
   teamMembers: [
     {

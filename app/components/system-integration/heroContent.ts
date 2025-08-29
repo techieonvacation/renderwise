@@ -10,7 +10,11 @@ export const heroContent = {
     "Real-time Insights",
     "Unified Systems",
   ],
-  imageSlides: ["/images/hero/itstaff-slide3.png"],
+  imageSlides: [
+    "/images/system-integration-1.webp",
+    "/images/system-integration-2.webp",
+    "/images/system-integration-3.webp",
+  ],
   buttonText: "Get Started",
   teamMembers: [
     {

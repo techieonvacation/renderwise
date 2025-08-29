@@ -192,13 +192,14 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
         },
       ],
       footerText: "Explore All Services",
-      footerLink: "/services",
+      footerLink: "/contact-us",
       order: 2,
       isActive: true,
       sliderData: [
         {
           title: "Web Development",
-          description: "Modern, responsive websites built with cutting-edge technologies",
+          description:
+            "Modern, responsive websites built with cutting-edge technologies",
           image: "/images/services/web-development.jpg",
           order: 1,
         },
@@ -261,13 +262,14 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
         },
       ],
       footerText: "View All Solutions",
-      footerLink: "/solutions",
+      footerLink: "/contact-us",
       order: 3,
       isActive: true,
       sliderData: [
         {
           title: "Enterprise Solutions",
-          description: "Large-scale business solutions with enterprise-grade security",
+          description:
+            "Large-scale business solutions with enterprise-grade security",
           image: "/images/solutions/enterprise.jpg",
           order: 1,
         },
@@ -279,7 +281,8 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
         },
         {
           title: "SaaS Products",
-          description: "Software as a Service platforms with subscription management",
+          description:
+            "Software as a Service platforms with subscription management",
           image: "/images/solutions/saas.jpg",
           order: 3,
         },
@@ -343,7 +346,8 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       sliderData: [
         {
           title: "Our Story",
-          description: "Learn about our journey and mission to deliver exceptional solutions",
+          description:
+            "Learn about our journey and mission to deliver exceptional solutions",
           image: "/images/about/our-story.jpg",
           order: 1,
         },
@@ -355,7 +359,8 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
         },
         {
           title: "Careers",
-          description: "Join our team and build the future of technology together",
+          description:
+            "Join our team and build the future of technology together",
           image: "/images/about/careers.jpg",
           order: 3,
         },
@@ -461,7 +466,8 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
   sliderData: [
     {
       title: "Web Development",
-      description: "Modern, responsive websites built with cutting-edge technologies",
+      description:
+        "Modern, responsive websites built with cutting-edge technologies",
       image: "/images/services/web-development.jpg",
       order: 1,
     },
@@ -490,4 +496,4 @@ export const DEFAULT_NAVBAR_CONFIG: NavbarConfig = {
       order: 5,
     },
   ],
-}; 
+};

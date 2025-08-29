@@ -107,7 +107,7 @@ export const NAVBAR_CONFIG = {
         },
       ],
       footerText: "Explore All Services",
-      footerLink: "/services",
+      footerLink: "/contact-us",
       sliderData: [
         {
           title: "Web Development",
@@ -230,7 +230,7 @@ export const NAVBAR_CONFIG = {
         },
       ],
       footerText: "View All Solutions",
-      footerLink: "/solutions",
+      footerLink: "/contact-us",
       sliderData: [
         {
           title: "Enterprise Solutions",

@@ -5,6 +5,7 @@ import { ThemeProvider } from "./lib/theme-provider";
 import { inter, dmSans, spaceGrotesk, urbanist } from "./lib/fonts";
 import ConditionalFooter from "./components/ConditionalFooter";
 import { Toaster } from "react-hot-toast";
+import ContactSection from "./components/ui/GetInTouch";
 
 export const metadata: Metadata = {
   title: "Eleservsoftech",
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="light" storageKey="eleserv-theme">
           <ConditionalNavbar />
           <main>{children}</main>
+          <ContactSection />
           <ConditionalFooter />
         </ThemeProvider>
         <Toaster position="top-center" reverseOrder={false} />

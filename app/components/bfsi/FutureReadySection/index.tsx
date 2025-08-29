@@ -76,16 +76,6 @@ const containerVariants = {
 export default function FutureReadySection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const handleScrollToContact = () => {
-    const contactSection = document.getElementById("get-in-touch");
-    if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-background via-primary/5 to-accent/5 relative overflow-hidden">
       {/* Background Elements */}
@@ -269,7 +259,8 @@ export default function FutureReadySection() {
                   size="lg"
                   variant="primary"
                   rightIcon={<ArrowRight className="w-5 h-5" />}
-                  onClick={handleScrollToContact}
+                  scrollToBottom={true}
+                  scrollTarget="#get-in-touch"
                   className="group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -283,6 +274,8 @@ export default function FutureReadySection() {
                   className="group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  scrollToBottom={true}
+                  scrollTarget="#get-in-touch"
                 >
                   Download Case Studies
                 </Button>

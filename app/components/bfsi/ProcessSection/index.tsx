@@ -12,6 +12,7 @@ import {
   Clock,
 } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../../ui/Button";
 
 const processSteps = [
   {
@@ -252,21 +253,23 @@ export default function ProcessSection() {
               challenges and design a customized transformation roadmap.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full hover:shadow-lg transition-all duration-300"
+              <Button
+                variant="primary"
+                size="lg"
+                scrollToBottom={true}
+                scrollTarget="#get-in-touch"
               >
                 Schedule Discovery Session
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-3 border border-border text-foreground font-semibold rounded-full hover:bg-muted transition-all duration-300"
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                scrollToBottom={true}
+                scrollTarget="#get-in-touch"
               >
                 Download Process Guide
-              </motion.button>
+              </Button>
             </div>
           </motion.div>
         </motion.div>
